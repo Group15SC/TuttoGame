@@ -4,14 +4,21 @@ import java.util.Collections;
 public class Card {
     CardType CardType;
     int AddScore;
+
+    ArrayList<Card> CardSet = new ArrayList<>();
+
     public Card(CardType cardType, int addScore) {
         this.CardType = cardType;
         this.AddScore = addScore;
     }
 
-    public ArrayList<Card> GenerateCardSet(){
+    public Card DrawACard() {
+        Card card = CardSet.get(-1);
+        CardSet.remove(-1);
+        return card;
+    }
 
-        ArrayList<Card> CardSet = new ArrayList<>();
+    public void GenerateCardSet(){
 
         for (int i = 0; i < 5; i++) {
             Card Bonus = new Card(CardType.BONUS, 200);
@@ -57,8 +64,12 @@ public class Card {
             CardSet.add(Straight);
         }
         Collections.shuffle(CardSet);
-        return CardSet;
+
+
     }
+
+
+
 
 
 }
