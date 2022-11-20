@@ -2,7 +2,7 @@
 import processing.core.PApplet;
 
 
-public class player{
+public class Player{
     public input getplayername(){
         return input
     }
