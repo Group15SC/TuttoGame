@@ -10,6 +10,4 @@ public class Card {
         this.AddScore = addScore;
     }
 
-
-    
 }
