@@ -1,4 +1,4 @@
-package TuttoGame.Logic;
+package TuttoGame.Logics;
 
 import java.util.ArrayList;
 import java.util.Collections;

@@ -1,4 +1,4 @@
-package TuttoGame.Logic;
+package TuttoGame;
 
 import TuttoGame.GameController.Player;
 
@@ -47,7 +47,7 @@ public abstract class Logic {
         return halfwayopt;
     }
 
-    protected static String TuttoOption() {
+    public static String TuttoOption() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("You accomplished a Tutto!");
         System.out.println("Would you like to End or Continue?");

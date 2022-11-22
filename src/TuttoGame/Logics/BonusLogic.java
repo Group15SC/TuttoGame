@@ -1,4 +1,7 @@
-package TuttoGame.Logic;
+package TuttoGame.Logics;
+
+import TuttoGame.GameController.Player;
+import TuttoGame.Logic;
 
 import java.util.ArrayList;
 

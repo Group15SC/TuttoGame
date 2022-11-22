@@ -3,6 +3,9 @@ package TuttoGame.GameController;
 import TuttoGame.Cards.Card;
 import TuttoGame.Cards.CardType;
 
+import TuttoGame.Logic;
+import TuttoGame.Logics.*;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
@@ -23,78 +26,7 @@ public class Game {
     int numberOfPlayers = input.getNumberofplayers();
     ArrayList<Player> ListOfPlayers = new ArrayList<>();
 
-//    private ArrayList<Integer> RollDices(int numOfDices) {
-//        ArrayList<Integer> ListOfDices = new ArrayList<>();
-//        for(int i = 0; i < numOfDices; i ++){
-//            Random r = new Random();
-//            int n = r.nextInt(7);
-//            ListOfDices.add(n);
-//        }
-//        return ListOfDices;
-//    }
-//
-//    public void DisplayDices(ArrayList<Integer> ListOfDices) {
-//        for(int i = 0; i < ListOfDices.size(); i++) {
-//            System.out.print(ListOfDices.get(i) + ' ');
-//        }
-//    }
-//
-//    private boolean IsValid(ArrayList<Integer> ListOfDices) {
-//        int occurrences;
-//        for(int i = 0; i < ListOfDices.size(); i++) {
-//            occurrences = Collections.frequency(ListOfDices, ListOfDices.get(i));
-//            if(ListOfDices.get(i) == 1 || ListOfDices.get(i) == 5 || occurrences >= 3) {
-//                return true;
-//            }
-//        }
-//        return false;
-//
-//    }
-//    private boolean IsValidKeep(ArrayList<Integer> KeepDices) {
-//        if(KeepDices.size() == 1 && (KeepDices.get(0) == 1 || KeepDices.get(0) == 5)) {
-//            return true;
-//        }
-//        else if(KeepDices.size() == 3 && ((KeepDices.get(0) == KeepDices.get(1)) && (KeepDices.get(1) == KeepDices.get(2)))) {
-//            return true;
-//        }
-//        else {
-//            return false;
-//        }
-//    }
-//
-//    private int CalScores(ArrayList<Integer> Dices) {
-//        int Scores = 0;
-//        int occurrences = 0;
-//        ArrayList<Integer> CurrentDices = Dices;
-//
-//        for(int i = 0; i < Dices.size(); i++) {
-//            occurrences = Collections.frequency(Dices, Dices.get(i));
-//            if(occurrences == 3) {
-//                if(Dices.get(i) == 2||Dices.get(i) == 3||Dices.get(i) == 4||Dices.get(i) == 5||Dices.get(i) == 6) {
-//                    Scores = Scores + Dices.get(i) * 100;
-//                    CurrentDices.remove(Integer.valueOf(Dices.get(i)));
-//                    CurrentDices.remove(Integer.valueOf(Dices.get(i)));
-//                    CurrentDices.remove(Integer.valueOf(Dices.get(i)));
-//                }
-//                else if(Dices.get(i) == 1) {
-//                    Scores = Scores + 1000;
-//                    CurrentDices.remove(Integer.valueOf(Dices.get(i)));
-//                }
-//            }
-//        }
-//        for (int i = 0; i < CurrentDices.size(); i++) {
-//            if(CurrentDices.get(i) == 1) {
-//                Scores = Scores + 100;
-//            }
-//            else if(CurrentDices.get(i) == 5) {
-//                Scores = Scores + 50;
-//            }
-//        }
-//
-//        return Scores;
-//    }
 
-    //Logic logic = new Logic();
 
     private ArrayList<Integer> DicesOfThisCard(Player player, Card card){
         ArrayList<Integer> dices = new ArrayList<>();
@@ -104,10 +36,6 @@ public class Game {
             case BONUS:
                 BonusLogic bonuslogic = new BonusLogic();
                 dices = bonuslogic.GetValidDices(player);
-//                int ThisCardScore = Dices.CalDiceScores();
-//                Scoreinthisturn += ThisCardScore + card.AddScore;
-                //if()
-                //player.setScore(bonuslogic.GetScore(player) + card.AddScore);
             case MULTIPLY_TWO:
                 MultiplyTwoLogic multiplytwologic = new MultiplyTwoLogic();
                 dices = multiplytwologic.GetValidDices(player);
@@ -185,7 +113,7 @@ public class Game {
                                     }
                                     break;
                             }
-                            String option = TuttoGame.Logic.TuttoOption();
+                            String option = Logic.TuttoOption();
                             switch (option) {
                                 case "E":
                                     Continue = false;
@@ -355,6 +283,79 @@ public class Game {
         }
         Collections.shuffle(CardSet);
     }
+
+//    private ArrayList<Integer> RollDices(int numOfDices) {
+//        ArrayList<Integer> ListOfDices = new ArrayList<>();
+//        for(int i = 0; i < numOfDices; i ++){
+//            Random r = new Random();
+//            int n = r.nextInt(7);
+//            ListOfDices.add(n);
+//        }
+//        return ListOfDices;
+//    }
+//
+//    public void DisplayDices(ArrayList<Integer> ListOfDices) {
+//        for(int i = 0; i < ListOfDices.size(); i++) {
+//            System.out.print(ListOfDices.get(i) + ' ');
+//        }
+//    }
+//
+//    private boolean IsValid(ArrayList<Integer> ListOfDices) {
+//        int occurrences;
+//        for(int i = 0; i < ListOfDices.size(); i++) {
+//            occurrences = Collections.frequency(ListOfDices, ListOfDices.get(i));
+//            if(ListOfDices.get(i) == 1 || ListOfDices.get(i) == 5 || occurrences >= 3) {
+//                return true;
+//            }
+//        }
+//        return false;
+//
+//    }
+//    private boolean IsValidKeep(ArrayList<Integer> KeepDices) {
+//        if(KeepDices.size() == 1 && (KeepDices.get(0) == 1 || KeepDices.get(0) == 5)) {
+//            return true;
+//        }
+//        else if(KeepDices.size() == 3 && ((KeepDices.get(0) == KeepDices.get(1)) && (KeepDices.get(1) == KeepDices.get(2)))) {
+//            return true;
+//        }
+//        else {
+//            return false;
+//        }
+//    }
+//
+//    private int CalScores(ArrayList<Integer> Dices) {
+//        int Scores = 0;
+//        int occurrences = 0;
+//        ArrayList<Integer> CurrentDices = Dices;
+//
+//        for(int i = 0; i < Dices.size(); i++) {
+//            occurrences = Collections.frequency(Dices, Dices.get(i));
+//            if(occurrences == 3) {
+//                if(Dices.get(i) == 2||Dices.get(i) == 3||Dices.get(i) == 4||Dices.get(i) == 5||Dices.get(i) == 6) {
+//                    Scores = Scores + Dices.get(i) * 100;
+//                    CurrentDices.remove(Integer.valueOf(Dices.get(i)));
+//                    CurrentDices.remove(Integer.valueOf(Dices.get(i)));
+//                    CurrentDices.remove(Integer.valueOf(Dices.get(i)));
+//                }
+//                else if(Dices.get(i) == 1) {
+//                    Scores = Scores + 1000;
+//                    CurrentDices.remove(Integer.valueOf(Dices.get(i)));
+//                }
+//            }
+//        }
+//        for (int i = 0; i < CurrentDices.size(); i++) {
+//            if(CurrentDices.get(i) == 1) {
+//                Scores = Scores + 100;
+//            }
+//            else if(CurrentDices.get(i) == 5) {
+//                Scores = Scores + 50;
+//            }
+//        }
+//
+//        return Scores;
+//    }
+
+    //Logic logic = new Logic();
 
 
 }
