@@ -1,3 +1,5 @@
+package TuttoGame.Cards;
+
 public enum CardType {
     BONUS,
     MULTIPLY_TWO,

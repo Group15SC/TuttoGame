@@ -1,3 +1,5 @@
+package TuttoGame.GameController;
+
 import java.util.Collections;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -9,7 +11,7 @@ public class Input {
 
 
     private Scanner scanner = new Scanner(System.in);
-    Card card = DrawACard();
+
     private int Askfornumberofplayers() {
         System.out.println("Please enter the number of players (2-4): ");
         int num = scanner.nextInt();

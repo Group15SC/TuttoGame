@@ -1,6 +1,10 @@
+package TuttoGame.GameController;
+
+import TuttoGame.Cards.Card;
+import TuttoGame.Cards.CardType;
+
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Random;
 import java.util.Scanner;
 
 public class Game {
@@ -90,7 +94,53 @@ public class Game {
 //        return Scores;
 //    }
 
-    Logic logic = new Logic();
+    //Logic logic = new Logic();
+
+    private ArrayList<Integer> DicesOfThisCard(Player player, Card card){
+        ArrayList<Integer> dices = new ArrayList<>();
+        switch (card.CardType){
+            case STOP:
+                break;
+            case BONUS:
+                BonusLogic bonuslogic = new BonusLogic();
+                dices = bonuslogic.GetValidDices(player);
+//                int ThisCardScore = Dices.CalDiceScores();
+//                Scoreinthisturn += ThisCardScore + card.AddScore;
+                //if()
+                //player.setScore(bonuslogic.GetScore(player) + card.AddScore);
+            case MULTIPLY_TWO:
+                MultiplyTwoLogic multiplytwologic = new MultiplyTwoLogic();
+                dices = multiplytwologic.GetValidDices(player);
+                //int ThisCardScore2 = Dices.CalDiceScores(multiplytwologic.GetValidDices(player));
+        }
+        return dices; /* return a valid dice list of each type of card
+                            -if the length of the dice is 6: Tutto / Straight Tutto;
+                            -if the length of the dice is 0: Null;
+                            -if the length of the dice is 12: Cloverleaf (2Tutto) / Fireworks
+                            -if the length of the dice is others:
+                               either a Fireworks
+                               or end in the halfway (Bonus/Multiply Two)*/
+    }
+
+    private ArrayList<Player> GetHighestPlayer(ArrayList<Player> players) {
+        ArrayList<Player> HighestPlayer= new ArrayList<>();
+        int MaxScore = 0;
+//        ArrayList<Player> SortedPlayers = new ArrayList<>();
+//        players.sort(Comparator.comparing(Player::getScore));
+        for (Player player: players) {
+            if(player.getScore()>=MaxScore) {
+                MaxScore = player.getScore();
+            }
+        }
+
+        for (Player player2: players) {
+            if(player2.getScore() == MaxScore){
+                HighestPlayer.add(player2);
+            }
+        }
+        return HighestPlayer;
+    }
+
     public void GameOn(){
 
         for(int i = 0; i < numberOfPlayers; i++){
@@ -101,14 +151,73 @@ public class Game {
         boolean Win = false;
         while(!Win) {
             for(Player player: ListOfPlayers) {
-                Card card = DrawACard();
-                switch (card.CardType){
-                    case STOP:
-                        break;
-                    case BONUS:
-                        player.setScore(logic.Halfwayendturn(player) + card.AddScore);
-                    case MULTIPLY_TWO:
-                        player.setScore(logic.Halfwayendturn(player));
+                Card card = DrawACard(); // a turn
+                int Scoreinthisturn = 0;
+                ArrayList<Integer> resultdices = DicesOfThisCard(player, card);
+                // Calculate the points gained in this card
+                boolean Continue = true;
+                while (Continue) {
+                    int ScoreOfThisCard = 0;
+                    switch (resultdices.size()){
+                        case 0:
+                            // if the card is STOP, return a empty list and enter this case
+                            Scoreinthisturn = 0;
+                            Continue = false;
+                            break;
+                        case 6:
+                            switch (card.CardType) {
+                                case BONUS:
+                                    ScoreOfThisCard = Dices.CalDiceScores(resultdices) + card.AddScore;
+                                    break;
+                                case MULTIPLY_TWO:
+                                    ScoreOfThisCard = Dices.CalDiceScores(resultdices) * 2;
+                                    break;
+                                case STRAIGHT:
+                                    ScoreOfThisCard = 2000;
+                                    break;
+                                case PLUS_MINUS:
+                                    ScoreOfThisCard = 1000;
+                                    ArrayList<Player> HighestPlayer = GetHighestPlayer(ListOfPlayers);
+                                    for(Player player2: HighestPlayer) {
+                                        if(player2 != player) {
+                                            player2.setScore(player2.getScore()-1000);
+                                        }
+                                    }
+                                    break;
+                            }
+                            String option = TuttoGame.Logic.TuttoOption();
+                            switch (option) {
+                                case "E":
+                                    Continue = false;
+                                    break;
+                                case "R":
+                                    Card NewCard = DrawACard();
+                                    resultdices = DicesOfThisCard(player, NewCard);
+                                    break;
+                            }
+                            break;
+                        case 12:
+                            switch (card.CardType) {
+                                case CLOVERLEAF:
+                                    ScoreOfThisCard = input.winningpoints;
+                                    break;
+                                case FIREWORKS:
+                                    ScoreOfThisCard = Dices.CalDiceScores(resultdices);
+                                    break;
+                            }
+                            Continue = false;
+                            break;
+                        default:
+                            ScoreOfThisCard = Dices.CalDiceScores(resultdices);
+                            break;
+                        }
+                    Scoreinthisturn += ScoreOfThisCard;
+                }
+                player.setScore(Scoreinthisturn);
+                if(player.getScore()>=input.winningpoints) {
+                    System.out.println("Game over!");
+                    System.out.println("Player"+player.name+"is the winner!");
+                    Win = true;
                 }
             }
         }
