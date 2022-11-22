@@ -19,6 +19,19 @@ public abstract class Logic {
         return false;
     }
 
+    // get all the valid dices in a roll
+    protected static ArrayList<Integer> ValidInThisRoll( ArrayList<Integer> ListOfDices){
+        int occurrences;
+        ArrayList<Integer> ValidDicesInThisRoll = new ArrayList<>();
+        for(int dice: ListOfDices) {
+            occurrences = Collections.frequency(ListOfDices, dice);
+            if(dice == 1 || dice == 5 || occurrences >=3){
+                ValidDicesInThisRoll.add(dice);
+            }
+        }
+        return ValidDicesInThisRoll;
+    }
+
     protected static boolean IsValidKeep(ArrayList<Integer> KeepDices) {
         if(KeepDices.size() == 1 && (KeepDices.get(0) == 1 || KeepDices.get(0) == 5)) {
             return true;
