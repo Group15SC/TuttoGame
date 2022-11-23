@@ -20,7 +20,7 @@ public abstract class Logic {
     }
 
     // get all the valid dices in a roll
-    protected static ArrayList<Integer> ValidInThisRoll( ArrayList<Integer> ListOfDices){
+    public static ArrayList<Integer> ValidInThisRoll( ArrayList<Integer> ListOfDices){
         int occurrences;
         ArrayList<Integer> ValidDicesInThisRoll = new ArrayList<>();
         for(int dice: ListOfDices) {

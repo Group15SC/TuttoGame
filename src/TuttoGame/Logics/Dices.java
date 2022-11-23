@@ -18,9 +18,12 @@ public class Dices {
     }
 
     public static void DisplayDices(ArrayList<Integer> ListOfDices) {
-        for(int i = 0; i < ListOfDices.size(); i++) {
-            System.out.print(ListOfDices.get(i) + ' ');
+        System.out.println("The result of this roll is:");
+        for(int dice: ListOfDices) {
+            System.out.print(dice);
+            System.out.print(" ");
         }
+        System.out.println();
     }
 
     public static int CalDiceScores(ArrayList<Integer> Dices) {
@@ -59,7 +62,7 @@ public class Dices {
         ArrayList<Integer> IntKeepDices = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
         System.out.println("Please select the Dices you want to keep");
-        System.out.println("And separate each number with ','"); //e.g 2,2,2
+        System.out.println("If you choose to keep a triplet, please separate each number with ','"); //e.g 2,2,2
         String keep = scanner.nextLine();
         String[] KeepDices = keep.split(",");
         for(String s: KeepDices) IntKeepDices.add(Integer.valueOf(s));
