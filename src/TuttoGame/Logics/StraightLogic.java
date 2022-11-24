@@ -17,12 +17,14 @@ public class StraightLogic extends Logic{
 
         String option = Logic.TurnSartingOption();
         // choosing display: display current score
+        int NumOfCurrentDices = 6;
         if (option.equals("D")) {
             System.out.print(player.getScore());
         }
+
         else if (option.equals("R")) {
             boolean isValid = true;
-            int NumOfCurrentDices = 6;
+
             while (isValid) {
                 // store and display result of dice rolling
                 ArrayList<Integer> RolledDices = Dices.RollDices(NumOfCurrentDices);
@@ -40,7 +42,7 @@ public class StraightLogic extends Logic{
                             /*player accomplish a Tutto, the functionality of this card ends */
                             return ValidDices;
                         }
-                        break;
+//                        break;
                         /* the break is used to get out of the flag while loop,
                                     go back to the isValid while loop,
                                     use the updated current dices to roll (i.e. roll the remaining dices) */

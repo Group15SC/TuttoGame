@@ -24,9 +24,12 @@ public abstract class Logic {
 
     // [for straight card] check whether a list of rolled dices have valid dices to keep
     protected static boolean IsValidForStraight(ArrayList<Integer> RolledDices, ArrayList<Integer> AlreadyKeptDices) {
+        if(AlreadyKeptDices.size() == 0) {
+            return true;
+        }
         for(int Dice : RolledDices) {
             for(int KeptDice : AlreadyKeptDices) {
-                if( AlreadyKeptDices.size() == 0 || ((!AlreadyKeptDices.contains(Dice)) && (KeptDice + 1 == Dice || KeptDice - 1 == Dice))) {
+                if( (!AlreadyKeptDices.contains(Dice)) && (KeptDice + 1 == Dice || KeptDice - 1 == Dice)) {
                     return true;
                 }
             }
