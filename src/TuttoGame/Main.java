@@ -10,10 +10,11 @@ import java.util.Comparator;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello World!");
         Player player1 = new Player("A", 1000);
-        BonusLogic fwlogic = new BonusLogic();
-        ArrayList<Integer> result = fwlogic.GetValidDices(player1);
+//        BonusLogic fwlogic = new BonusLogic();
+        StraightLogic test = new StraightLogic();
+
+        ArrayList<Integer> result = test.GetValidDices(player1);
         for(int r: result){
             System.out.println(r);
         }

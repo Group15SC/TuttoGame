@@ -26,7 +26,7 @@ public abstract class Logic {
     protected static boolean IsValidForStraight(ArrayList<Integer> RolledDices, ArrayList<Integer> AlreadyKeptDices) {
         for(int Dice : RolledDices) {
             for(int KeptDice : AlreadyKeptDices) {
-                if((!AlreadyKeptDices.contains(Dice)) && (KeptDice + 1 == Dice || KeptDice - 1 == Dice)) {
+                if( AlreadyKeptDices.size() == 0 || ((!AlreadyKeptDices.contains(Dice)) && (KeptDice + 1 == Dice || KeptDice - 1 == Dice))) {
                     return true;
                 }
             }
