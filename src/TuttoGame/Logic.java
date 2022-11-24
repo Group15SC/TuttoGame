@@ -8,6 +8,9 @@ import java.util.Scanner;
 
 public abstract class Logic {
 
+    // check whether a list of rolled dices have valid dices to keep
+    // true --> not null
+    // false --> null
     protected static boolean IsValid(ArrayList<Integer> ListOfDices) {
         int occurrences;
         for (int i = 0; i < ListOfDices.size(); i++) {
@@ -18,6 +21,19 @@ public abstract class Logic {
         }
         return false;
     }
+
+    // [for straight card] check whether a list of rolled dices have valid dices to keep
+    protected static boolean IsValidForStraight(ArrayList<Integer> RolledDices, ArrayList<Integer> AlreadyKeptDices) {
+        for(int Dice : RolledDices) {
+            for(int KeptDice : AlreadyKeptDices) {
+                if((!AlreadyKeptDices.contains(Dice)) && (KeptDice + 1 == Dice || KeptDice - 1 == Dice)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
 
     // get all the valid dices in a roll
     public static ArrayList<Integer> ValidInThisRoll( ArrayList<Integer> ListOfDices){
@@ -43,6 +59,18 @@ public abstract class Logic {
             return false;
         }
     }
+
+    // [for straight card]Check whether a list of dices user select to keep is valid
+    protected static boolean IsValidKeepForStraight(ArrayList<Integer> KeepDices, ArrayList<Integer> AlreadyKeptDices) {
+        for(int Dice : KeepDices) {
+            if(AlreadyKeptDices.contains(Dice)){
+                return false;
+            }
+        }
+
+        return true;
+    }
+
 
     protected static String TurnSartingOption() {
         Scanner scanner = new Scanner(System.in);
