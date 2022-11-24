@@ -69,9 +69,9 @@ public class Game {
         return HighestPlayer;
     }
 
-    public void GameOn(){
+    public void GameOn() {
 
-        for(int i = 0; i < numberOfPlayers; i++){
+        for(int i = 0; i < numberOfPlayers; i++) {
             Player player = new Player(input.getPlayers().get(i), 0);
             ListOfPlayers.add(player);
         }
