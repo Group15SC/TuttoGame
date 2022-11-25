@@ -34,19 +34,17 @@ public class StraightLogic extends Logic{
                 if (Logic.IsValidForStraight(RolledDices, ValidDices)) {
                     // If there exist dice valid to keep, ask the player which dices he/she would like to keep
                     DicesToKeep = Dices.GetKeepDices();
-                    if (Logic.IsValidKeepForStraight(DicesToKeep, ValidDices)) {
-                        // if all the player's input dices are valid, append them to valid dice list
-                        NumOfCurrentDices -= DicesToKeep.size();
-                        ValidDices.addAll(DicesToKeep);
-                        if (ValidDices.size() == 6) {
-                            /*player accomplish a Tutto, the functionality of this card ends */
-                            return ValidDices;
-                        }
+                    // if all the player's input dices are valid, append them to valid dice list
+                    NumOfCurrentDices -= DicesToKeep.size();
+                    ValidDices.addAll(DicesToKeep);
+                    if (ValidDices.size() == 6) {
+                        /*player accomplish a Tutto, the functionality of this card ends */
+                        return ValidDices;
+                    }
 //                        break;
                         /* the break is used to get out of the flag while loop,
                                     go back to the isValid while loop,
                                     use the updated current dices to roll (i.e. roll the remaining dices) */
-                    }
                 } else { // null case
                     System.out.println("You rolled a null! Your turn is over.");
                     ValidDices = new ArrayList<>();

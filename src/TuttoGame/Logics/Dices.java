@@ -9,9 +9,10 @@ public class Dices {
 
     public static ArrayList<Integer> RollDices(int numOfDices) {
         ArrayList<Integer> ListOfDices = new ArrayList<>();
+
         for(int i = 0; i < numOfDices; i ++){
             Random r = new Random();
-            int n = r.nextInt(7);
+            int n = r.nextInt(6) + 1;
             ListOfDices.add(n);
         }
         return ListOfDices;

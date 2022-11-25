@@ -28,10 +28,8 @@ public abstract class Logic {
             return true;
         }
         for(int Dice : RolledDices) {
-            for(int KeptDice : AlreadyKeptDices) {
-                if( (!AlreadyKeptDices.contains(Dice)) && (KeptDice + 1 == Dice || KeptDice - 1 == Dice)) {
-                    return true;
-                }
+            if( Dice >= 0 && Dice <=6 && !AlreadyKeptDices.contains(Dice)) {
+                return true;
             }
         }
         return false;
@@ -63,16 +61,6 @@ public abstract class Logic {
         }
     }
 
-    // [for straight card]Check whether a list of dices user select to keep is valid
-    protected static boolean IsValidKeepForStraight(ArrayList<Integer> KeepDices, ArrayList<Integer> AlreadyKeptDices) {
-        for(int Dice : KeepDices) {
-            if(AlreadyKeptDices.contains(Dice)){
-                return false;
-            }
-        }
-
-        return true;
-    }
 
 
     protected static String TurnSartingOption() {
