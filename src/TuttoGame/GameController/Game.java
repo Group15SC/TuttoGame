@@ -36,10 +36,27 @@ public class Game {
             case BONUS:
                 BonusLogic bonuslogic = new BonusLogic();
                 dices = bonuslogic.GetValidDices(player);
+                break;
             case MULTIPLY_TWO:
                 MultiplyTwoLogic multiplytwologic = new MultiplyTwoLogic();
                 dices = multiplytwologic.GetValidDices(player);
-                //int ThisCardScore2 = Dices.CalDiceScores(multiplytwologic.GetValidDices(player));
+                break;
+            case FIREWORKS:
+                FireworksLogic fireworksLogic = new FireworksLogic();
+                dices = fireworksLogic.GetValidDices(player);
+                break;
+            case CLOVERLEAF:
+                CloverleafLogic cloverleaflogic = new CloverleafLogic();
+                dices = cloverleaflogic.GetValidDices(player);
+                break;
+            case PLUS_MINUS:
+                PlusMinusLogic plusminuslogic = new PlusMinusLogic();
+                dices = plusminuslogic.GetValidDices(player);
+                break;
+            case STRAIGHT:
+                StraightLogic straigthlogic = new StraightLogic();
+                dices = straigthlogic.GetValidDices(player);
+                break;
         }
         return dices;
         /* return a valid dice list of each type of card
