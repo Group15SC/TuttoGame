@@ -18,11 +18,10 @@ public class StraightLogic extends Logic{
         String option = Logic.TurnSartingOption();
         // choosing display: display current score
         int NumOfCurrentDices = 6;
-        if (option.equals("D")) {
-            System.out.print(player.getScore());
-        }
-
-        else if (option.equals("R")) {
+        while(option.equals("D")){
+            System.out.println(player.getScore());
+            option = Logic.TurnSartingOption();
+        } if (option.equals("R")) {
             boolean isValid = true;
 
             while (isValid) {

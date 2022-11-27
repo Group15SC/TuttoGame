@@ -16,11 +16,10 @@ public class FireworksLogic extends Logic {
 
         String option = Logic.TurnSartingOption();
         // choosing display: display current score
-        if (option.equals("D")) {
-            System.out.print(player.getScore());
-        }
-        // choosing roll: roll the dice
-        else if (option.equals("R")) {
+        while(option.equals("D")){
+            System.out.println(player.getScore());
+            option = Logic.TurnSartingOption();
+        } if (option.equals("R")) {
             int CurrentDices = 6;
             boolean isValid = true;
 

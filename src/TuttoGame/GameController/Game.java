@@ -41,13 +41,14 @@ public class Game {
                 dices = multiplytwologic.GetValidDices(player);
                 //int ThisCardScore2 = Dices.CalDiceScores(multiplytwologic.GetValidDices(player));
         }
-        return dices; /* return a valid dice list of each type of card
-                            -if the length of the dice is 6: Tutto / Straight Tutto;
-                            -if the length of the dice is 0: Null;
-                            -if the length of the dice is 12: Cloverleaf (2Tutto) / Fireworks
-                            -if the length of the dice is others:
-                               either a Fireworks
-                               or end in the halfway (Bonus/Multiply Two)*/
+        return dices;
+        /* return a valid dice list of each type of card
+        -if the length of the dice is 6: Tutto / Straight Tutto;
+        -if the length of the dice is 0: Null;
+        -if the length of the dice is 12: Cloverleaf (2Tutto) / Fireworks
+        -if the length of the dice is others:
+           either a Fireworks
+           or end in the halfway (Bonus/Multiply Two)*/
     }
 
     private ArrayList<Player> GetHighestPlayer(ArrayList<Player> players) {

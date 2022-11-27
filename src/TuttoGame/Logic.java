@@ -75,6 +75,7 @@ public abstract class Logic {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Would you like to End or Continue?");
         System.out.println("Enter 'E' if you want to End.");
+        System.out.println("Press any key to continue.");
         String halfwayopt = scanner.next();
         return halfwayopt;
     }

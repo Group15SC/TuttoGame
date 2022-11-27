@@ -12,7 +12,7 @@ public class Main {
     public static void main(String[] args) {
         Player player1 = new Player("A", 1000);
 //        BonusLogic fwlogic = new BonusLogic();
-        StraightLogic test = new StraightLogic();
+        BonusLogic test = new BonusLogic();
 
         ArrayList<Integer> result = test.GetValidDices(player1);
         for(int r: result){
