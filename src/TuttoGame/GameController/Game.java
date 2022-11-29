@@ -1,7 +1,6 @@
 package TuttoGame.GameController;
 
-import TuttoGame.Cards.Card;
-import TuttoGame.Cards.CardType;
+import TuttoGame.Cards.*;
 
 import TuttoGame.Logic;
 import TuttoGame.Logics.*;
@@ -22,7 +21,7 @@ public class Game {
         return card;
     }
 
-    Scanner scanner = new Scanner(System.in);
+//    Scanner scanner = new Scanner(System.in);
     Input input = new Input();
     int numberOfPlayers = input.GetNumberOfPlayers();
     ArrayList<Player> ListOfPlayers = new ArrayList<>();
@@ -31,7 +30,7 @@ public class Game {
 
     private ArrayList<Integer> DicesOfThisCard(Player player, Card card){
         ArrayList<Integer> dices = new ArrayList<>();
-        switch (card.CardType){
+        switch (card.GetCardType()){
             case STOP:
                 break;
             case BONUS:
@@ -112,9 +111,9 @@ public class Game {
                             Continue = false;
                             break;
                         case 6:
-                            switch (card.CardType) {
+                            switch (card.GetCardType()) {
                                 case BONUS:
-                                    ScoreOfThisCard = Dices.CalDiceScores(resultdices) + card.Points;
+                                    ScoreOfThisCard = Dices.CalDiceScores(resultdices) + card.GetPoints();
                                     break;
                                 case MULTIPLY_TWO:
                                     ScoreOfThisCard = Dices.CalDiceScores(resultdices) * 2;
@@ -144,7 +143,7 @@ public class Game {
                             }
                             break;
                         case 12:
-                            switch (card.CardType) {
+                            switch (card.GetCardType()) {
                                 case CLOVERLEAF:
                                     ScoreOfThisCard = input.GetWinningPoints();
                                     break;
@@ -258,46 +257,46 @@ public class Game {
     private void GenerateCardSet(){
 
         for (int i = 0; i < 5; i++) {
-            Card Bonus = new Card(CardType.BONUS, 200);
+            Card Bonus = new BonusCard(200);
             CardSet.add(Bonus);
         }
         for (int i = 0; i < 5; i++) {
-            Card Bonus = new Card(CardType.BONUS, 300);
+            Card Bonus = new BonusCard(300);
             CardSet.add(Bonus);
         }
         for (int i = 0; i < 5; i++) {
-            Card Bonus = new Card(CardType.BONUS, 400);
+            Card Bonus = new BonusCard(400);
             CardSet.add(Bonus);
         }
         for (int i = 0; i < 5; i++) {
-            Card Bonus = new Card(CardType.BONUS, 500);
+            Card Bonus = new BonusCard(500);
             CardSet.add(Bonus);
         }
         for (int i = 0; i < 5; i++) {
-            Card Bonus = new Card(CardType.BONUS, 600);
+            Card Bonus = new BonusCard(600);
             CardSet.add(Bonus);
         }
         for (int i = 0; i < 5; i++) {
-            Card MultiplyTwo = new Card(CardType.MULTIPLY_TWO, 0);
+            Card MultiplyTwo = new MultiplyTwoCard();
             CardSet.add(MultiplyTwo);
         }
         for (int i = 0; i < 10; i++) {
-            Card Stop = new Card(CardType.STOP, 0);
+            Card Stop = new StopCard();
             CardSet.add(Stop);
         }
         for (int i = 0; i < 5; i++) {
-            Card FireWorks = new Card(CardType.FIREWORKS, 0);
+            Card FireWorks = new FireworksCard();
             CardSet.add(FireWorks);
         }
         for (int i = 0; i < 5; i++) {
-            Card Plus_Minus = new Card(CardType.PLUS_MINUS, 0);
+            Card Plus_Minus = new PlusMinusCard();
             CardSet.add(Plus_Minus);
         }
-        Card CloverLeaf = new Card(CardType.CLOVERLEAF, 0);
+        Card CloverLeaf = new CloverleafCard();
         CardSet.add(CloverLeaf);
 
         for (int i = 0; i < 5; i++) {
-            Card Straight = new Card(CardType.STRAIGHT, 0);
+            Card Straight = new StraightCard();
             CardSet.add(Straight);
         }
         Collections.shuffle(CardSet);

@@ -32,11 +32,11 @@ public class BonusLogic extends Logic {
                     // keep valid dices flag
                     boolean Flag = true;
                     while (Flag) {
-                        // Ask the player if he/she wanna continue rolling or end this turn here
-                        String halfwayopt = Logic.HalfwayOption();
+                        // Ask the player if he/she want to continue rolling or end this turn here
+                        String HalfwayOpt = Logic.HalfwayOption();
 
                         // player decides to end the turn halfway
-                        if (halfwayopt.equals("E")) {
+                        if (HalfwayOpt.equals("E")) {
                             // return the valid dices obtained after this roll
                             ValidDices.addAll(ValidInThisRoll(RolledDices));
                             Flag = false;
