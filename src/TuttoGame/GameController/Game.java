@@ -12,6 +12,7 @@ import java.util.Scanner;
 
 public class Game {
     public Game() {
+//        GenerateCardSet();
     }
 
     ArrayList<Card> CardSet = new ArrayList<>();
@@ -88,7 +89,7 @@ public class Game {
     }
 
     public void GameOn() {
-
+        GenerateCardSet();
         for(int i = 0; i < numberOfPlayers; i++) {
             Player player = new Player(input.getPlayers().get(i), 0);
             ListOfPlayers.add(player);
@@ -98,7 +99,7 @@ public class Game {
         while(!Win) {
             for(Player player: ListOfPlayers) {
                 Card card = DrawACard(); // a turn
-                int Scoreinthisturn = 0;
+                int ScoreInThisTurn = 0;
                 ArrayList<Integer> resultdices = DicesOfThisCard(player, card);
                 // Calculate the points gained in this card
                 boolean Continue = true;
@@ -107,7 +108,7 @@ public class Game {
                     switch (resultdices.size()){
                         case 0:
                             // if the card is STOP, return a empty list and enter this case
-                            Scoreinthisturn = 0;
+                            ScoreInThisTurn = 0;
                             Continue = false;
                             break;
                         case 6:
@@ -157,9 +158,9 @@ public class Game {
                             ScoreOfThisCard = Dices.CalDiceScores(resultdices);
                             break;
                         }
-                    Scoreinthisturn += ScoreOfThisCard;
+                    ScoreInThisTurn += ScoreOfThisCard;
                 }
-                player.setScore(Scoreinthisturn);
+                player.setScore(ScoreInThisTurn);
                 if(player.getScore()>=input.GetWinningPoints()) {
                     System.out.println("Game over!");
                     System.out.println("Player"+player.name+"is the winner!");
