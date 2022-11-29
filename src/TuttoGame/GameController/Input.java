@@ -5,14 +5,14 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Input {
-    int numberofplayers;
-    int winningpoints;
+    int NumberOfPlayers;
+    int WinningPoints;
     ArrayList<String> Players;
 
 
     private Scanner scanner = new Scanner(System.in);
 
-    private int Askfornumberofplayers() {
+    private int AskForNumberOfPlayers() {
         System.out.println("Please enter the number of players (2-4): ");
         int num = scanner.nextInt();
         while (num < 2 || num > 4) {
@@ -23,35 +23,35 @@ public class Input {
         return num;
     }
 
-    private int Askforwinningpoints() {
+    private int AskForWinningPoints() {
         System.out.println("Please define the winning points:");
         int points = scanner.nextInt(); // any limits?
         return points;
     }
 
-    private String Askforname() {
+    private String AskForName() {
         String name = scanner.next();
         return name;
     }
 
     public Input(){
-        this.numberofplayers = Askfornumberofplayers();
+        this.NumberOfPlayers = AskForNumberOfPlayers();
         ArrayList<String> Players = new ArrayList<>();
-        for(int i=0; i < numberofplayers; i++) {
+        for(int i=0; i < NumberOfPlayers; i++) {
             System.out.println("Please enter the name of Player" + (i+1) +":");
-            String player = Askforname();
+            String player = AskForName();
             Players.add(player);
         } Collections.sort(Players); //sort the list of players alphabetically
         this.Players = Players;
-        this.winningpoints = Askforwinningpoints();
+        this.WinningPoints = AskForWinningPoints();
     }
 
-    public int getNumberofplayers() {
-        return numberofplayers;
+    public int GetNumberOfPlayers() {
+        return NumberOfPlayers;
     }
 
-    public int getWinningpoints() {
-        return winningpoints;
+    public int GetWinningPoints() {
+        return WinningPoints;
     }
 
     public ArrayList<String> getPlayers() {

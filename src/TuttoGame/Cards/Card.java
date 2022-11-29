@@ -2,10 +2,10 @@ package TuttoGame.Cards;
 
 public class Card {
     public CardType CardType;
-    public int AddScore;
+    public int Points;
 
-    public Card(CardType cardType, int addScore) {
+    public Card(CardType cardType, int points) {
         this.CardType = cardType;
-        this.AddScore = addScore;
+        this.Points = points;
     }
 }

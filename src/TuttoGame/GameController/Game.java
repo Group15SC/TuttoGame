@@ -23,7 +23,7 @@ public class Game {
 
     Scanner scanner = new Scanner(System.in);
     Input input = new Input();
-    int numberOfPlayers = input.getNumberofplayers();
+    int numberOfPlayers = input.GetNumberOfPlayers();
     ArrayList<Player> ListOfPlayers = new ArrayList<>();
 
 
@@ -113,7 +113,7 @@ public class Game {
                         case 6:
                             switch (card.CardType) {
                                 case BONUS:
-                                    ScoreOfThisCard = Dices.CalDiceScores(resultdices) + card.AddScore;
+                                    ScoreOfThisCard = Dices.CalDiceScores(resultdices) + card.Points;
                                     break;
                                 case MULTIPLY_TWO:
                                     ScoreOfThisCard = Dices.CalDiceScores(resultdices) * 2;
@@ -145,7 +145,7 @@ public class Game {
                         case 12:
                             switch (card.CardType) {
                                 case CLOVERLEAF:
-                                    ScoreOfThisCard = input.winningpoints;
+                                    ScoreOfThisCard = input.GetWinningPoints();
                                     break;
                                 case FIREWORKS:
                                     ScoreOfThisCard = Dices.CalDiceScores(resultdices);
@@ -160,7 +160,7 @@ public class Game {
                     Scoreinthisturn += ScoreOfThisCard;
                 }
                 player.setScore(Scoreinthisturn);
-                if(player.getScore()>=input.winningpoints) {
+                if(player.getScore()>=input.GetWinningPoints()) {
                     System.out.println("Game over!");
                     System.out.println("Player"+player.name+"is the winner!");
                     Win = true;

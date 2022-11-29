@@ -12,15 +12,15 @@ public class MultiplyTwoLogic extends Logic {
         // x2 logic return list of valid dices
         ArrayList<Integer> ValidDices = new ArrayList<>();
         // get the option
-    String option = Logic.TurnsartingOption();
+    String option = Logic.TurnSartingOption();
     // choosing display: display current score
     while(option.equals("D")){
         System.out.println(player.getScore());
-        option = Logic.TurnsartingOption();
+        option = Logic.TurnSartingOption();
     } if (option.equals("R")) {
         int CurrentDices =6;
         boolean isValid = true;
-        while (isvalid) {
+        while (isValid) {
             //store and display results of dice rolling
             ArrayList<Integer>RolledDices = Dices.RollDices(CurrentDices);
             Dices.DisplayDices(RolledDices);
