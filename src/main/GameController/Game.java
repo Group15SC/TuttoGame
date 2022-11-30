@@ -56,90 +56,91 @@ public class Game {
                 Card card = DrawACard(deck); // a turn
                 System.out.println("Player "+player.name);
                 System.out.println("The card you got is: "+card.GetCardType());
-//                if (card.GetCardType()!=CardType.STOP) {
-//
-//                }
-                int ScoreInThisTurn = 0;
-                String option = Utils.TurnStartingOption();
-                while(!option.equals("R")) {
-                    switch (option) {
-                        // choosing display: display current score
-                        case "D":
-                            System.out.println(player.getScore());
-                            break;
-                        case "E":
-                            System.out.println("You may not end now! Please reenter:");
-                            break;
-                        default:
-                            System.out.println("Invalid Input! Please input again");
-                            break;
-                    }
-                    option = Utils.TurnStartingOption();
-                }
-                if (option.equals("R")) {
-                    ArrayList<Integer> ResultDices = card.ValidDices();
-                    // Calculate the points gained in this card
-                    boolean Continue = true;
-                    while (Continue) {
-                        int ScoreOfThisCard = 0;
-                        switch (ResultDices.size()){
-                            case 0:
-                                // if the card is STOP, return a empty list and enter this case
-                                ScoreInThisTurn = 0;
-                                Continue = false;
+                if (card.GetCardType()!=CardType.STOP) {
+                    int ScoreInThisTurn = 0;
+                    String option = Utils.TurnStartingOption();
+                    while(!option.equals("R")) {
+                        switch (option) {
+                            // choosing display: display current score
+                            case "D":
+                                System.out.println(player.getScore());
                                 break;
-                            case 6:
-                                switch (card.GetCardType()) {
-                                    case BONUS:
-                                        ScoreOfThisCard = Dices.CalDiceScores(ResultDices) + card.GetPoints();
-                                        break;
-                                    case MULTIPLY_TWO:
-                                        ScoreOfThisCard = Dices.CalDiceScores(ResultDices) * 2;
-                                        break;
-                                    case STRAIGHT:
-                                        ScoreOfThisCard = 2000;
-                                        break;
-                                    case PLUS_MINUS:
-                                        ScoreOfThisCard = 1000;
-                                        ArrayList<Player> HighestPlayer = GetHighestPlayer(ListOfPlayers);
-                                        for(Player player2: HighestPlayer) {
-                                            if(player2 != player) {
-                                                player2.setScore(player2.getScore()-1000);
-                                            }
-                                        }
-                                        break;
-                                }
-                                String ifContinue = Utils.TuttoOption();
-                                switch (ifContinue) {
-                                    case "E":
-                                        Continue = false;
-                                        break;
-                                    case "R":
-                                        Card NewCard = DrawACard(deck);
-                                        ResultDices = NewCard.ValidDices();
-                                        break;
-                                }
-                                break;
-                            case 12:
-                                switch (card.GetCardType()) {
-                                    case CLOVERLEAF:
-                                        ScoreOfThisCard = input.GetWinningPoints();
-                                        break;
-                                    case FIREWORKS:
-                                        ScoreOfThisCard = Dices.CalDiceScores(ResultDices);
-                                        break;
-                                }
-                                Continue = false;
+                            case "E":
+                                System.out.println("You may not end now! Please reenter:");
                                 break;
                             default:
-                                ScoreOfThisCard = Dices.CalDiceScores(ResultDices);
-                                Continue = false;
+                                System.out.println("Invalid Input! Please input again");
                                 break;
                         }
-                        ScoreInThisTurn += ScoreOfThisCard;
+                        option = Utils.TurnStartingOption();
                     }
-                    player.setScore(ScoreInThisTurn);
+                    if (option.equals("R")) {
+                        ArrayList<Integer> ResultDices = card.ValidDices();
+                        // Calculate the points gained in this card
+                        boolean Continue = true;
+                        while (Continue) {
+                            int ScoreOfThisCard = 0;
+                            switch (ResultDices.size()){
+                                case 0:
+                                    // if the card is STOP, return a empty list and enter this case
+                                    ScoreInThisTurn = 0;
+                                    Continue = false;
+                                    break;
+                                case 6:
+                                    switch (card.GetCardType()) {
+                                        case BONUS:
+                                            ScoreOfThisCard = Dices.CalDiceScores(ResultDices) + card.GetPoints();
+                                            break;
+                                        case MULTIPLY_TWO:
+                                            ScoreOfThisCard = Dices.CalDiceScores(ResultDices) * 2;
+                                            break;
+                                        case STRAIGHT:
+                                            ScoreOfThisCard = 2000;
+                                            break;
+                                        case PLUS_MINUS:
+                                            ScoreOfThisCard = 1000;
+                                            ArrayList<Player> HighestPlayer = GetHighestPlayer(ListOfPlayers);
+                                            for(Player player2: HighestPlayer) {
+                                                if(player2 != player) {
+                                                    player2.setScore(player2.getScore()-1000);
+                                                }
+                                            }
+                                            break;
+                                    }
+                                    String ifContinue = Utils.TuttoOption();
+                                    switch (ifContinue) {
+                                        case "E":
+                                            Continue = false;
+                                            break;
+                                        case "R":
+                                            Card NewCard = DrawACard(deck);
+                                            ResultDices = NewCard.ValidDices();
+                                            break;
+                                    }
+                                    break;
+                                case 12:
+                                    switch (card.GetCardType()) {
+                                        case CLOVERLEAF:
+                                            ScoreOfThisCard = input.GetWinningPoints();
+                                            break;
+                                        case FIREWORKS:
+                                            ScoreOfThisCard = Dices.CalDiceScores(ResultDices);
+                                            break;
+                                    }
+                                    Continue = false;
+                                    break;
+                                default:
+                                    ScoreOfThisCard = Dices.CalDiceScores(ResultDices);
+                                    Continue = false;
+                                    break;
+                            }
+                            ScoreInThisTurn += ScoreOfThisCard;
+                        }
+                        player.setScore(ScoreInThisTurn);
+                    }
                 }
+                System.out.println("Your turn is over!");
+                System.out.println("===================");
                 if(player.getScore()>=input.GetWinningPoints()) {
                     System.out.println("Game over!");
                     System.out.println("Player "+player.name+" is the winner!");
