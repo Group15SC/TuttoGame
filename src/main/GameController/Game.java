@@ -3,6 +3,7 @@ package main.GameController;
 import main.Cards.*;
 
 import main.Logics.*;
+import main.Utils;
 import main.utils;
 
 import java.util.ArrayList;
@@ -56,8 +57,11 @@ public class Game {
                 Card card = DrawACard(deck); // a turn
                 System.out.println("Player "+player.name);
                 System.out.println("The card you got is: "+card.GetCardType());
+//                if (card.GetCardType()!=CardType.STOP) {
+//
+//                }
                 int ScoreInThisTurn = 0;
-                String option = utils.TurnSartingOption();
+                String option = Utils.TurnStartingOption();
                 while(!option.equals("R")) {
                     switch (option) {
                         // choosing display: display current score
@@ -71,7 +75,7 @@ public class Game {
                             System.out.println("Invalid Input! Please input again");
                             break;
                     }
-                    option = utils.TurnSartingOption();
+                    option = Utils.TurnStartingOption();
                 }
                 if (option.equals("R")) {
                     ArrayList<Integer> ResultDices = card.ValidDices();
@@ -106,7 +110,7 @@ public class Game {
                                         }
                                         break;
                                 }
-                                String ifContinue = utils.TuttoOption();
+                                String ifContinue = Utils.TuttoOption();
                                 switch (ifContinue) {
                                     case "E":
                                         Continue = false;

@@ -2,8 +2,8 @@ package main;
 
 import java.util.Scanner;
 
-public class utils {
-    public static String TurnSartingOption() {
+public class Utils {
+    public static String TurnStartingOption() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Would you like to Roll or Display current scores?");
         System.out.println("Enter 'D' if you want to Display current scores");

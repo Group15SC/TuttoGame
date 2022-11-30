@@ -12,12 +12,12 @@ import static org.junit.jupiter.api.Assertions.*;
 class LogicTest {
 
     @Test
-    void isValid() {
+    void TestInvalidDices() {
         ArrayList<Integer> TestInt= new ArrayList<>();
         TestInt.add(1);
         TestInt.add(5);
         TestInt.add(3);
-        Logic logic
+
     }
 
     @Test
