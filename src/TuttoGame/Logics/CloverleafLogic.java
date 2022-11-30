@@ -8,17 +8,17 @@ import java.util.ArrayList;
 public class CloverleafLogic extends Logic{
 
     @Override
-    public ArrayList<Integer> GetValidDices(Player player) {
+    public ArrayList<Integer> GetValidDices() {
         ArrayList<Integer> ValidDices = new ArrayList<>();
         int CurrentDices = 6;
         // get the option
-        String option = Logic.TurnSartingOption();
-        // choosing display: display current score
-
-        while(option.equals("D")){
-            System.out.println(player.getScore());
-            option = Logic.TurnSartingOption();
-        } if (option.equals("R")) {
+//        String option = Logic.TurnSartingOption();
+//        // choosing display: display current score
+//
+//        while(option.equals("D")){
+//            System.out.println(player.getScore());
+//            option = Logic.TurnSartingOption();
+//        } if (option.equals("R")) {
             boolean isValid = true;
             while (isValid) {
                 // store and display result of dice rolling
@@ -49,10 +49,10 @@ public class CloverleafLogic extends Logic{
                     isValid = false;
                 }
             }
-        }
-        else {
-            System.out.println("Invalid Input! Please input again");
-        }
+//        }
+//        else {
+//            System.out.println("Invalid Input! Please input again");
+//        }
         return ValidDices;
     }
 

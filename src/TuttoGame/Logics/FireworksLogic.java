@@ -8,18 +8,18 @@ import java.util.ArrayList;
 public class FireworksLogic extends Logic {
 
     @Override
-    public ArrayList<Integer> GetValidDices(Player player) {
+    public ArrayList<Integer> GetValidDices() {
         ArrayList<Integer> ValidDices = new ArrayList<>();
         /* FIREWORKS:
             keep throwing the dice until roll a null
             after each roll, keep all valid dices and triplets*/
 
-        String option = Logic.TurnSartingOption();
-        // choosing display: display current score
-        while(option.equals("D")){
-            System.out.println(player.getScore());
-            option = Logic.TurnSartingOption();
-        } if (option.equals("R")) {
+//        String option = Logic.TurnSartingOption();
+//        // choosing display: display current score
+//        while(option.equals("D")){
+//            System.out.println(player.getScore());
+//            option = Logic.TurnSartingOption();
+//        } if (option.equals("R")) {
             int CurrentDices = 6;
             boolean isValid = true;
 
@@ -27,7 +27,6 @@ public class FireworksLogic extends Logic {
                 // store and display the result of dice rolling
                 ArrayList<Integer> RolledDices = Dices.RollDices(CurrentDices);
                 Dices.DisplayDices(RolledDices);
-
                 if (Logic.IsValid(RolledDices)) {
                     // keep all valid single dice and triplets
                     ArrayList<Integer> DicesToKeep = ValidInThisRoll(RolledDices);
@@ -46,7 +45,7 @@ public class FireworksLogic extends Logic {
                     isValid = false;
                 }
             }
-        }
+        //}
         return ValidDices;
     }
 }

@@ -1,5 +1,9 @@
 package TuttoGame.Cards;
 
+import TuttoGame.Logics.MultiplyTwoLogic;
+
+import java.util.ArrayList;
+
 public class MultiplyTwoCard extends Card{
 
     @Override
@@ -10,5 +14,11 @@ public class MultiplyTwoCard extends Card{
     @Override
     public int GetPoints() {
         return 0;
+    }
+
+    @Override
+    public ArrayList<Integer> ValidDices() {
+        MultiplyTwoLogic MultiplyTwo = new MultiplyTwoLogic();
+        return MultiplyTwo.GetValidDices();
     }
 }

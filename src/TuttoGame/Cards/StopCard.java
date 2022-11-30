@@ -1,5 +1,9 @@
 package TuttoGame.Cards;
 
+import TuttoGame.Logics.StopLogic;
+
+import java.util.ArrayList;
+
 public class StopCard extends Card{
 
     @Override
@@ -10,5 +14,11 @@ public class StopCard extends Card{
     @Override
     public int GetPoints() {
         return 0;
+    }
+
+    @Override
+    public ArrayList<Integer> ValidDices() {
+        StopLogic stop = new StopLogic();
+        return stop.GetValidDices();
     }
 }

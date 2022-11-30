@@ -1,5 +1,10 @@
 package TuttoGame.Cards;
 
+import java.util.ArrayList;
+
+import TuttoGame.Logic;
+import TuttoGame.Logics.BonusLogic;
+
 public class BonusCard extends Card{
     int Points;
 
@@ -15,4 +20,9 @@ public class BonusCard extends Card{
         return Points;
     }
 
+    @Override
+    public ArrayList<Integer> ValidDices() {
+        BonusLogic bonus = new BonusLogic();
+        return bonus.GetValidDices();
+    }
 }

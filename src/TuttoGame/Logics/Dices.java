@@ -1,5 +1,6 @@
 package TuttoGame.Logics;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
@@ -61,13 +62,19 @@ public class Dices {
 
     public static ArrayList<Integer> GetKeepDices() {
         ArrayList<Integer> IntKeepDices = new ArrayList<>();
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Please select the Dices you want to keep");
-        System.out.println("If you choose to keep a triplet, please separate each number with ','"); //e.g 2,2,2
-        String keep = scanner.nextLine();
-        String[] KeepDices = keep.split(",");
-        for(String s: KeepDices) IntKeepDices.add(Integer.valueOf(s));
+        while (true) { // handle invalid input
+            try {
+                Scanner scanner = new Scanner(System.in);
+                System.out.println("Please select the Dices you want to keep");
+                System.out.println("If you choose to keep a triplet, please separate each number with ','"); //e.g 2,2,2
+                String keep = scanner.nextLine();
+                String[] KeepDices = keep.split(",");
+                for (String s : KeepDices) IntKeepDices.add(Integer.valueOf(s));
+                break;
+            } catch (Exception e) {
+                System.out.println("Invalid Input! Please re-enter:");
+            }
+        }
         return IntKeepDices;
     }
-
 }

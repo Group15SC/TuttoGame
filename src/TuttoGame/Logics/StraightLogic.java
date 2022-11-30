@@ -4,24 +4,36 @@ import TuttoGame.GameController.Player;
 import TuttoGame.Logic;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class StraightLogic extends Logic{
 
-    @Override
-    public ArrayList<Integer> GetValidDices(Player player) {
+    private static boolean IsValidForStraight(ArrayList<Integer> RolledDices, ArrayList<Integer> AlreadyKeptDices) {
+        if(AlreadyKeptDices.size() == 0) {
+            return true;
+        }
+        for(int Dice : RolledDices) {
+            if( Dice >= 0 && Dice <=6 && !AlreadyKeptDices.contains(Dice)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
+    @Override
+    public ArrayList<Integer> GetValidDices() {
         // logic of Straight card, return all the valid dices
         // note that the logic of valid dice is different from other cards
 
         ArrayList<Integer> ValidDices = new ArrayList<>();
 
-        String option = Logic.TurnSartingOption();
+        //String option = Logic.TurnSartingOption();
         // choosing display: display current score
         int NumOfCurrentDices = 6;
-        while(option.equals("D")){
-            System.out.println(player.getScore());
-            option = Logic.TurnSartingOption();
-        } if (option.equals("R")) {
+//        while(option.equals("D")){
+//            System.out.println(player.getScore());
+//            option = Logic.TurnSartingOption();
+//        } if (option.equals("R")) {
             boolean isValid = true;
 
             while (isValid) {
@@ -30,7 +42,7 @@ public class StraightLogic extends Logic{
                 Dices.DisplayDices(RolledDices);
                 ArrayList<Integer> DicesToKeep;
 
-                if (Logic.IsValidForStraight(RolledDices, ValidDices)) {
+                if (IsValidForStraight(RolledDices, ValidDices)) {
                     // If there exist dice valid to keep, ask the player which dices he/she would like to keep
                     DicesToKeep = Dices.GetKeepDices();
                     // if all the player's input dices are valid, append them to valid dice list
@@ -50,13 +62,11 @@ public class StraightLogic extends Logic{
                     isValid = false;
                 }
             }
-        }
-        else {
-            System.out.println("Invalid Input! Please input again");
-        }
+//        }
+//        else {
+//            System.out.println("Invalid Input! Please input again");
+//        }
 
         return ValidDices;
     }
-
-
 }
