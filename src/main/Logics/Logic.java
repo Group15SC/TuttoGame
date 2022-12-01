@@ -1,8 +1,11 @@
-package main;
+package main.Logics;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Objects;
 import java.util.Scanner;
+
+import static java.lang.System.out;
 
 public abstract class Logic {
 
@@ -13,7 +16,7 @@ public abstract class Logic {
         int occurrences;
         for (int i = 0; i < ListOfDices.size(); i++) {
             occurrences = Collections.frequency(ListOfDices, ListOfDices.get(i));
-            if (ListOfDices.get(i) == 1 || ListOfDices.get(i) == 5 || occurrences == 3) {
+            if (ListOfDices.get(i) == 1 || ListOfDices.get(i) == 5 || occurrences >= 3) {
                 return true;
             }
         }
@@ -32,22 +35,6 @@ public abstract class Logic {
             return isValid;
     }
 
-
-
-    // [for straight card] check whether a list of rolled dices have valid dices to keep
-//    protected static boolean IsValidForStraight(ArrayList<Integer> RolledDices, ArrayList<Integer> AlreadyKeptDices) {
-//        if(AlreadyKeptDices.size() == 0) {
-//            return true;
-//        }
-//        for(int Dice : RolledDices) {
-//            if( Dice >= 0 && Dice <=6 && !AlreadyKeptDices.contains(Dice)) {
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
-
-
     // get all the valid dices in a roll
     protected static ArrayList<Integer> ValidInThisRoll( ArrayList<Integer> ListOfDices){
         int occurrences;
@@ -61,6 +48,38 @@ public abstract class Logic {
         return ValidDicesInThisRoll;
     }
 
+    public static String HalfwayOption() {
+        Scanner scanner = new Scanner(System.in);
+        out.println("Would you like to End or Continue?");
+        out.println("Enter 'E' if you want to End.");
+        out.println("Press 'R' to continue.");
+        while(!scanner.hasNext("[ER]")) {
+            out.println("Invalid input! Please re-enter:");
+            scanner.next();
+        }
+        String option = scanner.next();
+        return option;
+    }
+
+    public abstract ArrayList<Integer> GetValidDices();
+}
+
+
+
+
+// [for straight card] check whether a list of rolled dices have valid dices to keep
+//    protected static boolean IsValidForStraight(ArrayList<Integer> RolledDices, ArrayList<Integer> AlreadyKeptDices) {
+//        if(AlreadyKeptDices.size() == 0) {
+//            return true;
+//        }
+//        for(int Dice : RolledDices) {
+//            if( Dice >= 0 && Dice <=6 && !AlreadyKeptDices.contains(Dice)) {
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
+
 
 
 
@@ -73,18 +92,3 @@ public abstract class Logic {
 //        String option = scanner.next();
 //        return option;
 //    }
-
-    protected static String HalfwayOption() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Would you like to End or Continue?");
-        System.out.println("Enter 'E' if you want to End.");
-        System.out.println("Press any key to continue.");
-        String halfwayopt = scanner.next();
-        return halfwayopt;
-    }
-
-
-
-    public abstract ArrayList<Integer> GetValidDices();
-
-}

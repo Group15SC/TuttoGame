@@ -1,10 +1,8 @@
 package main.Logics;
 
-import main.Logic;
-
 import java.util.ArrayList;
 
-public class PlusMinusLogic extends Logic{
+public class PlusMinusLogic extends Logic {
 
     /* Try to accomplish a TUTTO and may not stop in halfway
         if the player roll a null, his/her turn is over

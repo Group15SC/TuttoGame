@@ -1,10 +1,8 @@
 package main.Logics;
 
-import main.Logic;
-
 import java.util.ArrayList;
 
-public class CloverleafLogic extends Logic{
+public class CloverleafLogic extends Logic {
 
     @Override
     public ArrayList<Integer> GetValidDices() {
@@ -24,10 +22,10 @@ public class CloverleafLogic extends Logic{
                 ArrayList<Integer> RolledDices = Dices.RollDices(CurrentDices);
                 Dices.DisplayDices(RolledDices);
                 ArrayList<Integer> DicesToKeep;
-                if (Logic.IsValid(RolledDices)) {
+                if (IsValid(RolledDices)) {
                     // Ask the player which dices she/he would like to keep
                     DicesToKeep = Dices.GetKeepDices();
-                    if (Logic.IsValidKeep(DicesToKeep)) {
+                    if (IsValidKeep(DicesToKeep)) {
                         // if all the player's input dices are valid, append them to valid dice list
                         ValidDices.addAll(DicesToKeep);
                         CurrentDices -= DicesToKeep.size();

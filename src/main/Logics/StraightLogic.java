@@ -1,10 +1,8 @@
 package main.Logics;
 
-import main.Logic;
-
 import java.util.ArrayList;
 
-public class StraightLogic extends Logic{
+public class StraightLogic extends Logic {
 
     private static boolean IsValidForStraight(ArrayList<Integer> RolledDices, ArrayList<Integer> AlreadyKeptDices) {
         if(AlreadyKeptDices.size() == 0) {

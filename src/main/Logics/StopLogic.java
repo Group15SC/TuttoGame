@@ -1,7 +1,5 @@
 package main.Logics;
 
-import main.Logic;
-
 import java.util.ArrayList;
 
 public class StopLogic extends Logic {

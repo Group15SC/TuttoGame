@@ -1,14 +1,12 @@
 package main;
 
-import main.GameController.Game;
-import main.Logics.BonusLogic;
-import main.Logics.MultiplyTwoLogic;
-
-import java.util.ArrayList;
+import main.Logics.Dices;
+import main.Logics.Logic;
 
 public class Main {
     public static void main(String[] args) {
-        Game game = new Game();
+        Logic.HalfwayOption();
+//        Game game = new Game();
 //        game.GameOn();
 
 
@@ -25,7 +23,7 @@ public class Main {
 //        for(Card card: test) {
 //            System.out.println(card.GetCardType());
 //        }
-
+//        Dices.GetKeepDices();
     }
 }
 

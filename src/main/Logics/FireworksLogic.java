@@ -1,7 +1,5 @@
 package main.Logics;
 
-import main.Logic;
-
 import java.util.ArrayList;
 
 public class FireworksLogic extends Logic {
@@ -26,7 +24,7 @@ public class FireworksLogic extends Logic {
                 // store and display the result of dice rolling
                 ArrayList<Integer> RolledDices = Dices.RollDices(CurrentDices);
                 Dices.DisplayDices(RolledDices);
-                if (Logic.IsValid(RolledDices)) {
+                if (IsValid(RolledDices)) {
                     // keep all valid single dice and triplets
                     ArrayList<Integer> DicesToKeep = ValidInThisRoll(RolledDices);
                     ValidDices.addAll(DicesToKeep);

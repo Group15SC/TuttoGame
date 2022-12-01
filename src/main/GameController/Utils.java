@@ -1,4 +1,4 @@
-package main;
+package main.GameController;
 
 import java.util.Scanner;
 

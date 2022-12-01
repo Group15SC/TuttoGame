@@ -1,9 +1,7 @@
 package main.GameController;
 
 import main.Cards.*;
-
-import main.Logics.*;
-import main.Utils;
+import main.Logics.Dices;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -56,7 +54,7 @@ public class Game {
                 Card card = DrawACard(deck); // a turn
                 System.out.println("Player "+player.name);
                 System.out.println("The card you got is: "+card.GetCardType());
-                if (card.GetCardType()!=CardType.STOP) {
+                if (card.GetCardType()!= CardType.STOP) {
                     int ScoreInThisTurn = 0;
                     String option = Utils.TurnStartingOption();
                     while(!option.equals("R")) {

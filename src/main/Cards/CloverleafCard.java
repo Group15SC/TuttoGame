@@ -1,7 +1,7 @@
 package main.Cards;
 
-import main.Logic;
 import main.Logics.CloverleafLogic;
+import main.Logics.Logic;
 
 import java.util.ArrayList;
 

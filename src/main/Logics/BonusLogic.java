@@ -1,7 +1,5 @@
 package main.Logics;
 
-import main.Logic;
-
 import java.util.ArrayList;
 
 public class BonusLogic extends Logic {
@@ -20,12 +18,12 @@ public class BonusLogic extends Logic {
             Dices.DisplayDices(RolledDices);
 
             ArrayList<Integer> DicesToKeep;
-            if (Logic.IsValid(RolledDices)) {
+            if (IsValid(RolledDices)) {
                 // keep valid dices flag
                 boolean Flag = true;
                 while (Flag) {
                     // Ask the player if he/she want to continue rolling or end this turn here
-                    String HalfwayOpt = Logic.HalfwayOption();
+                    String HalfwayOpt = HalfwayOption();
                     // player decides to end the turn halfway
                     if (HalfwayOpt.equals("E")) {
                         // return the valid dices obtained after this roll
@@ -35,7 +33,7 @@ public class BonusLogic extends Logic {
                     } else {
                         // Ask the player which dices he/she would like to keep
                         DicesToKeep = Dices.GetKeepDices();
-                        if (Logic.IsValidKeep(DicesToKeep)) {
+                        if (IsValidKeep(DicesToKeep)) {
                             // if all the player's input dices are valid, append them to valid dice list
                             ValidDices.addAll(DicesToKeep);
                             CurrentDices -= DicesToKeep.size();
