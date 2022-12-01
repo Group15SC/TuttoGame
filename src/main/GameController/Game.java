@@ -12,17 +12,17 @@ public class Game {
     int numberOfPlayers = input.GetNumberOfPlayers();
     ArrayList<Player> ListOfPlayers = new ArrayList<>();
 
-    public Game() {
-        GameOn();
-    }
+//    public Game() {
+//        GameOn();
+//    }
 
-    private Card DrawACard(ArrayList<Card> CardSet) {
+    private static Card DrawACard(ArrayList<Card> CardSet) {
         Card card = CardSet.get(CardSet.size() - 1);
         CardSet.remove(CardSet.size() - 1);
         return card;
     }
 
-    private ArrayList<Player> GetHighestPlayer(ArrayList<Player> players) {
+    private static ArrayList<Player> GetHighestPlayer(ArrayList<Player> players) {
         ArrayList<Player> HighestPlayer= new ArrayList<>();
         int MaxScore = 0;
 //        ArrayList<Player> SortedPlayers = new ArrayList<>();
@@ -152,26 +152,20 @@ public class Game {
 
     public static ArrayList<Card> GenerateCardSet(){
         ArrayList<Card> CardSet = new ArrayList<>();
-        Card MultiplyTwo = new MultiplyTwoCard();
-        Card FireWorks = new FireworksCard();
-        Card Plus_Minus = new PlusMinusCard();
-        Card Straight = new StraightCard();
-        Card Stop = new StopCard();
         Card CloverLeaf = new CloverleafCard();
         for (int i = 0; i < 5; i++) {
-            // add bonus cards, 200-600 points * 5
+//          add bonus cards, 200-600 points * 5
             for (int point = 2; point <= 6; point ++){
-                Card Bonus = new BonusCard(point*100);
-                CardSet.add(Bonus);
+                CardSet.add(new BonusCard(point*100));
             }
             // add x2, fireworks, plus_minus, straight *5
-            CardSet.add(MultiplyTwo);
-            CardSet.add(FireWorks);
-            CardSet.add(Plus_Minus);
-            CardSet.add(Straight);
+            CardSet.add(new MultiplyTwoCard());
+            CardSet.add(new FireworksCard());
+            CardSet.add(new PlusMinusCard());
+            CardSet.add(new StraightCard());
             // add stop *10
-            CardSet.add(Stop);
-            CardSet.add(Stop);
+            CardSet.add(new StopCard());
+            CardSet.add(new StopCard());
         }
         // add cloverleaf * 1
         CardSet.add(CloverLeaf);
@@ -179,6 +173,12 @@ public class Game {
         Collections.shuffle(CardSet);
         return CardSet;
     }
+}
+
+
+
+
+
 //        for (int i = 0; i < 5; i++) {
 //            Card Bonus = new BonusCard(300);
 //            CardSet.add(Bonus);
@@ -348,4 +348,4 @@ public class Game {
     //Logic logic = new Logic();
 
 
-}
+

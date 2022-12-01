@@ -1,10 +1,8 @@
 package main.GameController;
 
-import main.Cards.Card;
-import main.Cards.CardType;
+import main.Cards.*;
 import org.junit.jupiter.api.Test;
 
-import javax.swing.plaf.basic.BasicTreeUI;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,28 +10,69 @@ import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.*;
 
 class GameTest {
-//
-//    private Card DrawACard(ArrayList<Card> CardSet) {
-//        try {
-//            Method method = Game.class.getDeclaredMethod("DrawACard");
-//            method.setAccessible(true);
-//            return (Card) method.invoke(Game);
-//        } catch (ReflectiveOperationException exception) {
-//            fail();
-//            return ArrayList.empty();
-//        }
-//    }
-//    private Optional<Card> getPreviousCard(Card pCard) {
-//        try {
-//            Method method = FoundationPile.class.
-//                    getDeclaredMethod("getPreviousCard", Card.class);
-//            ((Method) method).setAccessible(true);
-//            return (Optional<Card>) method.invoke(aPile, pCard);
-//        } catch( ReflectiveOperationException exception ) {
-//            fail();
-//            return Optional.empty();
-//        }
-//    }
+
+    // test private method DrawACard
+    @Test
+    void TestDrawCard() throws Exception{
+        ArrayList<Card> aDeck = new ArrayList<>();
+        aDeck.add(new BonusCard(200));
+        aDeck.add(new CloverleafCard());
+        aDeck.add(new FireworksCard());
+
+        Method method = Game.class.getDeclaredMethod("DrawACard", ArrayList.class);
+        method.setAccessible(true);
+        Card ResultCard = (Card) method.invoke(null, aDeck);
+        assertEquals(CardType.FIREWORKS, ResultCard.GetCardType());
+    }
+
+    @Test
+    void TestLengthOfDeckAfterDrawACard() throws Exception{
+        ArrayList<Card> aDeck = new ArrayList<>();
+        aDeck.add(new BonusCard(200));
+
+        Method method = Game.class.getDeclaredMethod("DrawACard", ArrayList.class);
+        method.setAccessible(true);
+        Card ResultCard = (Card) method.invoke(null, aDeck);
+        assertEquals(0, aDeck.size());
+    }
+
+    // test private method GetHighestPlayer
+    @Test
+    void TestHighestPlayerWithoutTie() throws Exception{
+        ArrayList<Player> players = new ArrayList<>();
+        Player player1 = new Player("A", 300);
+        Player player2 = new Player("B", 200);
+        players.add(player1);
+        players.add(player2);
+
+        ArrayList<Player> ExpectedHighest = new ArrayList<>();
+        ExpectedHighest.add(player1);
+
+        Method method = Game.class.getDeclaredMethod("GetHighestPlayer", ArrayList.class);
+        method.setAccessible(true);
+        ArrayList<Player> HighestPlayer = (ArrayList<Player>) method.invoke(null, players);
+        assertEquals(ExpectedHighest, HighestPlayer);
+    }
+
+    @Test
+    void TestHighestPlayerWithTie() throws Exception{
+        ArrayList<Player> players = new ArrayList<>();
+        Player player1 = new Player("A", 300);
+        Player player2 = new Player("B", 200);
+        Player player3 = new Player("C", 300);
+        players.add(player1);
+        players.add(player2);
+        players.add(player3);
+
+        ArrayList<Player> ExpectedHighest = new ArrayList<>();
+        ExpectedHighest.add(player1);
+        ExpectedHighest.add(player3);
+
+        Method method = Game.class.getDeclaredMethod("GetHighestPlayer", ArrayList.class);
+        method.setAccessible(true);
+        ArrayList<Player> HighestPlayer = (ArrayList<Player>) method.invoke(null, players);
+        assertEquals(ExpectedHighest, HighestPlayer);
+    }
 
 
     @Test
