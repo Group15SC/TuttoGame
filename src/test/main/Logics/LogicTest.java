@@ -117,12 +117,30 @@ class LogicTest {
     }
 
     @Test
-    void TestInputM() {
-        /* Not done yet */
-//        InputStream sysInBackup = System.in; // backup System.in to restore it later
-//        ByteArrayInputStream in = new ByteArrayInputStream("M".getBytes());
-//        System.setIn(in);
-//        assertNotEquals("M",Logic.HalfwayOption());
-//        System.setIn(sysInBackup);
+    void TestInputE() {
+        String end = "E";
+        InputStream Original = System.in; // backup System.in to restore it later
+        System.setIn(new ByteArrayInputStream(end.getBytes()));
+        assertEquals("E", Logic.HalfwayOption());
+        System.setIn(Original);
     }
+
+    @Test
+    void TestInputR() {
+        String cont = "R";
+        InputStream Original = System.in; // backup System.in to restore it later
+        System.setIn(new ByteArrayInputStream(cont.getBytes()));
+        assertEquals("R", Logic.HalfwayOption());
+        System.setIn(Original);
+    }
+
+//    @Test
+//    void TestInvalid() {
+//        String InvalidInput = "M";
+//        InputStream Original = System.in; // backup System.in to restore it later
+//        System.setIn(new ByteArrayInputStream(InvalidInput.getBytes()));
+//        assertNotEquals("E", Logic.HalfwayOption());
+//        System.setIn(Original);
+//    }
+
 }

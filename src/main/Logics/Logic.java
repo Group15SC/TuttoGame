@@ -54,7 +54,7 @@ public abstract class Logic {
         out.println("Enter 'E' if you want to End.");
         out.println("Press 'R' to continue.");
         while(!scanner.hasNext("[ER]")) {
-            out.println("Invalid input! Please re-enter:");
+            System.out.println("Invalid input! Please re-enter:");
             scanner.next();
         }
         String option = scanner.next();

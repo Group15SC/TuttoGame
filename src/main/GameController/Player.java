@@ -3,12 +3,16 @@ package main.GameController;
 
 public class Player {
 
-    public String name;
-    public int score;
+    private String name;
+    private int score;
 
     public Player(String name, int score) {
         this.name = name;
         this.score = score;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public int getScore() {
@@ -21,5 +25,3 @@ public class Player {
 
 
 }
-
-                    

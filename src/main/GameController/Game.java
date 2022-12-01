@@ -52,7 +52,7 @@ public class Game {
         while(!Win) {
             for(Player player: ListOfPlayers) {
                 Card card = DrawACard(deck); // a turn
-                System.out.println("Player "+player.name);
+                System.out.println("Player "+player.getName());
                 System.out.println("The card you got is: "+card.GetCardType());
                 if (card.GetCardType()!= CardType.STOP) {
                     int ScoreInThisTurn = 0;
@@ -141,7 +141,7 @@ public class Game {
                 System.out.println("===================");
                 if(player.getScore()>=input.GetWinningPoints()) {
                     System.out.println("Game over!");
-                    System.out.println("Player "+player.name+" is the winner!");
+                    System.out.println("Player "+player.getName()+" is the winner!");
                     Win = true;
                     break;
                 }

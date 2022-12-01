@@ -25,13 +25,11 @@ public class Input {
 
     private int AskForWinningPoints() {
         System.out.println("Please define the winning points:");
-        int points = scanner.nextInt(); // any limits?
-        return points;
+        return scanner.nextInt();
     }
 
     private String AskForName() {
-        String name = scanner.next();
-        return name;
+        return scanner.next();
     }
 
     public Input(){
