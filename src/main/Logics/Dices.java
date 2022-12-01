@@ -32,30 +32,29 @@ public class Dices {
         int occurrences = 0;
         ArrayList<Integer> CurrentDices = Dices;
 
-        for(int i = 0; i < Dices.size(); i++) {
-            occurrences = Collections.frequency(Dices, Dices.get(i));
+        for(int dice: Dices) {
+            occurrences = Collections.frequency(Dices, dice);
             if(occurrences == 3) {
-                if(Dices.get(i) == 2||Dices.get(i) == 3||Dices.get(i) == 4||Dices.get(i) == 5||Dices.get(i) == 6) {
-                    Scores = Scores + Dices.get(i) * 100;
-                    CurrentDices.remove(Integer.valueOf(Dices.get(i)));
-                    CurrentDices.remove(Integer.valueOf(Dices.get(i)));
-                    CurrentDices.remove(Integer.valueOf(Dices.get(i)));
+                if(dice == 2|| dice == 3|| dice == 4|| dice == 5|| dice == 6) {
+                    Scores = Scores + dice * 100;
+                    CurrentDices.remove(Integer.valueOf(dice));
+                    CurrentDices.remove(Integer.valueOf(dice));
+                    CurrentDices.remove(Integer.valueOf(dice));
                 }
-                else if(Dices.get(i) == 1) {
+                else if(dice == 1) {
                     Scores = Scores + 1000;
-                    CurrentDices.remove(Integer.valueOf(Dices.get(i)));
+                    CurrentDices.remove(Integer.valueOf(dice));
                 }
             }
         }
-        for (int i = 0; i < CurrentDices.size(); i++) {
-            if(CurrentDices.get(i) == 1) {
+        for (int CurrentDice: CurrentDices) {
+            if(CurrentDice == 1) {
                 Scores = Scores + 100;
             }
-            else if(CurrentDices.get(i) == 5) {
+            else if(CurrentDice == 5) {
                 Scores = Scores + 50;
             }
         }
-
         return Scores;
     }
 
