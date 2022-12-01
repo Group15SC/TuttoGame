@@ -9,12 +9,12 @@ class BonusCardTest {
     @Test
     void getCardType() {
         BonusCard bonus = new BonusCard(200);
-        assertEquals(bonus.GetCardType(), CardType.BONUS);
+        assertEquals(CardType.BONUS, bonus.GetCardType());
     }
 
     @Test
     void getPoints() {
         BonusCard bonus = new BonusCard(200);
-        assertEquals(bonus.GetPoints(), 200);
+        assertEquals(200, bonus.GetPoints());
     }
 }

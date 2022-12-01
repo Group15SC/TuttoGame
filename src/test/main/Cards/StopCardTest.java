@@ -9,12 +9,12 @@ class StopCardTest {
     @Test
     void getCardType() {
         StopCard stop = new StopCard();
-        assertEquals(stop.GetCardType(), CardType.STOP);
+        assertEquals(CardType.STOP, stop.GetCardType());
     }
 
     @Test
     void getPoints() {
         StopCard stop = new StopCard();
-        assertEquals(stop.GetPoints(), 0);
+        assertEquals(0, stop.GetPoints());
     }
 }

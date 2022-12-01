@@ -12,9 +12,9 @@ public class Game {
     int numberOfPlayers = input.GetNumberOfPlayers();
     ArrayList<Player> ListOfPlayers = new ArrayList<>();
 
-//    public Game() {
-//        GameOn();
-//    }
+    public Game() {
+        GameOn();
+    }
 
     private static Card DrawACard(ArrayList<Card> CardSet) {
         Card card = CardSet.get(CardSet.size() - 1);

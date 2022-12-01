@@ -9,12 +9,12 @@ class MultiplyTwoCardTest {
     @Test
     void getCardType() {
         MultiplyTwoCard multiplyTwoCard = new MultiplyTwoCard();
-        assertEquals(multiplyTwoCard.GetCardType(), CardType.MULTIPLY_TWO);
+        assertEquals(CardType.MULTIPLY_TWO, multiplyTwoCard.GetCardType());
     }
 
     @Test
     void getPoints() {
         MultiplyTwoCard multiplyTwoCard = new MultiplyTwoCard();
-        assertEquals(multiplyTwoCard.GetPoints(), 0);
+        assertEquals(0, multiplyTwoCard.GetPoints());
     }
 }

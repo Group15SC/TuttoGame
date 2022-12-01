@@ -9,12 +9,12 @@ class CloverleafCardTest {
     @Test
     void getCardType() {
         CloverleafCard cloverleaf = new CloverleafCard();
-        assertEquals(cloverleaf.GetCardType(), CardType.CLOVERLEAF);
+        assertEquals(CardType.CLOVERLEAF, cloverleaf.GetCardType());
     }
 
     @Test
     void getPoints() {
         CloverleafCard cloverleaf = new CloverleafCard();
-        assertEquals(cloverleaf.GetPoints(), 0);
+        assertEquals(0, cloverleaf.GetPoints());
     }
 }

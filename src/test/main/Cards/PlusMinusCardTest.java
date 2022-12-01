@@ -9,12 +9,12 @@ class PlusMinusCardTest {
     @Test
     void getCardType() {
         PlusMinusCard plusMinusCard = new PlusMinusCard();
-        assertEquals(plusMinusCard.GetCardType(), CardType.PLUS_MINUS);
+        assertEquals(CardType.PLUS_MINUS, plusMinusCard.GetCardType());
     }
 
     @Test
     void getPoints() {
         PlusMinusCard plusMinusCard = new PlusMinusCard();
-        assertEquals(plusMinusCard.GetPoints(), 0);
+        assertEquals(0, plusMinusCard.GetPoints());
     }
 }
