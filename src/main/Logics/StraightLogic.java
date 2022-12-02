@@ -1,8 +1,14 @@
 package main.Logics;
 
+import main.GameController.GameInitialization;
+
 import java.util.ArrayList;
 
 public class StraightLogic extends Logic {
+
+    public StraightLogic(RollDices dice) {
+        super(dice);
+    }
 
     private static boolean IsValidForStraight(ArrayList<Integer> RolledDices, ArrayList<Integer> AlreadyKeptDices) {
         if(AlreadyKeptDices.size() == 0) {
@@ -28,8 +34,9 @@ public class StraightLogic extends Logic {
 
             while (isValid) {
                 // store and display result of dice rolling
-                ArrayList<Integer> RolledDices = Dices.RollDices(NumOfCurrentDices);
-                Dices.DisplayDices(RolledDices);
+                Dices dices = new Dices();
+                ArrayList<Integer> RolledDices = dices.RollDices(NumOfCurrentDices);
+                GameInitialization.DisplayDices(RolledDices);
                 ArrayList<Integer> DicesToKeep;
 
                 if (IsValidForStraight(RolledDices, ValidDices)) {

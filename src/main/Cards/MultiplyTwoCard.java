@@ -11,10 +11,10 @@ public class MultiplyTwoCard implements Card{
         return CardType.MULTIPLY_TWO;
     }
 
-    @Override
-    public int GetPoints() {
-        return 0;
-    }
+//    @Override
+//    public int GetPoints() {
+//        return 0;
+//    }
 
     @Override
     public ArrayList<Integer> ValidDices() {

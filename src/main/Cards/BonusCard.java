@@ -3,6 +3,7 @@ package main.Cards;
 import java.util.ArrayList;
 
 import main.Logics.BonusLogic;
+import main.Logics.Dices;
 
 public class BonusCard implements Card {
     int Points;

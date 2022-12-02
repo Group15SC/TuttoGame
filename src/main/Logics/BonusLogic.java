@@ -1,21 +1,32 @@
 package main.Logics;
 
+import main.GameController.GameInitialization;
+import main.GameController.UI;
+
 import java.util.ArrayList;
 
 public class BonusLogic extends Logic {
+
+    public BonusLogic(RollDices dice) {
+        super(dice);
+    }
 
         /* Try to accomplish a TUTTO
             The player may stop after each roll */
 
     @Override
-    public ArrayList<Integer> GetValidDices() {
+    public void GetValidDices() {
         ArrayList<Integer> ValidDices = new ArrayList<>();
         int CurrentDices = 6;
-        boolean isValid = true;
-        while (isValid) {
+//        boolean isValid = true;
+//        ArrayList<Integer> d = new ArrayList<>();
+//        d = dice.RollDices(CurrentDices);
+        setDice(dice.RollDices(CurrentDices));
+        while (IsValid(dice.RollDices(CurrentDices))) {
             // store and display result of dice rolling
-            ArrayList<Integer> RolledDices = Dices.RollDices(CurrentDices);
-            Dices.DisplayDices(RolledDices);
+//            Dices dices = new Dices();
+
+            GameInitialization.DisplayDices(RolledDices);
 
             ArrayList<Integer> DicesToKeep;
             if (IsValid(RolledDices)) {
@@ -23,7 +34,7 @@ public class BonusLogic extends Logic {
                 boolean Flag = true;
                 while (Flag) {
                     // Ask the player if he/she want to continue rolling or end this turn here
-                    String HalfwayOpt = HalfwayOption();
+                    String HalfwayOpt = UI.HalfwayOption();
                     // player decides to end the turn halfway
                     if (HalfwayOpt.equals("E")) {
                         // return the valid dices obtained after this roll
@@ -56,4 +67,6 @@ public class BonusLogic extends Logic {
         }
         return ValidDices;
     }
+
+
 }

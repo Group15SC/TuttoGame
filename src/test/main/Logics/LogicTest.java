@@ -119,7 +119,7 @@ class LogicTest {
         String end = "E";
         InputStream Original = System.in; // backup System.in to restore it later
         System.setIn(new ByteArrayInputStream(end.getBytes()));
-        assertEquals("E", Logic.HalfwayOption());
+        assertEquals("E", UI.HalfwayOption());
         System.setIn(Original);
     }
 

@@ -11,10 +11,10 @@ public class StopCard implements Card{
         return CardType.STOP;
     }
 
-    @Override
-    public int GetPoints() {
-        return 0;
-    }
+//    @Override
+//    public int GetPoints() {
+//        return 0;
+//    }
 
     @Override
     public ArrayList<Integer> ValidDices() {

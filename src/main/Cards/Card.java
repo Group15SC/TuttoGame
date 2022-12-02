@@ -3,9 +3,9 @@ package main.Cards;
 
 import java.util.ArrayList;
 
-interface Card {
+public interface Card {
     CardType GetCardType();
-    int GetPoints();
+//    int GetPoints();
     ArrayList<Integer> ValidDices();
 
 }

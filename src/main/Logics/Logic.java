@@ -12,6 +12,10 @@ public abstract class Logic {
     // check whether a list of rolled dices have valid dices to keep
     // true --> not null
     // false --> null
+    protected RollDices dice;
+    public Logic(RollDices dice) {
+        this.dice = dice;
+    }
     protected static boolean IsValid(ArrayList<Integer> ListOfDices) {
         int occurrences;
         for (int i = 0; i < ListOfDices.size(); i++) {
@@ -48,17 +52,8 @@ public abstract class Logic {
         return ValidDicesInThisRoll;
     }
 
-    public static String HalfwayOption() {
-        Scanner scanner = new Scanner(System.in);
-        out.println("Would you like to End or Continue?");
-        out.println("Enter 'E' if you want to End.");
-        out.println("Press 'R' to continue.");
-        while(!scanner.hasNext("[ER]")) {
-            System.out.println("Invalid input! Please re-enter:");
-            scanner.next();
-        }
-        String option = scanner.next();
-        return option;
+    protected void setDice(RollDices dice) {
+        this.dice = dice;
     }
 
     public abstract ArrayList<Integer> GetValidDices();

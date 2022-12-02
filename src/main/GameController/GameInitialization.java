@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.Scanner;
 import java.util.ArrayList;
 
-public class Input {
+public class GameInitialization {
     int NumberOfPlayers;
     int WinningPoints;
     ArrayList<String> Players;
@@ -32,7 +32,15 @@ public class Input {
         return scanner.next();
     }
 
-    public Input(){
+    public static void DisplayDices(ArrayList<Integer> ListOfDices) {
+        System.out.println("The result of this roll is:");
+        for(int dice: ListOfDices) {
+            System.out.print(dice);
+            System.out.print(" ");
+        }
+        System.out.println();
+    }
+    public GameInitialization(){
         this.NumberOfPlayers = AskForNumberOfPlayers();
         ArrayList<String> Players = new ArrayList<>();
         for(int i=0; i < NumberOfPlayers; i++) {

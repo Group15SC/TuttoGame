@@ -1,8 +1,14 @@
 package main.Logics;
 
+import main.GameController.GameInitialization;
+
 import java.util.ArrayList;
 
 public class FireworksLogic extends Logic {
+
+    public FireworksLogic(RollDices dice) {
+        super(dice);
+    }
 
     @Override
     public ArrayList<Integer> GetValidDices() {
@@ -15,8 +21,9 @@ public class FireworksLogic extends Logic {
 
             while (isValid) {
                 // store and display the result of dice rolling
-                ArrayList<Integer> RolledDices = Dices.RollDices(CurrentDices);
-                Dices.DisplayDices(RolledDices);
+                Dices dices = new Dices();
+                ArrayList<Integer> RolledDices = dices.RollDices(CurrentDices);
+                GameInitialization.DisplayDices(RolledDices);
                 if (IsValid(RolledDices)) {
                     // keep all valid single dice and triplets
                     ArrayList<Integer> DicesToKeep = ValidInThisRoll(RolledDices);

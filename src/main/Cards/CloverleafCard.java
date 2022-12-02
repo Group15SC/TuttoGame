@@ -12,10 +12,10 @@ public class CloverleafCard implements Card{
         return CardType.CLOVERLEAF;
     }
 
-    @Override
-    public int GetPoints() {
-        return 0;
-    }
+//    @Override
+//    public int GetPoints() {
+//        return 0;
+//    }
 
     @Override
     public ArrayList<Integer> ValidDices() {

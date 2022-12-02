@@ -10,10 +10,10 @@ public class StraightCard implements Card{
         return CardType.STRAIGHT;
     }
 
-    @Override
-    public int GetPoints() {
-        return 0;
-    }
+//    @Override
+//    public int GetPoints() {
+//        return 0;
+//    }
 
     @Override
     public ArrayList<Integer> ValidDices() {

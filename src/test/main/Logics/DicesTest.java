@@ -1,6 +1,6 @@
 package main.Logics;
 
-import org.junit.jupiter.api.Assertions;
+import main.GameController.GameInitialization;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
@@ -15,12 +15,14 @@ class DicesTest {
 
     @Test
     void TestDiceLengthSixDices() {
-        assertEquals(6, Dices.RollDices(6).size());
+        Dices dices = new Dices();
+        assertEquals(6, dices.RollDices(6).size());
     }
 
     @Test
     void TestDicesValueWithinOneAndSeven(){
-        ArrayList<Integer> DiceSet = Dices.RollDices(12);
+        Dices dices = new Dices();
+        ArrayList<Integer> DiceSet = dices.RollDices(12);
         for(int dice: DiceSet){
             assertFalse(dice<1 || dice>6);
         } // check if the dice include value greater than 6 or less than 1
@@ -36,7 +38,7 @@ class DicesTest {
         dices.add(1);
         dices.add(2);
         dices.add(3);
-        Dices.DisplayDices(dices);
+        GameInitialization.DisplayDices(dices);
         String expected = "The result of this roll is:\n1 2 3";
         assertEquals(expected, outputStreamCaptor.toString().trim());
         // put the original out back

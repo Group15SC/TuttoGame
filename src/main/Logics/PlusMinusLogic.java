@@ -1,8 +1,13 @@
 package main.Logics;
 
+import main.GameController.GameInitialization;
+
 import java.util.ArrayList;
 
 public class PlusMinusLogic extends Logic {
+    public PlusMinusLogic(RollDices dice) {
+        super(dice);
+    }
 
     /* Try to accomplish a TUTTO and may not stop in halfway
         if the player roll a null, his/her turn is over
@@ -16,8 +21,9 @@ public class PlusMinusLogic extends Logic {
             boolean isValid = true;
             while (isValid) {
                 // store and display result of dice rolling
-                ArrayList<Integer> RolledDices = Dices.RollDices(CurrentDices);
-                Dices.DisplayDices(RolledDices);
+                Dices dices = new Dices();
+                ArrayList<Integer> RolledDices = dices.RollDices(CurrentDices);
+                GameInitialization.DisplayDices(RolledDices);
 
                 ArrayList<Integer> DicesToKeep;
 

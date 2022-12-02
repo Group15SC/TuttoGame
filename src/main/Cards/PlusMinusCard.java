@@ -10,10 +10,10 @@ public class PlusMinusCard implements Card{
         return CardType.PLUS_MINUS;
     }
 
-    @Override
-    public int GetPoints() {
-        return 0;
-    }
+//    @Override
+//    public int GetPoints() {
+//        return 0;
+//    }
 
     @Override
     public ArrayList<Integer> ValidDices() {

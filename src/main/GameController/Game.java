@@ -8,8 +8,8 @@ import java.util.Collections;
 
 public class Game {
 
-    Input input = new Input();
-    int numberOfPlayers = input.GetNumberOfPlayers();
+    GameInitialization gameInitialization = new GameInitialization();
+    int numberOfPlayers = gameInitialization.GetNumberOfPlayers();
     ArrayList<Player> ListOfPlayers = new ArrayList<>();
 
     public Game() {
@@ -48,7 +48,7 @@ public class Game {
     public void GameOn() {
         ArrayList<Card> deck = GenerateCardSet();
         for(int i = 0; i < numberOfPlayers; i++) {
-            Player player = new Player(input.getPlayers().get(i), 0);
+            Player player = new Player(gameInitialization.getPlayers().get(i), 0);
             ListOfPlayers.add(player);
         }
 
@@ -60,7 +60,7 @@ public class Game {
                 System.out.println("The card you got is: "+card.GetCardType());
                 if (card.GetCardType()!= CardType.STOP) {
                     int ScoreInThisTurn = 0;
-                    String option = Utils.TurnStartingOption();
+                    String option = UI.TurnStartingOption();
                     while(!option.equals("R")) {
                         switch (option) {
                             // choosing display: display current score
@@ -74,7 +74,7 @@ public class Game {
                                 System.out.println("Invalid Input! Please input again");
                                 break;
                         }
-                        option = Utils.TurnStartingOption();
+                        option = UI.TurnStartingOption();
                     }
                     if (option.equals("R")) {
                         ArrayList<Integer> ResultDices = card.ValidDices();
@@ -109,7 +109,7 @@ public class Game {
                                             }
                                             break;
                                     }
-                                    String ifContinue = Utils.TuttoOption();
+                                    String ifContinue = UI.TuttoOption();
                                     switch (ifContinue) {
                                         case "E":
                                             Continue = false;
@@ -123,7 +123,7 @@ public class Game {
                                 case 12:
                                     switch (card.GetCardType()) {
                                         case CLOVERLEAF:
-                                            ScoreOfThisCard = input.GetWinningPoints();
+                                            ScoreOfThisCard = gameInitialization.GetWinningPoints();
                                             break;
                                         case FIREWORKS:
                                             ScoreOfThisCard = Dices.CalDiceScores(ResultDices);
@@ -143,7 +143,7 @@ public class Game {
                 }
                 System.out.println("Your turn is over!");
                 System.out.println("===================");
-                if(player.getScore()>=input.GetWinningPoints()) {
+                if(player.getScore()>= gameInitialization.GetWinningPoints()) {
                     System.out.println("Game over!");
                     System.out.println("Player "+player.getName()+" is the winner!");
                     Win = true;
