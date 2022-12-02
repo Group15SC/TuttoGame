@@ -4,7 +4,7 @@ import main.Logics.FireworksLogic;
 
 import java.util.ArrayList;
 
-public class FireworksCard extends Card{
+public class FireworksCard implements Card{
     @Override
     public CardType GetCardType() {
         return CardType.FIREWORKS;

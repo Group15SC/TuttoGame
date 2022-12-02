@@ -4,7 +4,7 @@ import main.Logics.StraightLogic;
 
 import java.util.ArrayList;
 
-public class StraightCard extends Card{
+public class StraightCard implements Card{
     @Override
     public CardType GetCardType() {
         return CardType.STRAIGHT;

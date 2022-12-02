@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import main.Logics.BonusLogic;
 
-public class BonusCard extends Card {
+public class BonusCard implements Card {
     int Points;
 
     public BonusCard(int Points){

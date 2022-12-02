@@ -4,7 +4,7 @@ import main.Logics.PlusMinusLogic;
 
 import java.util.ArrayList;
 
-public class PlusMinusCard extends Card{
+public class PlusMinusCard implements Card{
     @Override
     public CardType GetCardType() {
         return CardType.PLUS_MINUS;

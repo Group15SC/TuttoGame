@@ -5,7 +5,7 @@ import main.Logics.Logic;
 
 import java.util.ArrayList;
 
-public class CloverleafCard extends Card{
+public class CloverleafCard implements Card{
 
     @Override
     public CardType GetCardType() {

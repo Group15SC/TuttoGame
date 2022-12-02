@@ -4,7 +4,7 @@ import main.Logics.MultiplyTwoLogic;
 
 import java.util.ArrayList;
 
-public class MultiplyTwoCard extends Card{
+public class MultiplyTwoCard implements Card{
 
     @Override
     public CardType GetCardType() {

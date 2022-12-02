@@ -4,7 +4,7 @@ import main.Logics.StopLogic;
 
 import java.util.ArrayList;
 
-public class StopCard extends Card{
+public class StopCard implements Card{
 
     @Override
     public CardType GetCardType() {
