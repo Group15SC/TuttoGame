@@ -19,7 +19,7 @@ public class CloverleafLogic extends Logic {
                 // store and display result of dice rolling
                 Dices dices = new Dices();
                 ArrayList<Integer> RolledDices = dices.RollDices(CurrentDices);
-                GameInitialization.DisplayDices(RolledDices);
+                Dices.DisplayDices(RolledDices);
                 ArrayList<Integer> DicesToKeep;
                 if (IsValid(RolledDices)) {
                     // Ask the player which dices she/he would like to keep

@@ -1,5 +1,6 @@
 package main.Cards;
 
+import main.Logics.Dices;
 import main.Logics.StopLogic;
 
 import java.util.ArrayList;
@@ -17,8 +18,12 @@ public class StopCard implements Card{
 //    }
 
     @Override
-    public ArrayList<Integer> ValidDices() {
-        StopLogic stop = new StopLogic();
-        return stop.GetValidDices();
+    public ArrayList<Integer> HandleTurn() {
+        return new ArrayList<>(); //return an empty list
+    }
+
+    @Override
+    public int CalculateScore(ArrayList<Integer> keptDices) {
+        return 0;
     }
 }

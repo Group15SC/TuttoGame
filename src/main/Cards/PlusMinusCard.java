@@ -16,7 +16,7 @@ public class PlusMinusCard implements Card{
 //    }
 
     @Override
-    public ArrayList<Integer> ValidDices() {
+    public ArrayList<Integer> HandleTurn() {
         PlusMinusLogic PlusMinus = new PlusMinusLogic();
         return PlusMinus.GetValidDices();
     }

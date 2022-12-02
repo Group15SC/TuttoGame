@@ -6,6 +6,6 @@ import java.util.ArrayList;
 public interface Card {
     CardType GetCardType();
 //    int GetPoints();
-    ArrayList<Integer> ValidDices();
-
+    ArrayList<Integer> HandleTurn();
+    int CalculateScore(ArrayList<Integer> keptDices);
 }

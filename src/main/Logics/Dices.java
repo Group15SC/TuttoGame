@@ -5,19 +5,21 @@ import java.util.Collections;
 import java.util.Random;
 import java.util.Scanner;
 
-public class Dices implements RollDices {
+public class Dices implements RollDice {
     @Override
-    public ArrayList<Integer> RollDices(int numOfDices) {
-        ArrayList<Integer> ListOfDices = new ArrayList<>();
-
-        for(int i = 0; i < numOfDices; i ++){
-            Random r = new Random();
-            int n = r.nextInt(6) + 1;
-            ListOfDices.add(n);
-        }
-        return ListOfDices;
+    public int RollDice() {
+        Random r = new Random();
+        return r.nextInt(6) + 1;
     }
 
+    public static void DisplayDices(ArrayList<Integer> ListOfDices) {
+        System.out.println("The result of this roll is:");
+        for(int dice: ListOfDices) {
+            System.out.print(dice);
+            System.out.print(" ");
+        }
+        System.out.println();
+    }
 
 
     public static int CalDiceScores(ArrayList<Integer> Dices) {
@@ -70,4 +72,6 @@ public class Dices implements RollDices {
         }
         return IntKeepDices;
     }
+
+
 }

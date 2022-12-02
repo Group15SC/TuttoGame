@@ -16,7 +16,7 @@ public class StraightCard implements Card{
 //    }
 
     @Override
-    public ArrayList<Integer> ValidDices() {
+    public ArrayList<Integer> HandleTurn() {
         StraightLogic straight = new StraightLogic();
         return straight.GetValidDices();
     }

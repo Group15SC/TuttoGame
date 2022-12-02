@@ -77,7 +77,7 @@ public class Game {
                         option = UI.TurnStartingOption();
                     }
                     if (option.equals("R")) {
-                        ArrayList<Integer> ResultDices = card.ValidDices();
+                        ArrayList<Integer> ResultDices = card.HandleTurn();
                         // Calculate the points gained in this card
                         boolean Continue = true;
                         while (Continue) {
@@ -116,7 +116,7 @@ public class Game {
                                             break;
                                         case "R":
                                             Card NewCard = DrawACard(deck);
-                                            ResultDices = NewCard.ValidDices();
+                                            ResultDices = NewCard.HandleTurn();
                                             break;
                                     }
                                     break;

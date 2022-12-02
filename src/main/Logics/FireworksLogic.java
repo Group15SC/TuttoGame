@@ -23,7 +23,7 @@ public class FireworksLogic extends Logic {
                 // store and display the result of dice rolling
                 Dices dices = new Dices();
                 ArrayList<Integer> RolledDices = dices.RollDices(CurrentDices);
-                GameInitialization.DisplayDices(RolledDices);
+                Dices.DisplayDices(RolledDices);
                 if (IsValid(RolledDices)) {
                     // keep all valid single dice and triplets
                     ArrayList<Integer> DicesToKeep = ValidInThisRoll(RolledDices);

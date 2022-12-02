@@ -17,7 +17,7 @@ public class MultiplyTwoCard implements Card{
 //    }
 
     @Override
-    public ArrayList<Integer> ValidDices() {
+    public ArrayList<Integer> HandleTurn() {
         MultiplyTwoLogic MultiplyTwo = new MultiplyTwoLogic();
         return MultiplyTwo.GetValidDices();
     }

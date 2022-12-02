@@ -12,8 +12,8 @@ public abstract class Logic {
     // check whether a list of rolled dices have valid dices to keep
     // true --> not null
     // false --> null
-    protected RollDices dice;
-    public Logic(RollDices dice) {
+    protected RollDice dice;
+    public Logic(RollDice dice) {
         this.dice = dice;
     }
     protected static boolean IsValid(ArrayList<Integer> ListOfDices) {
@@ -27,16 +27,24 @@ public abstract class Logic {
         return false;
     }
 
-        protected static boolean IsValidKeep(ArrayList<Integer> KeepDices) {
-            int occurrences;
-            boolean isValid = true;
-            for (int i = 0; i < KeepDices.size(); i++) {
-                occurrences = Collections.frequency(KeepDices, KeepDices.get(i));
-                if (KeepDices.get(i) != 1 && KeepDices.get(i) != 5 && occurrences != 3) {
-                    isValid =  false;
-                }
+    // roll a specific number of dices
+    protected void rollAPair(int num, ArrayList<Integer> aPairOfDices){
+        for(int i=0; i<num; i++){
+            aPairOfDices.add(dice.RollDice());
+        }
+    }
+
+
+    protected static boolean IsValidKeep(ArrayList<Integer> KeepDices, ArrayList<Integer> currentDices) {
+        boolean isValid = true;
+        for (int dice: KeepDices) {
+            int occurrencesInInput = Collections.frequency(KeepDices, dice);
+            int occurrencesActual = Collections.frequency(currentDices, dice);
+            if (dice != 1 && dice != 5 && occurrencesInInput != 3 || occurrencesActual<occurrencesInInput) {
+                isValid =  false;
             }
-            return isValid;
+        }
+        return isValid;
     }
 
     // get all the valid dices in a roll
@@ -52,11 +60,15 @@ public abstract class Logic {
         return ValidDicesInThisRoll;
     }
 
-    protected void setDice(RollDices dice) {
-        this.dice = dice;
+//    protected void setDice(RollDices dice) {
+//        this.dice = dice;
+//    }
+
+    protected boolean isTutto(ArrayList<Integer> dices){
+        return(IsValidKeep(dices, dices));
     }
 
-    public abstract ArrayList<Integer> GetValidDices();
+    public abstract void GetValidDices();
 }
 
 

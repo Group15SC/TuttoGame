@@ -1,5 +1,7 @@
 package main.GameController;
 
+import main.Logics.RollDices;
+
 import java.util.Collections;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -32,14 +34,6 @@ public class GameInitialization {
         return scanner.next();
     }
 
-    public static void DisplayDices(ArrayList<Integer> ListOfDices) {
-        System.out.println("The result of this roll is:");
-        for(int dice: ListOfDices) {
-            System.out.print(dice);
-            System.out.print(" ");
-        }
-        System.out.println();
-    }
     public GameInitialization(){
         this.NumberOfPlayers = AskForNumberOfPlayers();
         ArrayList<String> Players = new ArrayList<>();

@@ -18,9 +18,14 @@ public class CloverleafCard implements Card{
 //    }
 
     @Override
-    public ArrayList<Integer> ValidDices() {
+    public ArrayList<Integer> HandleTurn() {
         Logic cloverleaf = new CloverleafLogic();
         return cloverleaf.GetValidDices();
+    }
+
+    @Override
+    public int CalculateScore(ArrayList<Integer> keptDices) {
+        return 0;
     }
 
 }

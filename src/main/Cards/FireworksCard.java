@@ -16,8 +16,13 @@ public class FireworksCard implements Card{
 //    }
 
     @Override
-    public ArrayList<Integer> ValidDices() {
+    public ArrayList<Integer> HandleTurn() {
         FireworksLogic fireworks = new FireworksLogic();
         return fireworks.GetValidDices();
+    }
+
+    @Override
+    public int CalculateScore(ArrayList<Integer> keptDices) {
+        return 0;
     }
 }
