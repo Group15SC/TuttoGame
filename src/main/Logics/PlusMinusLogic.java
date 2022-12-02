@@ -12,13 +12,6 @@ public class PlusMinusLogic extends Logic {
     public ArrayList<Integer> GetValidDices() {
         // logic of plus/minus card
         ArrayList<Integer> ValidDices = new ArrayList<>();
-//        // get the option
-//        String option = Logic.TurnSartingOption();
-//        // choosing display: display current score
-//        while(option.equals("D")){
-//            System.out.println(player.getScore());
-//            option = Logic.TurnSartingOption();
-//        } if (option.equals("R")) {
             int CurrentDices = 6;
             boolean isValid = true;
             while (isValid) {
@@ -55,7 +48,6 @@ public class PlusMinusLogic extends Logic {
                     isValid = false;
                 }
             }
-        //}
         return ValidDices;
     }
 }

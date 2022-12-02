@@ -17,6 +17,10 @@ public class Game {
     }
 
     private static Card DrawACard(ArrayList<Card> CardSet) {
+        // the card pile if empty, so start again from generating a shuffled card set
+        if(CardSet.size()==0){
+            GenerateCardSet();
+        }
         Card card = CardSet.get(CardSet.size() - 1);
         CardSet.remove(CardSet.size() - 1);
         return card;

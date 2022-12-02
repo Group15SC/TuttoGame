@@ -18,18 +18,12 @@ public class StraightLogic extends Logic {
 
     @Override
     public ArrayList<Integer> GetValidDices() {
-        // logic of Straight card, return all the valid dices
-        // note that the logic of valid dice is different from other cards
+        /* logic of Straight card, return all the valid dices
+            note that the logic of valid dice is different from other cards */
 
         ArrayList<Integer> ValidDices = new ArrayList<>();
 
-        //String option = Logic.TurnSartingOption();
-        // choosing display: display current score
         int NumOfCurrentDices = 6;
-//        while(option.equals("D")){
-//            System.out.println(player.getScore());
-//            option = Logic.TurnSartingOption();
-//        } if (option.equals("R")) {
             boolean isValid = true;
 
             while (isValid) {
@@ -48,7 +42,6 @@ public class StraightLogic extends Logic {
                         /*player accomplish a Tutto, the functionality of this card ends */
                         return ValidDices;
                     }
-//                        break;
                         /* the break is used to get out of the flag while loop,
                                     go back to the isValid while loop,
                                     use the updated current dices to roll (i.e. roll the remaining dices) */
@@ -58,11 +51,6 @@ public class StraightLogic extends Logic {
                     isValid = false;
                 }
             }
-//        }
-//        else {
-//            System.out.println("Invalid Input! Please input again");
-//        }
-
         return ValidDices;
     }
 }

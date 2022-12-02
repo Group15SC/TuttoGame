@@ -32,26 +32,28 @@ public class Dices {
         int occurrences = 0;
         ArrayList<Integer> CurrentDices = Dices;
 
-        for(int dice: Dices) {
+        for(int i=0; i<Dices.size(); i++) {
+            int dice = Dices.get(i);
             occurrences = Collections.frequency(Dices, dice);
             if(occurrences == 3) {
-                if(dice == 2|| dice == 3|| dice == 4|| dice == 5|| dice == 6) {
-                    Scores = Scores + dice * 100;
-                    CurrentDices.remove(Integer.valueOf(dice));
-                    CurrentDices.remove(Integer.valueOf(dice));
-                    CurrentDices.remove(Integer.valueOf(dice));
+                if(dice != 1) {
+                    // Triplet 2,3,4,5,6 gets 200,300,400,500,600 respectively
+                    Scores = Scores + CurrentDices.get(i) * 100;
                 }
                 else if(dice == 1) {
+                    // Triplet 1 gets 1000
                     Scores = Scores + 1000;
-                    CurrentDices.remove(Integer.valueOf(dice));
                 }
+                CurrentDices.remove(Integer.valueOf(dice));
+                CurrentDices.remove(Integer.valueOf(dice));
+                CurrentDices.remove(Integer.valueOf(dice));
             }
         }
-        for (int CurrentDice: CurrentDices) {
-            if(CurrentDice == 1) {
+        for (int i=0; i<CurrentDices.size(); i++) {
+            if(CurrentDices.get(i) == 1) {
                 Scores = Scores + 100;
             }
-            else if(CurrentDice == 5) {
+            else if(CurrentDices.get(i) == 5) {
                 Scores = Scores + 50;
             }
         }

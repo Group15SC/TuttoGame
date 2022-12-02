@@ -10,13 +10,6 @@ public class FireworksLogic extends Logic {
         /* FIREWORKS:
             keep throwing the dice until roll a null
             after each roll, keep all valid dices and triplets*/
-
-//        String option = Logic.TurnSartingOption();
-//        // choosing display: display current score
-//        while(option.equals("D")){
-//            System.out.println(player.getScore());
-//            option = Logic.TurnSartingOption();
-//        } if (option.equals("R")) {
             int CurrentDices = 6;
             boolean isValid = true;
 

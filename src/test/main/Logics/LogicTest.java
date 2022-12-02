@@ -20,8 +20,6 @@ class LogicTest {
         //initialize an empty dice set
         this.aDiceSet = new ArrayList<>();
     }
-
-
     @Test
     void TestSingleValid() {
         for(int i=1; i<=6; i++){

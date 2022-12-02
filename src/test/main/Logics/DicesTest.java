@@ -1,7 +1,12 @@
 package main.Logics;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -23,11 +28,23 @@ class DicesTest {
 
     @Test
     void displayDices() {
-        // how do we test a print val?
+        // set up
+        final PrintStream standardOut = System.out; //restoring it to its original state when our test terminates
+        final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStreamCaptor));
+        ArrayList<Integer> dices = new ArrayList<>();
+        dices.add(1);
+        dices.add(2);
+        dices.add(3);
+        Dices.DisplayDices(dices);
+        String expected = "The result of this roll is:\n1 2 3";
+        assertEquals(expected, outputStreamCaptor.toString().trim());
+        // put the original out back
+        System.setOut(standardOut);
     }
 
     @Test
-    void calDiceScoreWithSingleValidDice() {
+    void TestCalDiceScoreWithSingleValidDice() {
         ArrayList<Integer> dices = new ArrayList<>();
         for(int i=1; i<=6; i++){
             dices.add(i);
@@ -36,7 +53,7 @@ class DicesTest {
     }
 
     @Test
-    void calDiceScoreWithTriplet() {
+    void TestCalDiceScoreWithTriplet() {
         ArrayList<Integer> dices = new ArrayList<>();
         for(int i=1; i<=3; i++){
             dices.add(2);
@@ -48,7 +65,7 @@ class DicesTest {
     }
 
     @Test
-    void calDiceScoreWithTripletOne() {
+    void TestCalDiceScoreWithTripletOne() {
         ArrayList<Integer> dices = new ArrayList<>();
         for(int i=1; i<=3; i++){
             dices.add(1);
@@ -60,7 +77,7 @@ class DicesTest {
     }
 
     @Test
-    void calDiceScoreWithTripletFive() {
+    void TestCalDiceScoreWithTripletFive() {
         ArrayList<Integer> dices = new ArrayList<>();
         for(int i=1; i<=3; i++){
             dices.add(5);
@@ -72,6 +89,19 @@ class DicesTest {
     }
 
     @Test
-    void getKeepDices() {
+    void TestInputValidKeepDice() {
+        String InputDiceToKeep = "1,5";
+        ArrayList<Integer> Expected = new ArrayList<>();
+        Expected.add(1);
+        Expected.add(5);
+        InputStream Original = System.in; // backup System.in to restore it later
+        System.setIn(new ByteArrayInputStream(InputDiceToKeep.getBytes()));
+        assertEquals(Expected, Dices.GetKeepDices());
+        System.setIn(Original);
+    }
+
+    @Test
+    void testExpectedException() {
+        //don't know how to deal with
     }
 }

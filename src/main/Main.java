@@ -1,12 +1,12 @@
 package main;
 
+import main.GameController.Game;
 import main.Logics.Dices;
 import main.Logics.Logic;
 
 public class Main {
     public static void main(String[] args) {
-        Logic.HalfwayOption();
-//        Game game = new Game();
+        Game game = new Game();
 //        game.GameOn();
 
 
