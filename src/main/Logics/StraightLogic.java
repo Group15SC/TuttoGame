@@ -32,8 +32,20 @@ public class StraightLogic extends Logic {
         return false;
     }
 
-    private boolean isTuttoForStraight(ArrayList<Integer> dices){
-        return(IsValidForStraight(dices, dices));
+    private static boolean IsValidKeepForStraight(ArrayList<Integer> KeepDices, ArrayList<Integer> RolledDices, ArrayList<Integer> AlreadyKeptDices) {
+        boolean isValid = true;
+        for (int dice: KeepDices) {
+            int occurrencesInInput = Collections.frequency(KeepDices, dice);
+            int occurrencesRolled = Collections.frequency(RolledDices, dice);
+            if (AlreadyKeptDices.contains(dice) || occurrencesRolled < occurrencesInInput) {
+                isValid =  false;
+            }
+        }
+        return isValid;
+    }
+
+    private boolean isTuttoForStraight(ArrayList<Integer> rolledDices, ArrayList<Integer> AlreadyKeptDices){
+        return(IsValidKeepForStraight(rolledDices, rolledDices, AlreadyKeptDices));
     }
     private static ArrayList<Integer> ValidInThisRollForStraight(ArrayList<Integer> rolled, ArrayList<Integer> kept){
         ArrayList<Integer> ValidDicesInThisRoll = new ArrayList<>();
@@ -58,7 +70,7 @@ public class StraightLogic extends Logic {
             rollAPair(numOfDices, aPairOfDices); //rolled a pairOfDices
             Dices.DisplayDices(aPairOfDices);
             if (IsValidForStraight(aPairOfDices, keptDices)) {
-                if (isTuttoForStraight(aPairOfDices)) {
+                if (isTuttoForStraight(aPairOfDices,keptDices)) {
                     keptDices.addAll(aPairOfDices);
                     System.out.println("Congratulations! You accomplish a Tutto!");
                     notTutto = false;
@@ -66,9 +78,14 @@ public class StraightLogic extends Logic {
                     break;
                 }
                 while (notTutto) {
-                    // rolled dices are valid + not tutto --> keep all the valid dices and continue roll
-                    keptDices.addAll(ValidInThisRollForStraight(aPairOfDices, keptDices));
-                    numOfDices -= ValidInThisRollForStraight(aPairOfDices, keptDices).size();
+                    // rolled dices are valid + not tutto --> ask player which dice to keep and continue roll
+                    ArrayList<Integer> dicesToKeep = Dices.GetKeepDices();
+                    while (!IsValidKeepForStraight(dicesToKeep, aPairOfDices, keptDices)){
+                        System.out.println("Invalid Input! Please re-enter:");
+                        dicesToKeep = Dices.GetKeepDices();
+                    }
+                    keptDices.addAll(dicesToKeep);
+                    numOfDices -= dicesToKeep.size();
                     break; // break the while(notTutto) loop and continue roll left dices
                 }
 

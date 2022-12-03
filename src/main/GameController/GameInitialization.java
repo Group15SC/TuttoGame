@@ -11,7 +11,6 @@ public class GameInitialization {
     int WinningPoints;
     ArrayList<String> Players;
 
-    int numOfPlayers;
 
     private Scanner scanner = new Scanner(System.in);
 
@@ -56,17 +55,23 @@ public class GameInitialization {
 
     private int AskForWinningPoints() {
         System.out.println("Please define the winning points:");
-        return scanner.nextInt();
+        int winningPoints = scanner.nextInt();
+        return winningPoints;
     }
 
 //    private String AskForName() {
 //        return scanner.next();
 //    }
-
-    public GameInitialization() {
-        this.numOfPlayers = AskForNumberOfPlayers();
+    public void setUp() {
+        this.NumberOfPlayers = AskForNumberOfPlayers();
         this.Players = storePlayers();
         this.WinningPoints = AskForWinningPoints();
+    }
+    public GameInitialization() {
+        setUp();
+//        this.numOfPlayers = AskForNumberOfPlayers();
+//        this.Players = storePlayers();
+//        this.WinningPoints = AskForWinningPoints();
     }
 
     public int GetNumberOfPlayers() {
