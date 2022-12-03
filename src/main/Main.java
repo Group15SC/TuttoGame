@@ -7,7 +7,7 @@ import main.Logics.Logic;
 public class Main {
     public static void main(String[] args) {
         Game game = new Game();
-//        game.GameOn();
+        game.GameOn();
 
 
 //        Player player1 = new Player("A", 1000);

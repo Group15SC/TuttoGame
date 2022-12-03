@@ -9,11 +9,12 @@ import java.util.Collections;
 public class Game {
 
     GameInitialization gameInitialization = new GameInitialization();
-    int numberOfPlayers = gameInitialization.GetNumberOfPlayers();
+    int numberOfPlayers;
     ArrayList<Player> ListOfPlayers = new ArrayList<>();
 
+    ArrayList<String> players = new ArrayList<>();
+
     public Game() {
-        GameOn();
     }
 
     private static Card DrawACard(ArrayList<Card> CardSet) {
@@ -46,19 +47,27 @@ public class Game {
     }
 
     public void GameOn() {
+        //Game Initialization: Setup Players and generate a deck of cards
         ArrayList<Card> deck = GenerateCardSet();
+        numberOfPlayers = gameInitialization.GetNumberOfPlayers();
+        players = gameInitialization.getPlayers();
         for(int i = 0; i < numberOfPlayers; i++) {
-            Player player = new Player(gameInitialization.getPlayers().get(i), 0);
+            Player player = new Player(players.get(i), 0);
             ListOfPlayers.add(player);
         }
 
         boolean Win = false;
-        while(!Win) {
+        while(Win == false) {
             for(Player player: ListOfPlayers) {
                 Card card = DrawACard(deck); // a turn
                 System.out.println("Player "+player.getName());
-                System.out.println("The card you got is: "+card.GetCardType());
-                if (card.GetCardType()!= CardType.STOP) {
+                System.out.println("The card you got is: " + card.GetCardType());
+                // get the bonus points of this bonus card
+                if(card instanceof BonusCard) {
+                    BonusCard bonusCard = (BonusCard) card;
+                    System.out.println("The bonus points of this card is " + bonusCard.getPoints());
+                }
+                if (card.GetCardType() != CardType.STOP) {
                     int ScoreInThisTurn = 0;
                     String option = UI.TurnStartingOption();
                     while(!option.equals("R")) {
@@ -68,7 +77,7 @@ public class Game {
                                 System.out.println(player.getScore());
                                 break;
                             case "E":
-                                System.out.println("You may not end now! Please reenter:");
+                                System.out.println("You may not end now! Please re-enter:");
                                 break;
                             default:
                                 System.out.println("Invalid Input! Please input again");
@@ -84,23 +93,22 @@ public class Game {
                             int ScoreOfThisCard = 0;
                             switch (ResultDices.size()){
                                 case 0:
-                                    // if the card is STOP, return a empty list and enter this case
+                                    // if the card is STOP, return an empty list and enter this case
                                     ScoreInThisTurn = 0;
                                     Continue = false;
                                     break;
                                 case 6:
+                                case 12:
                                     switch (card.GetCardType()) {
                                         case BONUS:
-                                            ScoreOfThisCard = Dices.calScoresOfDices(ResultDices) + card.GetPoints();
-                                            break;
                                         case MULTIPLY_TWO:
-                                            ScoreOfThisCard = Dices.calScoresOfDices(ResultDices) * 2;
-                                            break;
                                         case STRAIGHT:
-                                            ScoreOfThisCard = 2000;
+                                        case CLOVERLEAF:
+                                        case FIREWORKS:
+                                            ScoreOfThisCard = card.calScores(ResultDices);
                                             break;
                                         case PLUS_MINUS:
-                                            ScoreOfThisCard = 1000;
+                                            ScoreOfThisCard = card.calScores(ResultDices);
                                             ArrayList<Player> HighestPlayer = GetHighestPlayer(ListOfPlayers);
                                             for(Player player2: HighestPlayer) {
                                                 if(player2 != player) {
@@ -120,17 +128,6 @@ public class Game {
                                             break;
                                     }
                                     break;
-                                case 12:
-                                    switch (card.GetCardType()) {
-                                        case CLOVERLEAF:
-                                            ScoreOfThisCard = gameInitialization.GetWinningPoints();
-                                            break;
-                                        case FIREWORKS:
-                                            ScoreOfThisCard = Dices.calScoresOfDices(ResultDices);
-                                            break;
-                                    }
-                                    Continue = false;
-                                    break;
                                 default:
                                     ScoreOfThisCard = Dices.calScoresOfDices(ResultDices);
                                     Continue = false;
@@ -142,7 +139,7 @@ public class Game {
                     }
                 }
                 System.out.println("Your turn is over!");
-                System.out.println("=======================");
+                System.out.println("==========================");
                 if(player.getScore()>= gameInitialization.GetWinningPoints()) {
                     System.out.println("Game over!");
                     System.out.println("Player "+player.getName()+" is the winner!");

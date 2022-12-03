@@ -11,10 +11,12 @@ public class GameInitialization {
     int WinningPoints;
     ArrayList<String> Players;
 
+    int numOfPlayers;
 
     private Scanner scanner = new Scanner(System.in);
 
     private int AskForNumberOfPlayers() {
+
         System.out.println("Please enter the number of players (2-4): ");
         int num = scanner.nextInt();
         while (num < 2 || num > 4) {
@@ -22,7 +24,34 @@ public class GameInitialization {
             System.out.println("Please re-enter the number of players: ");
             num = scanner.nextInt();
         }
+//        String strInput;
+//        boolean valid = false;
+//        while(valid == false) {
+//            System.out.println("Please enter the number of players (2-4): ");
+//            strInput = scanner.nextLine();
+//            try {
+//                num = Integer.parseInt(strInput);
+//                if(numOfPlayers > 2 || numOfPlayers < 4) {
+//                    valid = true;
+//                }
+//            }
+//            catch (NumberFormatException e) {
+//                System.out.println("Please note the number of players must be between 2 and 4!");
+//                System.out.println("Please re-enter the number of players: ");
+//            }
+//        }
         return num;
+    }
+
+    private ArrayList<String> storePlayers () {
+        ArrayList<String> Players = new ArrayList<>();
+        for(int i = 0; i < this.NumberOfPlayers; i++) {
+            System.out.println("Please enter the name of Player" + (i+1) +":");
+            String player = scanner.nextLine();
+            Players.add(player);
+        }
+        Collections.sort(Players); //sort the list of players alphabetically
+        return Players;
     }
 
     private int AskForWinningPoints() {
@@ -30,31 +59,25 @@ public class GameInitialization {
         return scanner.nextInt();
     }
 
-    private String AskForName() {
-        return scanner.next();
-    }
+//    private String AskForName() {
+//        return scanner.next();
+//    }
 
-    public GameInitialization(){
-        this.NumberOfPlayers = AskForNumberOfPlayers();
-        ArrayList<String> Players = new ArrayList<>();
-        for(int i=0; i < NumberOfPlayers; i++) {
-            System.out.println("Please enter the name of Player" + (i+1) +":");
-            String player = AskForName();
-            Players.add(player);
-        } Collections.sort(Players); //sort the list of players alphabetically
-        this.Players = Players;
+    public GameInitialization() {
+        this.numOfPlayers = AskForNumberOfPlayers();
+        this.Players = storePlayers();
         this.WinningPoints = AskForWinningPoints();
     }
 
     public int GetNumberOfPlayers() {
-        return NumberOfPlayers;
+        return this.NumberOfPlayers;
     }
 
     public int GetWinningPoints() {
-        return WinningPoints;
+        return this.WinningPoints;
     }
 
     public ArrayList<String> getPlayers() {
-        return Players;
+        return this.Players;
     }
 }

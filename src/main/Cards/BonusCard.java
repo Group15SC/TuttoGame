@@ -11,6 +11,11 @@ public class BonusCard implements Card {
     public BonusCard(int Points){
         this.points = Points;
     }
+
+    public int getPoints() {
+        return points;
+    }
+
     @Override
     public CardType GetCardType() {
         return CardType.BONUS;
