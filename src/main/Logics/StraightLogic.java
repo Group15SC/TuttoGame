@@ -45,7 +45,8 @@ public class StraightLogic extends Logic {
     }
 
     private boolean isTuttoForStraight(ArrayList<Integer> rolledDices, ArrayList<Integer> AlreadyKeptDices){
-        return(IsValidKeepForStraight(rolledDices, rolledDices, AlreadyKeptDices));
+        return(IsValidKeepForStraight(rolledDices, rolledDices, AlreadyKeptDices) && ((AlreadyKeptDices.size() + rolledDices.size()) == 6)
+        && keptDices.size() != 0);
     }
     private static ArrayList<Integer> ValidInThisRollForStraight(ArrayList<Integer> rolled, ArrayList<Integer> kept){
         ArrayList<Integer> ValidDicesInThisRoll = new ArrayList<>();
@@ -70,8 +71,9 @@ public class StraightLogic extends Logic {
             rollAPair(numOfDices, aPairOfDices); //rolled a pairOfDices
             Dices.DisplayDices(aPairOfDices);
             if (IsValidForStraight(aPairOfDices, keptDices)) {
-                if (isTuttoForStraight(aPairOfDices,keptDices)) {
+                if (isTuttoForStraight(aPairOfDices, keptDices)) {
                     keptDices.addAll(aPairOfDices);
+                    Dices.DisplayDices(aPairOfDices);
                     System.out.println("Congratulations! You accomplish a Tutto!");
                     notTutto = false;
                     continueTurn = false;
