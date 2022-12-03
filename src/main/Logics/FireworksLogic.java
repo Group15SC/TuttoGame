@@ -6,43 +6,46 @@ import java.util.ArrayList;
 
 public class FireworksLogic extends Logic {
 
-    public FireworksLogic(RollDices dice) {
+    private ArrayList<Integer> aPairOfDices;
+    private ArrayList<Integer> keptDices;
+    private boolean continueTurn = true;
+
+    public ArrayList<Integer> getKeptDices() {
+        return keptDices;
+    }
+
+    public FireworksLogic(RollDice dice) {
         super(dice);
     }
 
     @Override
-    public ArrayList<Integer> GetValidDices() {
-        ArrayList<Integer> ValidDices = new ArrayList<>();
+    public void getValidDices() {
+        keptDices = new ArrayList<>(); // empty the kept dices
         /* FIREWORKS:
             keep throwing the dice until roll a null
             after each roll, keep all valid dices and triplets*/
-            int CurrentDices = 6;
-            boolean isValid = true;
-
-            while (isValid) {
-                // store and display the result of dice rolling
-                Dices dices = new Dices();
-                ArrayList<Integer> RolledDices = dices.RollDices(CurrentDices);
-                Dices.DisplayDices(RolledDices);
-                if (IsValid(RolledDices)) {
-                    // keep all valid single dice and triplets
-                    ArrayList<Integer> DicesToKeep = ValidInThisRoll(RolledDices);
-                    ValidDices.addAll(DicesToKeep);
-                    // roll the other invalid dices
-                    CurrentDices -= DicesToKeep.size();
-                    // check if all the 6 dices have been kept
-                    if (ValidDices.size() == 6) {
-                        /*player accomplish a Tutto, restart rolling 6 dices*/
-                        CurrentDices = 6;
-                    }
+        int numOfDices = 6;
+        while (continueTurn){
+            aPairOfDices = new ArrayList<>(); //empty the dice set
+            rollAPair(numOfDices, aPairOfDices);
+            Dices.DisplayDices(aPairOfDices);
+            if(IsValid(aPairOfDices)){
+                // if rolled dice is valid to keep, set numOfDices = 6 and continue roll
+                if(isTutto(aPairOfDices)) {
+                    numOfDices = 6;
                 }
-                // if get a null
-                else {
-                    System.out.println("You rolled a null! Your turn is over.");
-                    isValid = false;
-                }
+                // store all the valid dices to keptDices
+                keptDices.addAll(ValidInThisRoll(aPairOfDices));
+                numOfDices -= ValidInThisRoll(aPairOfDices).size();
             }
-        //}
-        return ValidDices;
+            else{
+                // if rolled a null, stop roll
+                // All the Valid Dices have been kept in keptDices
+                System.out.println("You rolled a null! Your turn is over.");
+                continueTurn = false;
+            }
+
+        }
     }
+
 }

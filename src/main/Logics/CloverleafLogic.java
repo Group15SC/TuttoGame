@@ -6,45 +6,60 @@ import java.util.ArrayList;
 
 public class CloverleafLogic extends Logic {
 
-    public CloverleafLogic(RollDices dice) {
+    private ArrayList<Integer> aPairOfDices;
+    private ArrayList<Integer> keptDices;
+    private boolean notTutto = true;
+    private boolean continueTurn = true;
+
+    public ArrayList<Integer> getKeptDices() {
+        return keptDices;
+    }
+
+    public CloverleafLogic(RollDice dice) {
         super(dice);
     }
 
+    /* Try to accomplish two TUTTO
+            And Player may not stop before accomplishing two tutto */
+
     @Override
-    public ArrayList<Integer> GetValidDices() {
-        ArrayList<Integer> ValidDices = new ArrayList<>();
-        int CurrentDices = 6;
-            boolean isValid = true;
-            while (isValid) {
-                // store and display result of dice rolling
-                Dices dices = new Dices();
-                ArrayList<Integer> RolledDices = dices.RollDices(CurrentDices);
-                Dices.DisplayDices(RolledDices);
-                ArrayList<Integer> DicesToKeep;
-                if (IsValid(RolledDices)) {
-                    // Ask the player which dices she/he would like to keep
-                    DicesToKeep = Dices.GetKeepDices();
-                    if (IsValidKeep(DicesToKeep)) {
-                        // if all the player's input dices are valid, append them to valid dice list
-                        ValidDices.addAll(DicesToKeep);
-                        CurrentDices -= DicesToKeep.size();
-                        if (ValidDices.size() == 6) {
-                            CurrentDices = 6;
-                        } else if (ValidDices.size() == 12) {
-                            /*player accomplish a Tutto, the functionality of this card ends */
-                            return ValidDices;
-                        }
-//                        break;
-                            /* the break is used to get out of the flag while loop,
-                            go back to the isValid while loop,
-                            use the updated current dices to roll (i.e. roll the remaining dices) */
+    public void getValidDices() {
+        keptDices = new ArrayList<>(); // empty the kept dices
+        int numOfDices = 6;
+        while (continueTurn) {
+            aPairOfDices = new ArrayList<>(); //empty the dice set
+            rollAPair(numOfDices, aPairOfDices);
+            Dices.DisplayDices(aPairOfDices);
+            if (IsValid(aPairOfDices)) {
+                if(isTutto(aPairOfDices)) {
+                    // if rolled a list of dices that is all valid(accomplish one tutto),
+                    // set numOfDices = 6 and continue roll
+                    keptDices.addAll(aPairOfDices);
+                    numOfDices = 6;
+                    if(keptDices.size() == 12) {
+                        System.out.println("Congratulations! You accomplish a Tutto!");
+                        notTutto = false;
+                        continueTurn = false;
+                        break;
                     }
-                } else { // null case
-                    System.out.println("You rolled a null! Your turn is over.");
-                    ValidDices = new ArrayList<>();
-                    isValid = false;
                 }
+                while (notTutto){
+                    // Ask the player which dices he/she would like to keep
+                    /* break out of the notTutto while loop,but not change the notTutto value*/
+                    ArrayList<Integer> dicesToKeep = Dices.GetKeepDices();
+                    while (!IsValidKeep(dicesToKeep, aPairOfDices)){
+                        System.out.println("Invalid Input! Please re-enter:");
+                        dicesToKeep = Dices.GetKeepDices();
+                    }
+                    keptDices.addAll(dicesToKeep);
+                    numOfDices -= dicesToKeep.size();
+                    break;// end the turn
+                }
+            } else { // null case
+                System.out.println("You rolled a null! Your turn is over.");
+                keptDices = new ArrayList<>();
+                continueTurn = false;
             }
-        return ValidDices;
+        }
     }
 }

@@ -1,5 +1,7 @@
 package main.Cards;
 
+import main.Logics.BonusLogic;
+import main.Logics.Dices;
 import main.Logics.FireworksLogic;
 
 import java.util.ArrayList;
@@ -17,12 +19,14 @@ public class FireworksCard implements Card{
 
     @Override
     public ArrayList<Integer> HandleTurn() {
-        FireworksLogic fireworks = new FireworksLogic();
-        return fireworks.GetValidDices();
+        FireworksLogic fireworksLogic = new FireworksLogic(new Dices());
+        fireworksLogic.getValidDices();
+        return fireworksLogic.getKeptDices();
     }
 
     @Override
-    public int CalculateScore(ArrayList<Integer> keptDices) {
-        return 0;
+    public int calScores(ArrayList<Integer> keptDices) {
+        int Score = Dices.calScoresOfDices(keptDices);
+        return Score;
     }
 }

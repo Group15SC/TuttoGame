@@ -1,5 +1,7 @@
 package main.Cards;
 
+import main.Logics.BonusLogic;
+import main.Logics.Dices;
 import main.Logics.PlusMinusLogic;
 
 import java.util.ArrayList;
@@ -10,14 +12,18 @@ public class PlusMinusCard implements Card{
         return CardType.PLUS_MINUS;
     }
 
-//    @Override
-//    public int GetPoints() {
-//        return 0;
-//    }
 
     @Override
     public ArrayList<Integer> HandleTurn() {
-        PlusMinusLogic PlusMinus = new PlusMinusLogic();
-        return PlusMinus.GetValidDices();
+        PlusMinusLogic plusMinusLogic = new PlusMinusLogic(new Dices());
+        plusMinusLogic.getValidDices();
+        return plusMinusLogic.getKeptDices();
     }
+
+    @Override
+    public int calScores(ArrayList<Integer> keptDices) {
+        return 1000;
+    }
+
+
 }

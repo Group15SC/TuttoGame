@@ -3,10 +3,20 @@ package main.Logics;
 import main.GameController.GameInitialization;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class StraightLogic extends Logic {
 
-    public StraightLogic(RollDices dice) {
+    private ArrayList<Integer> aPairOfDices;
+    private ArrayList<Integer> keptDices;
+    private boolean notTutto = true;
+    private boolean continueTurn = true;
+    private int numOfDices = 6;
+    public ArrayList<Integer> getKeptDices() {
+        return keptDices;
+    }
+
+    public StraightLogic(RollDice dice) {
         super(dice);
     }
 
@@ -22,42 +32,52 @@ public class StraightLogic extends Logic {
         return false;
     }
 
+    private boolean isTuttoForStraight(ArrayList<Integer> dices){
+        return(IsValidForStraight(dices, dices));
+    }
+    private static ArrayList<Integer> ValidInThisRollForStraight(ArrayList<Integer> rolled, ArrayList<Integer> kept){
+        ArrayList<Integer> ValidDicesInThisRoll = new ArrayList<>();
+        for(int dice: rolled) {
+            if(!kept.contains(dice)) {
+                ValidDicesInThisRoll.add(dice);
+            }
+        }
+        return ValidDicesInThisRoll;
+    }
+
     @Override
-    public ArrayList<Integer> GetValidDices() {
+    public void getValidDices() {
         /* logic of Straight card, return all the valid dices
             note that the logic of valid dice is different from other cards */
 
-        ArrayList<Integer> ValidDices = new ArrayList<>();
-
-        int NumOfCurrentDices = 6;
-            boolean isValid = true;
-
-            while (isValid) {
-                // store and display result of dice rolling
-                Dices dices = new Dices();
-                ArrayList<Integer> RolledDices = dices.RollDices(NumOfCurrentDices);
-                Dices.DisplayDices(RolledDices);
-                ArrayList<Integer> DicesToKeep;
-
-                if (IsValidForStraight(RolledDices, ValidDices)) {
-                    // If there exist dice valid to keep, ask the player which dices he/she would like to keep
-                    DicesToKeep = Dices.GetKeepDices();
-                    // if all the player's input dices are valid, append them to valid dice list
-                    NumOfCurrentDices -= DicesToKeep.size();
-                    ValidDices.addAll(DicesToKeep);
-                    if (ValidDices.size() == 6) {
-                        /*player accomplish a Tutto, the functionality of this card ends */
-                        return ValidDices;
-                    }
-                        /* the break is used to get out of the flag while loop,
-                                    go back to the isValid while loop,
-                                    use the updated current dices to roll (i.e. roll the remaining dices) */
-                } else { // null case
-                    System.out.println("You rolled a null! Your turn is over.");
-                    ValidDices = new ArrayList<>();
-                    isValid = false;
+        keptDices = new ArrayList<>(); // empty the kept dices
+        // int numOfDices = 6;
+        // I moved this assignment out of the method because it is grey when updating numOfDices
+        while (continueTurn) {
+            aPairOfDices = new ArrayList<>(); //empty the dice set
+            rollAPair(numOfDices, aPairOfDices); //rolled a pairOfDices
+            Dices.DisplayDices(aPairOfDices);
+            if (IsValidForStraight(aPairOfDices, keptDices)) {
+                if (isTuttoForStraight(aPairOfDices)) {
+                    keptDices.addAll(aPairOfDices);
+                    System.out.println("Congratulations! You accomplish a Tutto!");
+                    notTutto = false;
+                    continueTurn = false;
+                    break;
                 }
+                while (notTutto) {
+                    // rolled dices are valid + not tutto --> keep all the valid dices and continue roll
+                    keptDices.addAll(ValidInThisRollForStraight(aPairOfDices, keptDices));
+                    numOfDices -= ValidInThisRollForStraight(aPairOfDices, keptDices).size();
+                    break; // break the while(notTutto) loop and continue roll left dices
+                }
+
+
+            } else {
+                System.out.println("You rolled a null! Your turn is over.");
+                keptDices = new ArrayList<>();
+                continueTurn = false;
             }
-        return ValidDices;
+        }
     }
 }

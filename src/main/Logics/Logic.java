@@ -34,13 +34,13 @@ public abstract class Logic {
         }
     }
 
-
-    protected static boolean IsValidKeep(ArrayList<Integer> KeepDices, ArrayList<Integer> currentDices) {
+    // check if a list of dieces that user choose is ok to keep according to rolled dice
+    protected static boolean IsValidKeep(ArrayList<Integer> KeepDices, ArrayList<Integer> RolledDices) {
         boolean isValid = true;
         for (int dice: KeepDices) {
             int occurrencesInInput = Collections.frequency(KeepDices, dice);
-            int occurrencesActual = Collections.frequency(currentDices, dice);
-            if (dice != 1 && dice != 5 && occurrencesInInput != 3 || occurrencesActual<occurrencesInInput) {
+            int occurrencesActual = Collections.frequency(RolledDices, dice);
+            if ((dice != 1 && dice != 5 && occurrencesInInput != 3) || (occurrencesActual < occurrencesInInput)) {
                 isValid =  false;
             }
         }
@@ -68,7 +68,7 @@ public abstract class Logic {
         return(IsValidKeep(dices, dices));
     }
 
-    public abstract void GetValidDices();
+    public abstract void getValidDices();
 }
 
 

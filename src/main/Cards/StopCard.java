@@ -23,7 +23,7 @@ public class StopCard implements Card{
     }
 
     @Override
-    public int CalculateScore(ArrayList<Integer> keptDices) {
+    public int calScores(ArrayList<Integer> keptDices) {
         return 0;
     }
 }

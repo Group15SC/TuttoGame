@@ -9,7 +9,7 @@ public class StopLogic extends Logic {
     }
 
     @Override
-    public void GetValidDices(){
+    public void getValidDices(){
     }
 
 }

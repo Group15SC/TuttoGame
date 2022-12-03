@@ -22,7 +22,7 @@ public class Dices implements RollDice {
     }
 
 
-    public static int CalDiceScores(ArrayList<Integer> Dices) {
+    public static int calScoresOfDices(ArrayList<Integer> Dices) {
         int Scores = 0;
         int occurrences = 0;
         ArrayList<Integer> CurrentDices = Dices;

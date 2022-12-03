@@ -1,6 +1,6 @@
 package main.GameController;
 
-import main.Logics.RollDices;
+import main.Logics.RollDice;
 
 import java.util.Collections;
 import java.util.Scanner;

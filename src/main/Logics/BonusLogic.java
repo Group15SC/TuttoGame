@@ -23,7 +23,7 @@ public class BonusLogic extends Logic {
             The player may stop after each roll */
 
     @Override
-    public void GetValidDices() {
+    public void getValidDices() {
         keptDices = new ArrayList<>(); // empty the kept dices
         int numOfDices = 6;
         while (continueTurn){

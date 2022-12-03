@@ -91,10 +91,10 @@ public class Game {
                                 case 6:
                                     switch (card.GetCardType()) {
                                         case BONUS:
-                                            ScoreOfThisCard = Dices.CalDiceScores(ResultDices) + card.GetPoints();
+                                            ScoreOfThisCard = Dices.calScoresOfDices(ResultDices) + card.GetPoints();
                                             break;
                                         case MULTIPLY_TWO:
-                                            ScoreOfThisCard = Dices.CalDiceScores(ResultDices) * 2;
+                                            ScoreOfThisCard = Dices.calScoresOfDices(ResultDices) * 2;
                                             break;
                                         case STRAIGHT:
                                             ScoreOfThisCard = 2000;
@@ -126,13 +126,13 @@ public class Game {
                                             ScoreOfThisCard = gameInitialization.GetWinningPoints();
                                             break;
                                         case FIREWORKS:
-                                            ScoreOfThisCard = Dices.CalDiceScores(ResultDices);
+                                            ScoreOfThisCard = Dices.calScoresOfDices(ResultDices);
                                             break;
                                     }
                                     Continue = false;
                                     break;
                                 default:
-                                    ScoreOfThisCard = Dices.CalDiceScores(ResultDices);
+                                    ScoreOfThisCard = Dices.calScoresOfDices(ResultDices);
                                     Continue = false;
                                     break;
                             }
@@ -142,7 +142,7 @@ public class Game {
                     }
                 }
                 System.out.println("Your turn is over!");
-                System.out.println("===================");
+                System.out.println("=======================");
                 if(player.getScore()>= gameInitialization.GetWinningPoints()) {
                     System.out.println("Game over!");
                     System.out.println("Player "+player.getName()+" is the winner!");

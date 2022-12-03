@@ -1,5 +1,6 @@
 package main.Cards;
 
+import main.Logics.Dices;
 import main.Logics.MultiplyTwoLogic;
 
 import java.util.ArrayList;
@@ -11,14 +12,17 @@ public class MultiplyTwoCard implements Card{
         return CardType.MULTIPLY_TWO;
     }
 
-//    @Override
-//    public int GetPoints() {
-//        return 0;
-//    }
 
     @Override
     public ArrayList<Integer> HandleTurn() {
-        MultiplyTwoLogic MultiplyTwo = new MultiplyTwoLogic();
-        return MultiplyTwo.GetValidDices();
+        MultiplyTwoLogic multiplyTwoLogic = new MultiplyTwoLogic(new Dices());
+        multiplyTwoLogic.getValidDices();
+        return multiplyTwoLogic.getKeptDices();
+    }
+
+    @Override
+    public int calScores(ArrayList<Integer> keptDices) {
+        int Score = 2 * Dices.calScoresOfDices(keptDices);
+        return Score;
     }
 }

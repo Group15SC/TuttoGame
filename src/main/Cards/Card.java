@@ -7,5 +7,5 @@ public interface Card {
     CardType GetCardType();
 //    int GetPoints();
     ArrayList<Integer> HandleTurn();
-    int CalculateScore(ArrayList<Integer> keptDices);
+    int calScores(ArrayList<Integer> keptDices);
 }
