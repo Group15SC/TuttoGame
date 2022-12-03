@@ -7,13 +7,11 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class GameInitialization {
-    int NumberOfPlayers;
-    int WinningPoints;
-    ArrayList<String> Players;
+//    int NumberOfPlayers;
 
     private Scanner scanner = new Scanner(System.in);
 
-    private int AskForNumberOfPlayers() {
+    public int AskForNumberOfPlayers() {
 
 //        System.out.println("Please enter the number of players (2-4): ");
 //        int num = scanner.nextInt();
@@ -42,47 +40,47 @@ public class GameInitialization {
         return num;
     }
 
-    private ArrayList<String> storePlayers () {
-        ArrayList<String> Players = new ArrayList<>();
-        for(int i = 0; i < this.NumberOfPlayers; i++) {
-            System.out.println("Please enter the name of Player" + (i+1) +":");
-            String player = scanner.next();
-            Players.add(player);
-        }
-        Collections.sort(Players); //sort the list of players alphabetically
-        return Players;
-    }
-
-    private int AskForWinningPoints() {
-        System.out.println("Please define the winning points:");
-        int winningPoints = scanner.nextInt();
-        return winningPoints;
-    }
+//    private ArrayList<String> storePlayers () {
+//        ArrayList<String> Players = new ArrayList<>();
+//        for(int i = 0; i < this.NumberOfPlayers; i++) {
+//            System.out.println("Please enter the name of Player" + (i+1) +":");
+//            String player = scanner.next();
+//            Players.add(player);
+//        }
+//        Collections.sort(Players); //sort the list of players alphabetically
+//        return Players;
+//    }
+//
+//    private int AskForWinningPoints() {
+//        System.out.println("Please define the winning points:");
+//        int winningPoints = scanner.nextInt();
+//        return winningPoints;
+//    }
 
 //    private String AskForName() {
 //        return scanner.next();
 //    }
-    public void setUp() {
-        this.NumberOfPlayers = AskForNumberOfPlayers();
-        this.Players = storePlayers();
-        this.WinningPoints = AskForWinningPoints();
-    }
+//    public void setUp() {
+//        this.NumberOfPlayers = AskForNumberOfPlayers();
+//        this.Players = storePlayers();
+//        this.WinningPoints = AskForWinningPoints();
+//    }
     public GameInitialization() {
-        setUp();
-//        this.numOfPlayers = AskForNumberOfPlayers();
+//        setUp();
+//        this.NumberOfPlayers = AskForNumberOfPlayers();
 //        this.Players = storePlayers();
 //        this.WinningPoints = AskForWinningPoints();
     }
 
-    public int GetNumberOfPlayers() {
-        return this.NumberOfPlayers;
-    }
-
-    public int GetWinningPoints() {
-        return this.WinningPoints;
-    }
-
-    public ArrayList<String> getPlayers() {
-        return this.Players;
-    }
+//    public int GetNumberOfPlayers() {
+//        return this.NumberOfPlayers;
+//    }
+//
+//    public int GetWinningPoints() {
+//        return this.WinningPoints;
+//    }
+//
+//    public ArrayList<String> getPlayers() {
+//        return this.Players;
+//    }
 }

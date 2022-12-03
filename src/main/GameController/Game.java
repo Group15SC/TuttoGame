@@ -5,16 +5,38 @@ import main.Logics.Dices;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Scanner;
 
 public class Game {
 
     GameInitialization gameInitialization = new GameInitialization();
-    int numberOfPlayers;
+    int numberOfPlayers = gameInitialization.AskForNumberOfPlayers();
+
+    private Scanner scanner = new Scanner(System.in);
+
+    public int WinningPoints;
     ArrayList<Player> ListOfPlayers = new ArrayList<>();
 
     ArrayList<String> players = new ArrayList<>();
 
     public Game() {
+    }
+
+    private ArrayList<String> storePlayers () {
+        ArrayList<String> Players = new ArrayList<>();
+        for(int i = 0; i < this.numberOfPlayers; i++) {
+            System.out.println("Please enter the name of Player" + (i+1) +":");
+            String player = scanner.next();
+            Players.add(player);
+        }
+        Collections.sort(Players); //sort the list of players alphabetically
+        return Players;
+    }
+
+    private int AskForWinningPoints() {
+        System.out.println("Please define the winning points:");
+        int winningPoints = scanner.nextInt();
+        return winningPoints;
     }
 
     private static Card DrawACard(ArrayList<Card> CardSet) {
@@ -49,8 +71,8 @@ public class Game {
     public void GameOn() {
         //Game Initialization: Setup Players and generate a deck of cards
         ArrayList<Card> deck = GenerateCardSet();
-        numberOfPlayers = gameInitialization.GetNumberOfPlayers();
-        players = gameInitialization.getPlayers();
+        players = storePlayers();
+        WinningPoints = AskForWinningPoints();
         for(int i = 0; i < numberOfPlayers; i++) {
             Player player = new Player(players.get(i), 0);
             ListOfPlayers.add(player);
@@ -139,8 +161,8 @@ public class Game {
                     }
                 }
                 System.out.println("Your turn is over!");
-                System.out.println("==========================");
-                if(player.getScore()>= gameInitialization.GetWinningPoints()) {
+                System.out.println("============================");
+                if(player.getScore() >= WinningPoints) {
                     System.out.println("Game over!");
                     System.out.println("Player "+player.getName()+" is the winner!");
                     Win = true;
