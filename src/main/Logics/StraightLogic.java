@@ -35,7 +35,7 @@ public class StraightLogic extends Logic {
         for (int dice: KeepDices) {
             int occurrencesInInput = Collections.frequency(KeepDices, dice);
             int occurrencesRolled = Collections.frequency(RolledDices, dice);
-            if (occurrencesInInput != 1 && AlreadyKeptDices.contains(dice) || occurrencesRolled < occurrencesInInput) {
+            if (occurrencesInInput != 1 || AlreadyKeptDices.contains(dice) || occurrencesRolled < occurrencesInInput) {
                 isValid =  false;
             }
         }
