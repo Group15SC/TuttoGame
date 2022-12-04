@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class StopCard implements Card{
 
     @Override
-    public CardType GetCardType() {
+    public CardType getCardType() {
         return CardType.STOP;
     }
 
@@ -18,7 +18,7 @@ public class StopCard implements Card{
 //    }
 
     @Override
-    public ArrayList<Integer> HandleTurn() {
+    public ArrayList<Integer> handleTurn() {
         return new ArrayList<>(); //return an empty list
     }
 

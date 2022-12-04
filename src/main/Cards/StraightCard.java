@@ -8,12 +8,12 @@ import java.util.ArrayList;
 
 public class StraightCard implements Card{
     @Override
-    public CardType GetCardType() {
+    public CardType getCardType() {
         return CardType.STRAIGHT;
     }
 
     @Override
-    public ArrayList<Integer> HandleTurn() {
+    public ArrayList<Integer> handleTurn() {
         StraightLogic straightLogic= new StraightLogic(new Dices());
         straightLogic.getValidDices();
         return straightLogic.getKeptDices();

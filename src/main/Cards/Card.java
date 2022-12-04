@@ -4,7 +4,7 @@ package main.Cards;
 import java.util.ArrayList;
 
 public interface Card {
-    CardType GetCardType();
-    ArrayList<Integer> HandleTurn();
+    CardType getCardType();
+    ArrayList<Integer> handleTurn();
     int calScores(ArrayList<Integer> keptDices);
 }

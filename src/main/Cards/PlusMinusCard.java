@@ -8,13 +8,13 @@ import java.util.ArrayList;
 
 public class PlusMinusCard implements Card{
     @Override
-    public CardType GetCardType() {
+    public CardType getCardType() {
         return CardType.PLUS_MINUS;
     }
 
 
     @Override
-    public ArrayList<Integer> HandleTurn() {
+    public ArrayList<Integer> handleTurn() {
         PlusMinusLogic plusMinusLogic = new PlusMinusLogic(new Dices());
         plusMinusLogic.getValidDices();
         return plusMinusLogic.getKeptDices();

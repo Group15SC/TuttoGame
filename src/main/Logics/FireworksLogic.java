@@ -1,7 +1,5 @@
 package main.Logics;
 
-import main.GameController.GameInitialization;
-
 import java.util.ArrayList;
 
 public class FireworksLogic extends Logic {
@@ -28,7 +26,7 @@ public class FireworksLogic extends Logic {
         while (continueTurn){
             aPairOfDices = new ArrayList<>(); //empty the dice set
             rollAPair(numOfDices, aPairOfDices);
-            Dices.DisplayDices(aPairOfDices);
+            Dices.displayDices(aPairOfDices);
             if(IsValid(aPairOfDices)){
                 // if tutto, set numOfDices = 6 and continue roll
                 if(isTutto(aPairOfDices)) {

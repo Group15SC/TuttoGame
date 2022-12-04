@@ -1,7 +1,5 @@
 package main.Logics;
 
-import main.GameController.GameInitialization;
-
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -20,7 +18,7 @@ public class StraightLogic extends Logic {
         super(dice);
     }
 
-    private static boolean IsValidForStraight(ArrayList<Integer> RolledDices, ArrayList<Integer> AlreadyKeptDices) {
+    private static boolean isValidForStraight(ArrayList<Integer> RolledDices, ArrayList<Integer> AlreadyKeptDices) {
         if(AlreadyKeptDices.size() == 0) {
             return true;
         }
@@ -32,26 +30,27 @@ public class StraightLogic extends Logic {
         return false;
     }
 
-    private static boolean IsValidKeepForStraight(ArrayList<Integer> KeepDices, ArrayList<Integer> RolledDices, ArrayList<Integer> AlreadyKeptDices) {
+    private static boolean isValidKeepForStraight(ArrayList<Integer> KeepDices, ArrayList<Integer> RolledDices, ArrayList<Integer> AlreadyKeptDices) {
         boolean isValid = true;
         for (int dice: KeepDices) {
             int occurrencesInInput = Collections.frequency(KeepDices, dice);
             int occurrencesRolled = Collections.frequency(RolledDices, dice);
-            if (AlreadyKeptDices.contains(dice) || occurrencesRolled < occurrencesInInput) {
+            if (occurrencesInInput != 1 && AlreadyKeptDices.contains(dice) || occurrencesRolled < occurrencesInInput) {
                 isValid =  false;
             }
         }
         return isValid;
     }
 
-    private boolean isTuttoForStraight(ArrayList<Integer> rolledDices, ArrayList<Integer> AlreadyKeptDices){
-        return(IsValidKeepForStraight(rolledDices, rolledDices, AlreadyKeptDices) && ((AlreadyKeptDices.size() + rolledDices.size()) == 6)
-        && keptDices.size() != 0);
+    private boolean isTuttoForStraight(ArrayList<Integer> ValidDices, ArrayList<Integer> AlreadyKeptDices){
+        return (ValidDices.size() + AlreadyKeptDices.size() == 6);
+//        return(IsValidKeepForStraight(rolledDices, rolledDices, AlreadyKeptDices) && ((AlreadyKeptDices.size() + rolledDices.size()) == 6)
+//        && keptDices.size() != 0);
     }
-    private static ArrayList<Integer> ValidInThisRollForStraight(ArrayList<Integer> rolled, ArrayList<Integer> kept){
+    private static ArrayList<Integer> validInThisRollForStraight(ArrayList<Integer> rolled, ArrayList<Integer> kept){
         ArrayList<Integer> ValidDicesInThisRoll = new ArrayList<>();
         for(int dice: rolled) {
-            if(!kept.contains(dice)) {
+            if(!kept.contains(dice) && !ValidDicesInThisRoll.contains(dice)) {
                 ValidDicesInThisRoll.add(dice);
             }
         }
@@ -69,11 +68,11 @@ public class StraightLogic extends Logic {
         while (continueTurn) {
             aPairOfDices = new ArrayList<>(); //empty the dice set
             rollAPair(numOfDices, aPairOfDices); //rolled a pairOfDices
-            Dices.DisplayDices(aPairOfDices);
-            if (IsValidForStraight(aPairOfDices, keptDices)) {
-                if (isTuttoForStraight(aPairOfDices, keptDices)) {
+            Dices.displayDices(aPairOfDices);
+            if (isValidForStraight(aPairOfDices, keptDices)) {
+                if (isTuttoForStraight(validInThisRollForStraight(aPairOfDices, keptDices), keptDices)) {
                     keptDices.addAll(aPairOfDices);
-                    Dices.DisplayDices(aPairOfDices);
+                    Dices.displayDices(aPairOfDices);
                     System.out.println("Congratulations! You accomplish a Tutto!");
                     notTutto = false;
                     continueTurn = false;
@@ -81,10 +80,10 @@ public class StraightLogic extends Logic {
                 }
                 while (notTutto) {
                     // rolled dices are valid + not tutto --> ask player which dice to keep and continue roll
-                    ArrayList<Integer> dicesToKeep = Dices.GetKeepDices();
-                    while (!IsValidKeepForStraight(dicesToKeep, aPairOfDices, keptDices)){
+                    ArrayList<Integer> dicesToKeep = Dices.getKeepDices();
+                    while (!isValidKeepForStraight(dicesToKeep, aPairOfDices, keptDices)){
                         System.out.println("Invalid Input! Please re-enter:");
-                        dicesToKeep = Dices.GetKeepDices();
+                        dicesToKeep = Dices.getKeepDices();
                     }
                     keptDices.addAll(dicesToKeep);
                     numOfDices -= dicesToKeep.size();

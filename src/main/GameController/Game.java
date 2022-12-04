@@ -9,53 +9,30 @@ import java.util.Scanner;
 
 public class Game {
 
-    GameInitialization gameInitialization = new GameInitialization();
-    int numberOfPlayers = gameInitialization.AskForNumberOfPlayers();
-
     private Scanner scanner = new Scanner(System.in);
 
-    public int WinningPoints;
-    ArrayList<Player> ListOfPlayers = new ArrayList<>();
 
-    ArrayList<String> players = new ArrayList<>();
+    ArrayList<Player> listOfPlayers = new ArrayList<>();
 
-    public Game() {
-    }
+    public Game() {}
 
-    private ArrayList<String> storePlayers () {
-        ArrayList<String> Players = new ArrayList<>();
-        for(int i = 0; i < this.numberOfPlayers; i++) {
-            System.out.println("Please enter the name of Player" + (i+1) +":");
-            String player = scanner.next();
-            Players.add(player);
-        }
-        Collections.sort(Players); //sort the list of players alphabetically
-        return Players;
-    }
-
-    private int AskForWinningPoints() {
-        System.out.println("Please define the winning points:");
-        int winningPoints = scanner.nextInt();
-        return winningPoints;
-    }
-
-    private static Card DrawACard(ArrayList<Card> CardSet) {
+    private static Card drawACard(ArrayList<Card> CardSet) {
         // the card pile if empty, so start again from generating a shuffled card set
         if(CardSet.size()==0){
-            GenerateCardSet();
+            generateCardSet();
         }
         Card card = CardSet.get(CardSet.size() - 1);
         CardSet.remove(CardSet.size() - 1);
         return card;
     }
 
-    private static ArrayList<Player> GetHighestPlayer(ArrayList<Player> players) {
+    private static ArrayList<Player> getHighestPlayer(ArrayList<Player> players) {
         ArrayList<Player> HighestPlayer= new ArrayList<>();
         int MaxScore = 0;
 //        ArrayList<Player> SortedPlayers = new ArrayList<>();
 //        players.sort(Comparator.comparing(Player::getScore));
         for (Player player: players) {
-            if(player.getScore()>=MaxScore) {
+            if(player.getScore() >= MaxScore) {
                 MaxScore = player.getScore();
             }
         }
@@ -68,30 +45,33 @@ public class Game {
         return HighestPlayer;
     }
 
-    public void GameOn() {
+    public void gameOn() {
         //Game Initialization: Setup Players and generate a deck of cards
-        ArrayList<Card> deck = GenerateCardSet();
-        players = storePlayers();
-        WinningPoints = AskForWinningPoints();
+        ArrayList<Card> deck = generateCardSet();
+        GameInitialization gameInitialization = new GameInitialization();
+        ArrayList<String> players;
+        int numberOfPlayers = gameInitialization.getNumberOfPlayers();
+        players = gameInitialization.getPlayers();
+        int WinningPoints = gameInitialization.getWinningPoints();
         for(int i = 0; i < numberOfPlayers; i++) {
             Player player = new Player(players.get(i), 0);
-            ListOfPlayers.add(player);
+            listOfPlayers.add(player);
         }
 
         boolean Win = false;
         while(Win == false) {
-            for(Player player: ListOfPlayers) {
-                Card card = DrawACard(deck); // a turn
+            for(Player player: listOfPlayers) {
+                Card card = drawACard(deck); // a turn
                 System.out.println("Player "+player.getName());
-                System.out.println("The card you got is: " + card.GetCardType());
+                System.out.println("The card you got is: " + card.getCardType());
                 // get the bonus points of this bonus card
                 if(card instanceof BonusCard) {
                     BonusCard bonusCard = (BonusCard) card;
                     System.out.println("The bonus points of this card is " + bonusCard.getPoints());
                 }
-                if (card.GetCardType() != CardType.STOP) {
+                if (card.getCardType() != CardType.STOP) {
                     int ScoreInThisTurn = 0;
-                    String option = UI.TurnStartingOption();
+                    String option = UI.turnStartingOption();
                     while(!option.equals("R")) {
                         switch (option) {
                             // choosing display: display current score
@@ -105,10 +85,10 @@ public class Game {
                                 System.out.println("Invalid Input! Please input again");
                                 break;
                         }
-                        option = UI.TurnStartingOption();
+                        option = UI.turnStartingOption();
                     }
                     if (option.equals("R")) {
-                        ArrayList<Integer> ResultDices = card.HandleTurn();
+                        ArrayList<Integer> ResultDices = card.handleTurn();
                         // Calculate the points gained in this card
                         boolean Continue = true;
                         while (Continue) {
@@ -121,7 +101,7 @@ public class Game {
                                     break;
                                 case 6:
                                 case 12:
-                                    switch (card.GetCardType()) {
+                                    switch (card.getCardType()) {
                                         case BONUS:
                                         case MULTIPLY_TWO:
                                         case STRAIGHT:
@@ -131,7 +111,7 @@ public class Game {
                                             break;
                                         case PLUS_MINUS:
                                             ScoreOfThisCard = card.calScores(ResultDices);
-                                            ArrayList<Player> HighestPlayer = GetHighestPlayer(ListOfPlayers);
+                                            ArrayList<Player> HighestPlayer = getHighestPlayer(listOfPlayers);
                                             for(Player player2: HighestPlayer) {
                                                 if(player2 != player) {
                                                     player2.setScore(player2.getScore()-1000);
@@ -139,14 +119,14 @@ public class Game {
                                             }
                                             break;
                                     }
-                                    String ifContinue = UI.TuttoOption();
+                                    String ifContinue = UI.tuttoOption();
                                     switch (ifContinue) {
                                         case "E":
                                             Continue = false;
                                             break;
                                         case "R":
-                                            Card NewCard = DrawACard(deck);
-                                            ResultDices = NewCard.HandleTurn();
+                                            Card NewCard = drawACard(deck);
+                                            ResultDices = NewCard.handleTurn();
                                             break;
                                     }
                                     break;
@@ -173,7 +153,7 @@ public class Game {
     }
 
 
-    public static ArrayList<Card> GenerateCardSet(){
+    public static ArrayList<Card> generateCardSet(){
         ArrayList<Card> CardSet = new ArrayList<>();
         Card CloverLeaf = new CloverleafCard();
         for (int i = 0; i < 5; i++) {

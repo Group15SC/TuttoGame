@@ -8,13 +8,13 @@ import java.util.ArrayList;
 public class MultiplyTwoCard implements Card{
 
     @Override
-    public CardType GetCardType() {
+    public CardType getCardType() {
         return CardType.MULTIPLY_TWO;
     }
 
 
     @Override
-    public ArrayList<Integer> HandleTurn() {
+    public ArrayList<Integer> handleTurn() {
         MultiplyTwoLogic multiplyTwoLogic = new MultiplyTwoLogic(new Dices());
         multiplyTwoLogic.getValidDices();
         return multiplyTwoLogic.getKeptDices();

@@ -2,10 +2,6 @@ package main.Logics;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Objects;
-import java.util.Scanner;
-
-import static java.lang.System.out;
 
 public abstract class Logic {
 
@@ -30,7 +26,7 @@ public abstract class Logic {
     // roll a specific number of dices
     protected void rollAPair(int num, ArrayList<Integer> aPairOfDices){
         for(int i=0; i<num; i++){
-            aPairOfDices.add(dice.RollDice());
+            aPairOfDices.add(dice.rollDice());
         }
     }
 

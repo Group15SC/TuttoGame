@@ -7,12 +7,12 @@ import java.util.Scanner;
 
 public class Dices implements RollDice {
     @Override
-    public int RollDice() {
+    public int rollDice() {
         Random r = new Random();
         return r.nextInt(6) + 1;
     }
 
-    public static void DisplayDices(ArrayList<Integer> ListOfDices) {
+    public static void displayDices(ArrayList<Integer> ListOfDices) {
         System.out.println("The result of this roll is:");
         for(int dice: ListOfDices) {
             System.out.print(dice);
@@ -55,7 +55,7 @@ public class Dices implements RollDice {
         return Scores;
     }
 
-    public static ArrayList<Integer> GetKeepDices() {
+    public static ArrayList<Integer> getKeepDices() {
         ArrayList<Integer> IntKeepDices = new ArrayList<>();
         while (true) { // handle invalid input
             try {

@@ -1,13 +1,11 @@
 package main;
 
 import main.GameController.Game;
-import main.Logics.Dices;
-import main.Logics.Logic;
 
 public class Main {
     public static void main(String[] args) {
         Game game = new Game();
-        game.GameOn();
+        game.gameOn();
 
 
 //        Player player1 = new Player("A", 1000);

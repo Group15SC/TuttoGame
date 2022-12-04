@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class FireworksCard implements Card{
     @Override
-    public CardType GetCardType() {
+    public CardType getCardType() {
         return CardType.FIREWORKS;
     }
 
@@ -18,7 +18,7 @@ public class FireworksCard implements Card{
 //    }
 
     @Override
-    public ArrayList<Integer> HandleTurn() {
+    public ArrayList<Integer> handleTurn() {
         FireworksLogic fireworksLogic = new FireworksLogic(new Dices());
         fireworksLogic.getValidDices();
         return fireworksLogic.getKeptDices();

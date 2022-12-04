@@ -29,7 +29,7 @@ public class BonusLogic extends Logic {
         while (continueTurn){
             aPairOfDices = new ArrayList<>(); //empty the dice set
             rollAPair(numOfDices, aPairOfDices);
-            Dices.DisplayDices(aPairOfDices);
+            Dices.displayDices(aPairOfDices);
             if(IsValid(aPairOfDices)){
                 if(isTutto(aPairOfDices)) {
                     keptDices.addAll(aPairOfDices);
@@ -38,7 +38,7 @@ public class BonusLogic extends Logic {
                     continueTurn = false;
                     break;
                 }
-                String HalfwayOpt = UI.HalfwayOption(); // player decides to end the turn halfway
+                String HalfwayOpt = UI.halfwayOption(); // player decides to end the turn halfway
                 while (notTutto){
                     // Ask the player which dices he/she would like to keep
                     /* break out of the notTutto while loop,but not change the notTutto value*/
@@ -46,10 +46,10 @@ public class BonusLogic extends Logic {
                         keptDices.addAll(ValidInThisRoll(aPairOfDices));
                         continueTurn = false;
                     } else {
-                        ArrayList<Integer> dicesToKeep = Dices.GetKeepDices();
+                        ArrayList<Integer> dicesToKeep = Dices.getKeepDices();
                         while (!IsValidKeep(dicesToKeep, aPairOfDices)){
                             System.out.println("Invalid Input! Please re-enter:");
-                            dicesToKeep = Dices.GetKeepDices();
+                            dicesToKeep = Dices.getKeepDices();
                         }
                         keptDices.addAll(dicesToKeep);
                         numOfDices -= dicesToKeep.size();

@@ -17,12 +17,12 @@ public class BonusCard implements Card {
     }
 
     @Override
-    public CardType GetCardType() {
+    public CardType getCardType() {
         return CardType.BONUS;
     }
 
     @Override
-    public ArrayList<Integer> HandleTurn() {
+    public ArrayList<Integer> handleTurn() {
         BonusLogic bonus = new BonusLogic(new Dices());
         bonus.getValidDices();
         return bonus.getKeptDices();

@@ -12,12 +12,12 @@ public class CloverleafCard implements Card{
     Game game = new Game();
 
     @Override
-    public CardType GetCardType() {
+    public CardType getCardType() {
         return CardType.CLOVERLEAF;
     }
 
     @Override
-    public ArrayList<Integer> HandleTurn() {
+    public ArrayList<Integer> handleTurn() {
         CloverleafLogic cloverleaf = new CloverleafLogic(new Dices());
         cloverleaf.getValidDices();
         return cloverleaf.getKeptDices();
@@ -27,7 +27,7 @@ public class CloverleafCard implements Card{
     public int calScores(ArrayList<Integer> keptDices) {
         int Score = Dices.calScoresOfDices(keptDices);
         if(keptDices.size() == 12){
-            Score = game.WinningPoints; // accomplish a Tutto --> the Player wins
+            Score = 100000000; // accomplish a Tutto --> the Player wins
         }
         return Score;
     }

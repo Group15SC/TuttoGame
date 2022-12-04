@@ -1,7 +1,5 @@
 package main.Logics;
 
-import main.GameController.GameInitialization;
-
 import java.util.ArrayList;
 
 public class PlusMinusLogic extends Logic {
@@ -30,7 +28,7 @@ public class PlusMinusLogic extends Logic {
         while (continueTurn) {
             aPairOfDices = new ArrayList<>(); //empty the dice set
             rollAPair(numOfDices, aPairOfDices);
-            Dices.DisplayDices(aPairOfDices);
+            Dices.displayDices(aPairOfDices);
             if (IsValid(aPairOfDices)) {
                 if (isTutto(aPairOfDices)) {
                     keptDices.addAll(aPairOfDices);

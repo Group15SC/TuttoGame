@@ -5,7 +5,7 @@ import java.util.Scanner;
 import static java.lang.System.out;
 
 public class UI {
-    public static String TurnStartingOption() {
+    public static String turnStartingOption() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Would you like to Roll or Display current scores?");
         System.out.println("Enter 'D' if you want to Display current scores");
@@ -14,16 +14,16 @@ public class UI {
         return option;
     }
 
-    public static String TuttoOption() {
+    public static String tuttoOption() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("You accomplished a Tutto!");
+//        System.out.println("You accomplished a Tutto!");
         System.out.println("Would you like to End or Continue?");
         System.out.println("Enter 'E' if you want to End.");
         String tuttooption = scanner.next();
         return tuttooption;
     }
 
-    public static String HalfwayOption() {
+    public static String halfwayOption() {
         Scanner scanner = new Scanner(System.in);
         out.println("Would you like to End or Continue?");
         out.println("Enter 'E' if you want to End.");

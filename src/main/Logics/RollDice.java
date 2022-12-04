@@ -1,5 +1,5 @@
 package main.Logics;
 
 public interface RollDice {
-    public int RollDice();
+    public int rollDice();
 }
