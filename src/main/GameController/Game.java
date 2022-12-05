@@ -107,7 +107,7 @@ public class Game {
         }
     }
 
-    private void handleAPlayersTurn(ArrayList<Card> deck, Player player, Card card, int ScoreInThisTurn, String option) {
+    protected void handleAPlayersTurn(ArrayList<Card> deck, Player player, Card card, int ScoreInThisTurn, String option) {
         if (option.equals("R")) {
             ArrayList<Integer> ResultDices = card.handleTurn();
             // Calculate the points gained in this card
