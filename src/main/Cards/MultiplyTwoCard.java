@@ -23,7 +23,10 @@ public class MultiplyTwoCard implements Card{
 
     @Override
     public int calScores(ArrayList<Integer> keptDices) {
-        int Score = 2 * Dices.calScoresOfDices(keptDices);
+        int Score = Dices.calScoresOfDices(keptDices);
+        if(keptDices.size() == 6){
+            Score = Score*2; // accomplish a Tutto --> get dices score+the points of this card
+        }
         return Score;
     }
 

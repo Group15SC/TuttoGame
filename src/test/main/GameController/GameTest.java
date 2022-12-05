@@ -1,8 +1,13 @@
 package main.GameController;
 
 import main.Cards.*;
+import main.Logics.Dices;
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.io.PrintStream;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -34,6 +39,16 @@ class GameTest {
         method.setAccessible(true);
         Card ResultCard = (Card) method.invoke(null, aDeck);
         assertEquals(0, aDeck.size());
+    }
+
+    @Test
+    void testEmptyDeckRedraw() throws Exception{
+        ArrayList<Card> emptyDeck = new ArrayList<>();
+
+        Method method = Game.class.getDeclaredMethod("drawACard", ArrayList.class);
+        method.setAccessible(true);
+        Card resultCard = (Card) method.invoke(null, emptyDeck);
+        assertTrue(resultCard instanceof Card);
     }
 
     // test private method GetHighestPlayer
@@ -73,13 +88,6 @@ class GameTest {
         ArrayList<Player> HighestPlayer = (ArrayList<Player>) method.invoke(null, players);
         assertEquals(ExpectedHighest, HighestPlayer);
     }
-
-
-    @Test
-    void gameOn() {
-
-    }
-
 
     @Test
     void TestGenerateACompleteCardSet() { // test if generate the right amount of cards
