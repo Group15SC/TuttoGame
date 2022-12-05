@@ -28,7 +28,7 @@ public class StraightCard implements Card{
 
     @Override
     public int calScores(ArrayList<Integer> keptDices) {
-        if(isTutto){
+        if(keptDices.size()==6){
             return 2000;
         }
         else{

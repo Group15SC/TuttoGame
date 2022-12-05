@@ -32,7 +32,7 @@ public class PlusMinusLogic extends Logic {
             aPairOfDices = new ArrayList<>(); //empty the dice set
             rollAPair(numOfDices, aPairOfDices);
             Dices.displayDices(aPairOfDices);
-            if (IsValid(aPairOfDices)) {
+            if (isValid(aPairOfDices)) {
                 if (isTutto(aPairOfDices)) {
                     keptDices.addAll(aPairOfDices);
                     System.out.println("Congratulations! You accomplish a Tutto!");
@@ -61,8 +61,8 @@ public class PlusMinusLogic extends Logic {
     public int handelNotTutto(int numOfDices, boolean notTutto) {
         while (notTutto){
             // rolled dices are valid + not tutto --> keep all the valid dices and continue roll
-            keptDices.addAll(ValidInThisRoll(aPairOfDices));
-            numOfDices -= ValidInThisRoll(aPairOfDices).size();
+            keptDices.addAll(validInThisRoll(aPairOfDices));
+            numOfDices -= validInThisRoll(aPairOfDices).size();
             break; // break the while(notTutto) loop and continue roll left dices
         }
         return numOfDices;

@@ -22,7 +22,7 @@ public class StraightLogic extends Logic {
         super(dice);
     }
 
-    private static boolean isValidForStraight(ArrayList<Integer> RolledDices, ArrayList<Integer> AlreadyKeptDices) {
+    protected static boolean isValidForStraight(ArrayList<Integer> RolledDices, ArrayList<Integer> AlreadyKeptDices) {
         if(AlreadyKeptDices.size() == 0) {
             return true;
         }
@@ -34,7 +34,7 @@ public class StraightLogic extends Logic {
         return false;
     }
 
-    private static boolean isValidKeepForStraight(ArrayList<Integer> KeepDices, ArrayList<Integer> RolledDices, ArrayList<Integer> AlreadyKeptDices) {
+    protected static boolean isValidKeepForStraight(ArrayList<Integer> KeepDices, ArrayList<Integer> RolledDices, ArrayList<Integer> AlreadyKeptDices) {
         boolean isValid = true;
         for (int dice: KeepDices) {
             int occurrencesInInput = Collections.frequency(KeepDices, dice);
@@ -46,12 +46,12 @@ public class StraightLogic extends Logic {
         return isValid;
     }
 
-    private boolean isTuttoForStraight(ArrayList<Integer> ValidDices, ArrayList<Integer> AlreadyKeptDices){
+    protected boolean isTuttoForStraight(ArrayList<Integer> ValidDices, ArrayList<Integer> AlreadyKeptDices){
         return (ValidDices.size() + AlreadyKeptDices.size() == 6);
 //        return(IsValidKeepForStraight(rolledDices, rolledDices, AlreadyKeptDices) && ((AlreadyKeptDices.size() + rolledDices.size()) == 6)
 //        && keptDices.size() != 0);
     }
-    private static ArrayList<Integer> validInThisRollForStraight(ArrayList<Integer> rolled, ArrayList<Integer> kept){
+    protected static ArrayList<Integer> validInThisRollForStraight(ArrayList<Integer> rolled, ArrayList<Integer> kept){
         ArrayList<Integer> ValidDicesInThisRoll = new ArrayList<>();
         for(int dice: rolled) {
             if(!kept.contains(dice) && !ValidDicesInThisRoll.contains(dice)) {

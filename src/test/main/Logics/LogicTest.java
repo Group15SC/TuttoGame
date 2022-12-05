@@ -1,11 +1,8 @@
 package main.Logics;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -25,7 +22,7 @@ class LogicTest {
         for(int i=1; i<=6; i++){
             aDiceSet.add(i);
         } // 1,2,3,4,5,6 -- should be valid
-        assertTrue(Logic.IsValid(aDiceSet));
+        assertTrue(Logic.isValid(aDiceSet));
     }
 
     @Test
@@ -35,7 +32,7 @@ class LogicTest {
         }
         aDiceSet.add(2);
         aDiceSet.add(3); // 1,1,1,2,3 -- should be valid
-        assertTrue(Logic.IsValid(aDiceSet));
+        assertTrue(Logic.isValid(aDiceSet));
     }
 
     @Test
@@ -45,7 +42,7 @@ class LogicTest {
         }
         aDiceSet.add(2);
         aDiceSet.add(3); // 3,3,3,2,3 -- should be valid
-        assertTrue(Logic.IsValid(aDiceSet));
+        assertTrue(Logic.isValid(aDiceSet));
     }
 
     @Test
@@ -53,7 +50,7 @@ class LogicTest {
         aDiceSet.add(2);
         aDiceSet.add(2);
         aDiceSet.add(3); // 2,2,3 -- should be invalid
-        assertFalse(Logic.IsValid(aDiceSet));
+        assertFalse(Logic.isValid(aDiceSet));
     }
 
 //    @Test

@@ -12,7 +12,7 @@ public abstract class Logic {
     public Logic(RollDice dice) {
         this.dice = dice;
     }
-    protected static boolean IsValid(ArrayList<Integer> ListOfDices) {
+    protected static boolean isValid(ArrayList<Integer> ListOfDices) {
         int occurrences;
         for (int i = 0; i < ListOfDices.size(); i++) {
             occurrences = Collections.frequency(ListOfDices, ListOfDices.get(i));
@@ -31,7 +31,7 @@ public abstract class Logic {
     }
 
     // check if a list of dieces that user choose is ok to keep according to rolled dice
-    protected static boolean IsValidKeep(ArrayList<Integer> KeepDices, ArrayList<Integer> RolledDices) {
+    protected static boolean isValidKeep(ArrayList<Integer> KeepDices, ArrayList<Integer> RolledDices) {
         boolean isValid = true;
         for (int dice: KeepDices) {
             int occurrencesInInput = Collections.frequency(KeepDices, dice);
@@ -44,7 +44,7 @@ public abstract class Logic {
     }
 
     // get all the valid dices in a roll
-    protected static ArrayList<Integer> ValidInThisRoll( ArrayList<Integer> ListOfDices){
+    protected static ArrayList<Integer> validInThisRoll(ArrayList<Integer> ListOfDices){
         int occurrences;
         ArrayList<Integer> ValidDicesInThisRoll = new ArrayList<>();
         for(int dice: ListOfDices) {
@@ -61,7 +61,7 @@ public abstract class Logic {
 //    }
 
     protected boolean isTutto(ArrayList<Integer> dices){
-        return(IsValidKeep(dices, dices));
+        return(isValidKeep(dices, dices));
     }
 
     public abstract void getValidDices();

@@ -50,7 +50,7 @@ public class BonusLogic extends Logic {
             aPairOfDices = new ArrayList<>(); //empty the dice set
             rollAPair(numOfDices, aPairOfDices);
             Dices.displayDices(aPairOfDices);
-            if(IsValid(aPairOfDices)){
+            if(isValid(aPairOfDices)){
                 if(isTutto(aPairOfDices)) {
                     keptDices.addAll(aPairOfDices);
                     System.out.println("Congratulations! You accomplish a Tutto!");
@@ -74,11 +74,11 @@ public class BonusLogic extends Logic {
             // Ask the player which dices he/she would like to keep
             /* break out of the notTutto while loop,but not change the notTutto value*/
             if (HalfwayOpt.equals("E")) {
-                keptDices.addAll(ValidInThisRoll(aPairOfDices));
+                keptDices.addAll(validInThisRoll(aPairOfDices));
                 continueTurn = false;
             } else {
                 ArrayList<Integer> dicesToKeep = Dices.getKeepDices();
-                while (!IsValidKeep(dicesToKeep, aPairOfDices)){
+                while (!isValidKeep(dicesToKeep, aPairOfDices)){
                     System.out.println("Invalid Input! Please re-enter:");
                     dicesToKeep = Dices.getKeepDices();
                 }

@@ -27,15 +27,15 @@ public class FireworksLogic extends Logic {
             aPairOfDices = new ArrayList<>(); //empty the dice set
             rollAPair(numOfDices, aPairOfDices);
             Dices.displayDices(aPairOfDices);
-            if(IsValid(aPairOfDices)){
+            if(isValid(aPairOfDices)){
                 // if tutto, set numOfDices = 6 and continue roll
                 if(isTutto(aPairOfDices)) {
                     numOfDices = 6;
                 }
 
                 // store all the valid dices to keptDices
-                keptDices.addAll(ValidInThisRoll(aPairOfDices));
-                numOfDices -= ValidInThisRoll(aPairOfDices).size();
+                keptDices.addAll(validInThisRoll(aPairOfDices));
+                numOfDices -= validInThisRoll(aPairOfDices).size();
             }
             else{
                 // if rolled a null, stop roll
