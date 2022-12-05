@@ -8,4 +8,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CloverleafLogicTest {
 
+    @Test
+    void getKeptDices() {
+    }
+
+    @Test
+    void isTutto() {
+    }
+
+    @Test
+    void getValidDices() {
+    }
 }

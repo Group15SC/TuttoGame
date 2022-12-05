@@ -19,7 +19,7 @@ class GameTest {
         aDeck.add(new CloverleafCard());
         aDeck.add(new FireworksCard());
 
-        Method method = Game.class.getDeclaredMethod("DrawACard", ArrayList.class);
+        Method method = Game.class.getDeclaredMethod("drawACard", ArrayList.class);
         method.setAccessible(true);
         Card ResultCard = (Card) method.invoke(null, aDeck);
         assertEquals(CardType.FIREWORKS, ResultCard.getCardType());
@@ -30,7 +30,7 @@ class GameTest {
         ArrayList<Card> aDeck = new ArrayList<>();
         aDeck.add(new BonusCard(200));
 
-        Method method = Game.class.getDeclaredMethod("DrawACard", ArrayList.class);
+        Method method = Game.class.getDeclaredMethod("drawACard", ArrayList.class);
         method.setAccessible(true);
         Card ResultCard = (Card) method.invoke(null, aDeck);
         assertEquals(0, aDeck.size());
@@ -48,7 +48,7 @@ class GameTest {
         ArrayList<Player> ExpectedHighest = new ArrayList<>();
         ExpectedHighest.add(player1);
 
-        Method method = Game.class.getDeclaredMethod("GetHighestPlayer", ArrayList.class);
+        Method method = Game.class.getDeclaredMethod("getHighestPlayer", ArrayList.class);
         method.setAccessible(true);
         ArrayList<Player> HighestPlayer = (ArrayList<Player>) method.invoke(null, players);
         assertEquals(ExpectedHighest, HighestPlayer);
@@ -68,7 +68,7 @@ class GameTest {
         ExpectedHighest.add(player1);
         ExpectedHighest.add(player3);
 
-        Method method = Game.class.getDeclaredMethod("GetHighestPlayer", ArrayList.class);
+        Method method = Game.class.getDeclaredMethod("getHighestPlayer", ArrayList.class);
         method.setAccessible(true);
         ArrayList<Player> HighestPlayer = (ArrayList<Player>) method.invoke(null, players);
         assertEquals(ExpectedHighest, HighestPlayer);

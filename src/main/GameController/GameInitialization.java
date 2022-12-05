@@ -5,23 +5,29 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class GameInitialization {
-    private Scanner scanner = new Scanner(System.in);
 
     private ArrayList<String> nameOfPlayers;
     private int winningPoints;
 
     private int numOfPlayers;
 
-    public GameInitialization() {
+    private GameInitialization() {
         setUp();
     }
-    public int askForNumberOfPlayers() {
 
+    private static final GameInitialization INSTANCE = new GameInitialization();
+
+    public static GameInitialization getInstance(){
+        return INSTANCE;
+    }
+
+    public static int askForNumberOfPlayers() {
         int num = 0;
         String strInput;
         boolean valid = false;
         while(valid == false) {
             System.out.println("Please enter the number of players (2-4): ");
+            Scanner scanner = new Scanner(System.in);
             strInput = scanner.nextLine();
             try {
                 num = Integer.parseInt(strInput);
@@ -37,6 +43,7 @@ public class GameInitialization {
     }
     private ArrayList<String> storePlayers () {
         ArrayList<String> Players = new ArrayList<>();
+        Scanner scanner = new Scanner(System.in);
         for(int i = 0; i < this.numOfPlayers; i++) {
             System.out.println("Please enter the name of Player" + (i+1) +":");
             String player = scanner.next();
@@ -46,8 +53,8 @@ public class GameInitialization {
         return Players;
     }
 
-    private int askForWinningPoints() {
-
+    private static int askForWinningPoints() {
+        Scanner scanner = new Scanner(System.in);
         int winningPoints = 0;
         System.out.println("Please define the winning points:");
         while(true) {

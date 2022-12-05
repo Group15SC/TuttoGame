@@ -68,7 +68,7 @@ public class Game {
     public void gameOn() {
         //Game Initialization: Setup Players and generate a deck of cards
         ArrayList<Card> deck = generateCardSet();
-        GameInitialization gameInitialization = new GameInitialization();
+        GameInitialization gameInitialization = GameInitialization.getInstance();
         ArrayList<String> players;
         int numberOfPlayers = gameInitialization.getNumberOfPlayers();
         players = gameInitialization.getPlayers();
