@@ -5,16 +5,27 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class StopCardTest {
+    StopCard stop = new StopCard();
 
     @Test
     void getCardType() {
-        StopCard stop = new StopCard();
         assertEquals(CardType.STOP, stop.getCardType());
     }
 
-//    @Test
-//    void getPoints() {
-//        StopCard stop = new StopCard();
-//        assertEquals(0, stop.GetPoints());
-//    }
+    @Test
+    void testNoDices(){
+        assertTrue(stop.handleTurn().isEmpty());
+    }
+
+
+    @Test
+    void testCalScore(){
+        assertEquals(0, stop.calScores(stop.handleTurn()));
+    }
+
+    @Test
+    void testDrawAnotherCard(){
+        assertFalse(stop.ableToDrawAnotherCard());
+    }
+
 }

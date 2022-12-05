@@ -43,7 +43,6 @@ public class FireworksLogic extends Logic {
                 System.out.println("You rolled a null! Your turn is over.");
                 continueTurn = false;
             }
-
         }
     }
 

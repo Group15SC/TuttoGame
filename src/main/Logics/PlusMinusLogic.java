@@ -40,12 +40,7 @@ public class PlusMinusLogic extends Logic {
                     continueTurn = false;
                     break;
                 }
-                while (notTutto){
-                    // rolled dices are valid + not tutto --> keep all the valid dices and continue roll
-                    keptDices.addAll(ValidInThisRoll(aPairOfDices));
-                    numOfDices -= ValidInThisRoll(aPairOfDices).size();
-                    break; // break the while(notTutto) loop and continue roll left dices
-                }
+                numOfDices = handelNotTutto(numOfDices, notTutto);
             }
             else{
                 System.out.println("You rolled a null! Your turn is over.");
@@ -53,5 +48,23 @@ public class PlusMinusLogic extends Logic {
                 continueTurn = false;
             }
         }
+    }
+
+    public void setKeptDices(ArrayList<Integer> keptDices) {
+        this.keptDices = keptDices;
+    }
+
+    public void setaPairOfDices(ArrayList<Integer> aPairOfDices) {
+        this.aPairOfDices = aPairOfDices;
+    }
+
+    public int handelNotTutto(int numOfDices, boolean notTutto) {
+        while (notTutto){
+            // rolled dices are valid + not tutto --> keep all the valid dices and continue roll
+            keptDices.addAll(ValidInThisRoll(aPairOfDices));
+            numOfDices -= ValidInThisRoll(aPairOfDices).size();
+            break; // break the while(notTutto) loop and continue roll left dices
+        }
+        return numOfDices;
     }
 }
