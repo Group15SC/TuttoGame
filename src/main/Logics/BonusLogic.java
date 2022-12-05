@@ -65,14 +65,11 @@ public class BonusLogic extends Logic {
                 keptDices = new ArrayList<>();
                 continueTurn = false;
             }
-        }  // null case
-//        for(int dice: keptDices){
-//            System.out.println(dice);
-//        }
+        }
     }
 
-    // handle re-rolling case, update number of dices
-    public int handleNotTutto(int numOfDices, String HalfwayOpt, boolean notTutto) {
+
+    public int handleNotTutto(int numOfDices, String HalfwayOpt, boolean notTutto) { // handle re-rolling case, update number of dices
         while (notTutto){
             // Ask the player which dices he/she would like to keep
             /* break out of the notTutto while loop,but not change the notTutto value*/

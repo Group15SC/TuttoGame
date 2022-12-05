@@ -41,7 +41,6 @@ class BonusLogicTest {
         }
     });
 
-
     @Test
     void testDefaultIsTutto() {
         assertFalse(bonus.isTutto());
@@ -55,10 +54,6 @@ class BonusLogicTest {
             expectedDices.add(1);
         }
         assertEquals(expectedDices,bonus.getKeptDices());
-    }
-
-    @Test
-    void getValidDices() {
     }
 
     @Test
@@ -118,7 +113,7 @@ class BonusLogicTest {
     @Test
     void testRolledAnInvalidDice(){
         BonusLogic newBonus = new BonusLogic(new RollDice() {
-            int[] aCase = {};
+            int[] aCase = {2,3,4,6,6,2}; // a null case
             int i  = 0;
             @Override
             public int rollDice() {
@@ -127,6 +122,7 @@ class BonusLogicTest {
                 return dice;
             }
         });
+        newBonus.getValidDices();
+        assertTrue(newBonus.getKeptDices().isEmpty());
     }
-
 }
