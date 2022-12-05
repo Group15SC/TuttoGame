@@ -18,7 +18,6 @@ public class UI {
         Scanner scanner = new Scanner(System.in);
 //        System.out.println("You accomplished a Tutto!");
         System.out.println("Would you like to End or Continue?");
-        System.out.println("Enter 'E' if you want to End.");
         String tuttooption = scanner.next();
         return tuttooption;
     }
@@ -26,7 +25,7 @@ public class UI {
     public static String halfwayOption() {
         Scanner scanner = new Scanner(System.in);
         out.println("Would you like to End or Continue?");
-        out.println("Enter 'E' if you want to End.");
+        out.println("Enter 'E' if you want to End. All the valid dices in this roll will be kept. ");
         out.println("Press 'R' to continue.");
         while(!scanner.hasNext("[ER]")) {
             System.out.println("Invalid input! Please re-enter:");
