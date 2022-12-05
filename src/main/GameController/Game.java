@@ -45,6 +45,26 @@ public class Game {
         return HighestPlayer;
     }
 
+    public static String askForContinueOption(Player player, String option) {
+        while(!option.equals("R")) {
+            switch (option) {
+                // choosing display: display current score
+                case "D" -> System.out.println(player.getScore());
+                case "E" -> System.out.println("You may not end now! Please re-enter:");
+                default -> System.out.println("Invalid Input! Please input again");
+            }
+            option = UI.turnStartingOption();
+        }
+        return option;
+    }
+
+    private static void displayScoreForEachPlayer(ArrayList<Player> players) {
+        for(Player player: players){
+            System.out.println("Player "+player.getName()+" got "+player.getScore()+" in total");
+        }
+    }
+
+
     public void gameOn() {
         //Game Initialization: Setup Players and generate a deck of cards
         ArrayList<Card> deck = generateCardSet();
@@ -59,85 +79,58 @@ public class Game {
         }
 
         boolean Win = false;
-        while(Win == false) {
+        while(!Win) {
             for(Player player: listOfPlayers) {
                 Card card = drawACard(deck); // a turn
                 System.out.println("Player "+player.getName());
                 System.out.println("The card you got is: " + card.getCardType());
                 // get the bonus points of this bonus card
-                if(card instanceof BonusCard) {
-                    BonusCard bonusCard = (BonusCard) card;
-                    System.out.println("The bonus points of this card is " + bonusCard.getPoints());
-                }
-                if (card.getCardType() != CardType.STOP) {
-                    int ScoreInThisTurn = 0;
-                    String option = UI.turnStartingOption();
-                    while(!option.equals("R")) {
-                        switch (option) {
-                            // choosing display: display current score
-                            case "D":
-                                System.out.println(player.getScore());
-                                break;
-                            case "E":
-                                System.out.println("You may not end now! Please re-enter:");
-                                break;
-                            default:
-                                System.out.println("Invalid Input! Please input again");
-                                break;
-                        }
-                        option = UI.turnStartingOption();
+                if(!(card instanceof StopCard)) {
+                    if(card instanceof BonusCard) {
+                        BonusCard bonusCard = (BonusCard) card;
+                        System.out.println("The bonus points of this card is " + bonusCard.getPoints());
                     }
+                    int ScoreInThisTurn = 0; // the actual score gained in this turn
+                    String option = UI.turnStartingOption();
+                    option = askForContinueOption(player, option);
                     if (option.equals("R")) {
                         ArrayList<Integer> ResultDices = card.handleTurn();
                         // Calculate the points gained in this card
                         boolean Continue = true;
+                        int ScoreOfThisCard = 0;
                         while (Continue) {
-                            int ScoreOfThisCard = 0;
-                            switch (ResultDices.size()){
-                                case 0:
-                                    // if the card is STOP, return an empty list and enter this case
-                                    ScoreInThisTurn = 0;
-                                    Continue = false;
-                                    break;
-                                case 6:
-                                case 12:
-                                    switch (card.getCardType()) {
-                                        case BONUS:
-                                        case MULTIPLY_TWO:
-                                        case STRAIGHT:
-                                        case CLOVERLEAF:
-                                        case FIREWORKS:
-                                            ScoreOfThisCard = card.calScores(ResultDices);
-                                            break;
-                                        case PLUS_MINUS:
-                                            ScoreOfThisCard = card.calScores(ResultDices);
-                                            ArrayList<Player> HighestPlayer = getHighestPlayer(listOfPlayers);
-                                            for(Player player2: HighestPlayer) {
-                                                if(player2 != player) {
-                                                    player2.setScore(player2.getScore()-1000);
-                                                }
-                                            }
-                                            break;
-                                    }
-                                    String ifContinue = UI.tuttoOption();
-                                    switch (ifContinue) {
-                                        case "E":
-                                            Continue = false;
-                                            break;
-                                        case "R":
-                                            Card NewCard = drawACard(deck);
-                                            ResultDices = NewCard.handleTurn();
-                                            break;
-                                    }
-                                    break;
-                                default:
-                                    ScoreOfThisCard = Dices.calScoresOfDices(ResultDices);
-                                    Continue = false;
-                                    break;
+                            ScoreOfThisCard = card.calScores(ResultDices);
+                            // store the score gained with this card
+                            if (card.getCardType() == CardType.STOP) {
+                                Continue = false;
                             }
-                            ScoreInThisTurn += ScoreOfThisCard;
+                            if (card.getCardType() == CardType.PLUS_MINUS && card.ableToDrawAnotherCard()) {
+                                // the player is able to draw a new card if and only if accomplishing a Tutto
+                                ArrayList<Player> HighestPlayer = getHighestPlayer(listOfPlayers);
+                                for (Player player2 : HighestPlayer) {
+                                    if (player2 != player) {
+                                        player2.setScore(player2.getScore() - 1000);
+                                    }
+                                }
+                            }
+                            if (card.ableToDrawAnotherCard()) { // if the player wants to draw a new card after Tutto
+                                String ifContinue = UI.tuttoOption();
+                                switch (ifContinue) {
+                                    case "E" -> Continue = false; // end this turn
+                                    case "R" -> {
+                                        Card NewCard = drawACard(deck);
+                                        System.out.println("Player " + player.getName());
+                                        System.out.println("The card you got is: " + card.getCardType());
+                                        ResultDices = NewCard.handleTurn();
+                                    }
+                                }
+                            } else { // if not able to draw another card --> setScore and end this turn
+                                Continue = false; // end this turn
+                            }
                         }
+                        ScoreInThisTurn += ScoreOfThisCard;
                         player.setScore(ScoreInThisTurn);
+                        System.out.println("The score you obtained in this turn is: "+ScoreInThisTurn);
                     }
                 }
                 System.out.println("Your turn is over!");
@@ -145,12 +138,15 @@ public class Game {
                 if(player.getScore() >= WinningPoints) {
                     System.out.println("Game over!");
                     System.out.println("Player "+player.getName()+" is the winner!");
+                    displayScoreForEachPlayer(listOfPlayers);
                     Win = true;
                     break;
                 }
             }
         }
     }
+
+
 
 
     public static ArrayList<Card> generateCardSet(){
@@ -181,174 +177,54 @@ public class Game {
 
 
 
-
-//        for (int i = 0; i < 5; i++) {
-//            Card Bonus = new BonusCard(300);
-//            CardSet.add(Bonus);
-//        }
-//        for (int i = 0; i < 5; i++) {
-//            Card Bonus = new BonusCard(400);
-//            CardSet.add(Bonus);
-//        }
-//        for (int i = 0; i < 5; i++) {
-//            Card Bonus = new BonusCard(500);
-//            CardSet.add(Bonus);
-//        }
-//        for (int i = 0; i < 5; i++) {
-//            Card Bonus = new BonusCard(600);
-//            CardSet.add(Bonus);
-//        }
-//        for (int i = 0; i < 5; i++) {
-//              Card MultiplyTwo = new MultiplyTwoCard();
-//              CardSet.add(MultiplyTwo);
-//        }
-//        for (int i = 0; i < 10; i++) {
+//                            switch (ResultDices.size()){
+//                                case 0:
+//                                    // if the card is STOP, return an empty list and enter this case
+//                                    ScoreInThisTurn = 0;
+//                                    Continue = false;
+//                                    break;
+//                                case 6:
+//                                case 12:
+//                                    switch (card.getCardType()) {
+//                                        case BONUS:
+//                                        case MULTIPLY_TWO:
+//                                        case STRAIGHT:
+//                                        case CLOVERLEAF:
+//                                        case FIREWORKS:
+//                                            ScoreOfThisCard = card.calScores(ResultDices);
+//                                            break;
+//                                        case PLUS_MINUS:
+//                                            ScoreOfThisCard = card.calScores(ResultDices);
+//                                            ArrayList<Player> HighestPlayer = getHighestPlayer(listOfPlayers);
+//                                            for(Player player2: HighestPlayer) {
+//                                                if(player2 != player) {
+//                                                    player2.setScore(player2.getScore()-1000);
+//                                                }
+//                                            }
+//                                            break;
+//                                    }
+//                                    String ifContinue = UI.tuttoOption();
+//                                    switch (ifContinue) {
+//                                        case "E":
+//                                            Continue = false;
+//                                            break;
+//                                        case "R":
+//                                            Card NewCard = drawACard(deck);
+//                                            ResultDices = NewCard.handleTurn();
+//                                            break;
+//                                    }
+//                                    break;
+//                                default:
+//                                    ScoreOfThisCard = Dices.calScoresOfDices(ResultDices);
+//                                    Continue = false;
+//                                    break;
+//                            }
+//                            ScoreInThisTurn += ScoreOfThisCard;
+//                        }
+//                        player.setScore(ScoreInThisTurn);
+//                    }
 //
-//
-//        }
-//        for (int i = 0; i < 5; i++) {
-//            Card FireWorks = new FireworksCard();
-//            CardSet.add(FireWorks);
-//        }
-//        for (int i = 0; i < 5; i++) {
-//            Card Plus_Minus = new PlusMinusCard();
-//            CardSet.add(Plus_Minus);
-//        }
-//
-//
-//        for (int i = 0; i < 5; i++) {
-//            Card Straight = new StraightCard();
-//            CardSet.add(Straight);
-//        }
-
-
-
-
-//    private ArrayList<Integer> DicesOfThisCard(Card card){
-//        ArrayList<Integer> dices = card.ValidDices();
-//        switch (card.GetCardType()){
-//            case STOP:
-//                break;
-//            case BONUS:
-//                BonusLogic bonuslogic = new BonusLogic();
-//                dices = bonuslogic.GetValidDices(player);
-//                break;
-//            case MULTIPLY_TWO:
-//                MultiplyTwoLogic multiplytwologic = new MultiplyTwoLogic();
-//                dices = multiplytwologic.GetValidDices(player);
-//                break;
-//            case FIREWORKS:
-//                FireworksLogic fireworksLogic = new FireworksLogic();
-//                dices = fireworksLogic.GetValidDices(player);
-//                break;
-//            case CLOVERLEAF:
-//                CloverleafLogic cloverleaflogic = new CloverleafLogic();
-//                dices = cloverleaflogic.GetValidDices(player);
-//                break;
-//            case PLUS_MINUS:
-//                PlusMinusLogic plusminuslogic = new PlusMinusLogic();
-//                dices = plusminuslogic.GetValidDices(player);
-//                break;
-//            case STRAIGHT:
-//                StraightLogic straigthlogic = new StraightLogic();
-//                dices = straigthlogic.GetValidDices(player);
-//                break;
-//        }
-//        return dices;
-        /* return a valid dice list of each type of card
-        -if the length of the dice is 6: Tutto / Straight Tutto;
-        -if the length of the dice is 0: Null;
-        -if the length of the dice is 12: Cloverleaf (2Tutto) / Fireworks
-        -if the length of the dice is others:
-           either a Fireworks
-           or end in the halfway (Bonus/Multiply Two)*/
-    //}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//    private ArrayList<Integer> RollDices(int numOfDices) {
-//        ArrayList<Integer> ListOfDices = new ArrayList<>();
-//        for(int i = 0; i < numOfDices; i ++){
-//            Random r = new Random();
-//            int n = r.nextInt(7);
-//            ListOfDices.add(n);
-//        }
-//        return ListOfDices;
-//    }
-//
-//    public void DisplayDices(ArrayList<Integer> ListOfDices) {
-//        for(int i = 0; i < ListOfDices.size(); i++) {
-//            System.out.print(ListOfDices.get(i) + ' ');
-//        }
-//    }
-//
-//    private boolean IsValid(ArrayList<Integer> ListOfDices) {
-//        int occurrences;
-//        for(int i = 0; i < ListOfDices.size(); i++) {
-//            occurrences = Collections.frequency(ListOfDices, ListOfDices.get(i));
-//            if(ListOfDices.get(i) == 1 || ListOfDices.get(i) == 5 || occurrences >= 3) {
-//                return true;
-//            }
-//        }
-//        return false;
-//
-//    }
-//    private boolean IsValidKeep(ArrayList<Integer> KeepDices) {
-//        if(KeepDices.size() == 1 && (KeepDices.get(0) == 1 || KeepDices.get(0) == 5)) {
-//            return true;
-//        }
-//        else if(KeepDices.size() == 3 && ((KeepDices.get(0) == KeepDices.get(1)) && (KeepDices.get(1) == KeepDices.get(2)))) {
-//            return true;
-//        }
-//        else {
-//            return false;
-//        }
-//    }
-//
-//    private int CalScores(ArrayList<Integer> Dices) {
-//        int Scores = 0;
-//        int occurrences = 0;
-//        ArrayList<Integer> CurrentDices = Dices;
-//
-//        for(int i = 0; i < Dices.size(); i++) {
-//            occurrences = Collections.frequency(Dices, Dices.get(i));
-//            if(occurrences == 3) {
-//                if(Dices.get(i) == 2||Dices.get(i) == 3||Dices.get(i) == 4||Dices.get(i) == 5||Dices.get(i) == 6) {
-//                    Scores = Scores + Dices.get(i) * 100;
-//                    CurrentDices.remove(Integer.valueOf(Dices.get(i)));
-//                    CurrentDices.remove(Integer.valueOf(Dices.get(i)));
-//                    CurrentDices.remove(Integer.valueOf(Dices.get(i)));
-//                }
-//                else if(Dices.get(i) == 1) {
-//                    Scores = Scores + 1000;
-//                    CurrentDices.remove(Integer.valueOf(Dices.get(i)));
-//                }
-//            }
-//        }
-//        for (int i = 0; i < CurrentDices.size(); i++) {
-//            if(CurrentDices.get(i) == 1) {
-//                Scores = Scores + 100;
-//            }
-//            else if(CurrentDices.get(i) == 5) {
-//                Scores = Scores + 50;
-//            }
-//        }
-//
-//        return Scores;
-//    }
-
-    //Logic logic = new Logic();
-
+//                System.out.println("Your turn is over!");
+//                System.out.println("============================");
 
 

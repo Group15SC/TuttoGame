@@ -14,6 +14,10 @@ public class StraightLogic extends Logic {
         return keptDices;
     }
 
+    public boolean isTutto() {
+        return !notTutto;
+    }
+
     public StraightLogic(RollDice dice) {
         super(dice);
     }
@@ -89,8 +93,6 @@ public class StraightLogic extends Logic {
                     numOfDices -= dicesToKeep.size();
                     break; // break the while(notTutto) loop and continue roll left dices
                 }
-
-
             } else {
                 System.out.println("You rolled a null! Your turn is over.");
                 keptDices = new ArrayList<>();

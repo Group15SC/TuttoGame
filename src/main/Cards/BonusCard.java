@@ -6,7 +6,8 @@ import main.Logics.BonusLogic;
 import main.Logics.Dices;
 
 public class BonusCard implements Card {
-    int points;
+    private int points;
+    private boolean isTutto = false;
 
     public BonusCard(int Points){
         this.points = Points;
@@ -25,6 +26,7 @@ public class BonusCard implements Card {
     public ArrayList<Integer> handleTurn() {
         BonusLogic bonus = new BonusLogic(new Dices());
         bonus.getValidDices();
+        isTutto = bonus.isTutto();
         return bonus.getKeptDices();
     }
 
@@ -38,4 +40,8 @@ public class BonusCard implements Card {
         return Score;
     }
 
+    @Override
+    public boolean ableToDrawAnotherCard() {
+        return isTutto; //--> if accomplish a Tutto, the player is able to draw a new card and continue
+    }
 }

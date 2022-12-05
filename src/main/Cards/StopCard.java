@@ -26,4 +26,10 @@ public class StopCard implements Card{
     public int calScores(ArrayList<Integer> keptDices) {
         return 0;
     }
+
+    @Override
+    public boolean ableToDrawAnotherCard() {
+        return false; //--> if accomplish a Tutto, the player is able to draw a new card and continue
+    }
+
 }

@@ -11,6 +11,10 @@ public class BonusLogic extends Logic {
     private boolean notTutto = true;
     private boolean continueTurn = true;
 
+    public boolean isTutto() {
+        return !notTutto;
+    }
+
     public ArrayList<Integer> getKeptDices() {
         return keptDices;
     }

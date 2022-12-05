@@ -8,8 +8,7 @@ import main.Logics.Dices;
 import java.util.ArrayList;
 
 public class CloverleafCard implements Card{
-
-    Game game = new Game();
+    private boolean isTutto = false;
 
     @Override
     public CardType getCardType() {
@@ -20,6 +19,7 @@ public class CloverleafCard implements Card{
     public ArrayList<Integer> handleTurn() {
         CloverleafLogic cloverleaf = new CloverleafLogic(new Dices());
         cloverleaf.getValidDices();
+        isTutto = cloverleaf.isTutto();
         return cloverleaf.getKeptDices();
     }
 
@@ -31,5 +31,12 @@ public class CloverleafCard implements Card{
         }
         return Score;
     }
+    @Override
+    public boolean ableToDrawAnotherCard() {
+        return false; //--> if accomplish a Tutto, the game comes to an end, no need to draw a new card
+    }
 
+    public boolean isTutto() {
+        return isTutto;
+    }
 }

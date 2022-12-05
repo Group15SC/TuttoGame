@@ -7,6 +7,12 @@ import main.Logics.StraightLogic;
 import java.util.ArrayList;
 
 public class StraightCard implements Card{
+    private boolean isTutto = false;
+
+    public boolean isTutto() {
+        return isTutto;
+    }
+
     @Override
     public CardType getCardType() {
         return CardType.STRAIGHT;
@@ -16,11 +22,23 @@ public class StraightCard implements Card{
     public ArrayList<Integer> handleTurn() {
         StraightLogic straightLogic= new StraightLogic(new Dices());
         straightLogic.getValidDices();
+        isTutto = straightLogic.isTutto();
         return straightLogic.getKeptDices();
     }
 
     @Override
     public int calScores(ArrayList<Integer> keptDices) {
-        return 2000;
+        if(isTutto){
+            return 2000;
+        }
+        else{
+            return 0;
+        }
     }
+
+    @Override
+    public boolean ableToDrawAnotherCard() {
+        return isTutto; //--> if accomplish a Tutto, the player is able to draw a new card and continue
+    }
+
 }

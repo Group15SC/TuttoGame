@@ -13,6 +13,10 @@ public class CloverleafLogic extends Logic {
         return keptDices;
     }
 
+    public boolean isTutto() {
+        return !notTutto;
+    }
+
     public CloverleafLogic(RollDice dice) {
         super(dice);
     }

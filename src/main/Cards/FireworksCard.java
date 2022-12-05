@@ -29,4 +29,10 @@ public class FireworksCard implements Card{
         int Score = Dices.calScoresOfDices(keptDices);
         return Score;
     }
+
+    @Override
+    public boolean ableToDrawAnotherCard() {
+        return false; //--> Fireworks card cannot continue to draw another card after accomplishing a Tutto
+    }
+
 }
