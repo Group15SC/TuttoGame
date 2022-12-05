@@ -38,7 +38,6 @@ public class GameInitialization {
             }
             catch (NumberFormatException e) {
                 System.out.println("Please note the number of players must be between 2 and 4!");
-                System.out.println("Please re-enter the number of players: ");
             }
         }
         return num;
@@ -55,9 +54,22 @@ public class GameInitialization {
     }
 
     private int askForWinningPoints() {
+
+        int winningPoints = 0;
         System.out.println("Please define the winning points:");
-        int winningPoints = scanner.nextInt();
+        while(true) {
+            if(scanner.hasNextInt()){
+                winningPoints = scanner.nextInt();
+                break;
+            }
+            else {
+                System.out.println("Invalid input!");
+                System.out.println("Please define the winning points:");
+                scanner.next();
+            }
+        }
         return winningPoints;
+
     }
 
     public void setUp() {
