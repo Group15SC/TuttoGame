@@ -9,8 +9,8 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
-//        Game game = new Game();
-//        game.gameOn();
+        Game game = new Game();
+        game.gameOn();
 //        Card bonus = new BonusCard(200);
 //        ArrayList<Integer> aTuttoPair = new ArrayList<>();
 //        for(int i=0; i<3; i++){

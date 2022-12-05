@@ -95,19 +95,16 @@ class DicesTest {
         assertEquals(Expected, Dices.getKeepDices());
         System.setIn(Original);
     }
-
     @Test
-    void testExpectedException(){
-//        String InputDiceToKeep = "R";
-//        InputStream Original = System.in; // backup System.in to restore it later
-//        System.setIn(new ByteArrayInputStream(InputDiceToKeep.getBytes()));
-//        try {
-//            Dices.getKeepDices();;
-//        }
-//        catch (NoSuchElementException e) {
-//            fail("Exception " + e);
-//            return;
-//        }
-//        System.setIn(Original);
+    void TestCalDiceScoreSeven() {
+        ArrayList<Integer> dices = new ArrayList<>();
+        for(int i=1; i<=3; i++){
+            dices.add(1);
+            dices.add(2);
+        }
+        dices.add(5); // 1,1,1,2,2,2,5 -- 1000+200+50=1250
+        assertEquals(1250, Dices.calScoresOfDices(dices));
     }
+
+
 }

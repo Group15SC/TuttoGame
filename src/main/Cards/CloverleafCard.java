@@ -25,7 +25,7 @@ public class CloverleafCard implements Card{
 
     @Override
     public int calScores(ArrayList<Integer> keptDices) {
-        int Score = Dices.calScoresOfDices(keptDices);
+        int Score = 0;
         if(keptDices.size() == 12){
             Score = 100000000; // accomplish a Tutto --> the Player wins
         }

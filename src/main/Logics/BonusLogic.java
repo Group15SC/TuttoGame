@@ -11,6 +11,22 @@ public class BonusLogic extends Logic {
     private boolean notTutto = true;
     private boolean continueTurn = true;
 
+    public void setaPairOfDices(ArrayList<Integer> aPairOfDices) {
+        this.aPairOfDices = aPairOfDices;
+    }
+
+    public void setKeptDices(ArrayList<Integer> keptDices) {
+        this.keptDices = keptDices;
+    }
+
+    public void setNotTutto(boolean notTutto) {
+        this.notTutto = notTutto;
+    }
+
+    public void setContinueTurn(boolean continueTurn) {
+        this.continueTurn = continueTurn;
+    }
+
     public boolean isTutto() {
         return !notTutto;
     }
@@ -43,29 +59,7 @@ public class BonusLogic extends Logic {
                     break;
                 }
                 String HalfwayOpt = UI.halfwayOption(); // player decides to end the turn halfway
-                while (notTutto){
-                    // Ask the player which dices he/she would like to keep
-                    /* break out of the notTutto while loop,but not change the notTutto value*/
-                    if (HalfwayOpt.equals("E")) {
-                        keptDices.addAll(ValidInThisRoll(aPairOfDices));
-                        continueTurn = false;
-                    } else {
-                        ArrayList<Integer> dicesToKeep = Dices.getKeepDices();
-                        while (!IsValidKeep(dicesToKeep, aPairOfDices)){
-                            System.out.println("Invalid Input! Please re-enter:");
-                            dicesToKeep = Dices.getKeepDices();
-                        }
-                        keptDices.addAll(dicesToKeep);
-                        numOfDices -= dicesToKeep.size();
-//                        if (isTutto(keptDices)) {
-//                            /*player accomplish a Tutto, the functionality of this card ends */
-//                            System.out.println("Congratulations! You accomplish a Tutto!");
-//                            notTutto = false;
-//                            continueTurn = false;
-//                        }
-                    }
-                    break;// end the turn
-                }
+                numOfDices = handleNotTutto(numOfDices, HalfwayOpt, notTutto); // update
             } else{
                 System.out.println("You rolled a null! Your turn is over.");
                 keptDices = new ArrayList<>();
@@ -75,5 +69,27 @@ public class BonusLogic extends Logic {
 //        for(int dice: keptDices){
 //            System.out.println(dice);
 //        }
+    }
+
+    // handle re-rolling case, update number of dices
+    public int handleNotTutto(int numOfDices, String HalfwayOpt, boolean notTutto) {
+        while (notTutto){
+            // Ask the player which dices he/she would like to keep
+            /* break out of the notTutto while loop,but not change the notTutto value*/
+            if (HalfwayOpt.equals("E")) {
+                keptDices.addAll(ValidInThisRoll(aPairOfDices));
+                continueTurn = false;
+            } else {
+                ArrayList<Integer> dicesToKeep = Dices.getKeepDices();
+                while (!IsValidKeep(dicesToKeep, aPairOfDices)){
+                    System.out.println("Invalid Input! Please re-enter:");
+                    dicesToKeep = Dices.getKeepDices();
+                }
+                keptDices.addAll(dicesToKeep);
+                numOfDices -= dicesToKeep.size();
+            }
+            break;// end the turn
+        }
+        return numOfDices;
     }
 }

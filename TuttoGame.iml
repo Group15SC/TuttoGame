@@ -7,7 +7,6 @@
       <sourceFolder url="file://$MODULE_DIR$/test2" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/test" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/src/test/main/GameController" />
-      <excludeFolder url="file://$MODULE_DIR$/src/test/main/Logics" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

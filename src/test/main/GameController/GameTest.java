@@ -22,7 +22,7 @@ class GameTest {
         Method method = Game.class.getDeclaredMethod("DrawACard", ArrayList.class);
         method.setAccessible(true);
         Card ResultCard = (Card) method.invoke(null, aDeck);
-        assertEquals(CardType.FIREWORKS, ResultCard.GetCardType());
+        assertEquals(CardType.FIREWORKS, ResultCard.getCardType());
     }
 
     @Test
@@ -83,17 +83,17 @@ class GameTest {
 
     @Test
     void TestGenerateACompleteCardSet() { // test if generate the right amount of cards
-        var CardSet = Game.GenerateCardSet();
+        ArrayList<Card> CardSet = Game.generateCardSet();
         assertEquals(56, CardSet.size());
     }
 
     @Test
     void TestAllTypesAreInclude() { // test if all types all included in the generated card set
-        var CardSet = Game.GenerateCardSet();
+        var CardSet = Game.generateCardSet();
         var CompleteType = new ArrayList<>(Arrays.asList(CardType.values())); // get all types in Card Types
         var types = new ArrayList<>();
         for (Card card: CardSet) {
-            types.add(card.GetCardType()); // get all card types in generated card set
+            types.add(card.getCardType()); // get all card types in generated card set
         }
         assertTrue(types.containsAll(CompleteType));
     }
