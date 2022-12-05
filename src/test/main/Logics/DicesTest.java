@@ -8,24 +8,18 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class DicesTest {
 
     @Test
-    void TestDiceLengthSixDices() {
+    void testDiceValueWithinOneAndSeven(){
         Dices dices = new Dices();
-        assertEquals(6, dices.RollDices(6).size());
-    }
-
-    @Test
-    void TestDicesValueWithinOneAndSeven(){
-        Dices dices = new Dices();
-        ArrayList<Integer> DiceSet = dices.RollDices(12);
-        for(int dice: DiceSet){
-            assertFalse(dice<1 || dice>6);
-        } // check if the dice include value greater than 6 or less than 1
+        int dice = dices.rollDice();
+        assertFalse(dice<1 || dice>6);
+        // check if the dice include value greater than 6 or less than 1
     }
 
     @Test
@@ -38,7 +32,7 @@ class DicesTest {
         dices.add(1);
         dices.add(2);
         dices.add(3);
-        GameInitialization.DisplayDices(dices);
+        Dices.displayDices(dices);
         String expected = "The result of this roll is:\n1 2 3";
         assertEquals(expected, outputStreamCaptor.toString().trim());
         // put the original out back
@@ -51,7 +45,7 @@ class DicesTest {
         for(int i=1; i<=6; i++){
             dices.add(i);
         } // 1,2,3,4,5,6 -- 50+100=150
-        assertEquals(150, Dices.CalDiceScores(dices));
+        assertEquals(150, Dices.calScoresOfDices(dices));
     }
 
     @Test
@@ -63,7 +57,7 @@ class DicesTest {
         dices.add(4);
         dices.add(5);
         dices.add(6); // 2,2,2,4,5,6 -- 50+200=250
-        assertEquals(250, Dices.CalDiceScores(dices));
+        assertEquals(250, Dices.calScoresOfDices(dices));
     }
 
     @Test
@@ -75,7 +69,7 @@ class DicesTest {
         dices.add(4);
         dices.add(5);
         dices.add(6); // 1,1,1,4,5,6 -- 1000+50=1050
-        assertEquals(1050, Dices.CalDiceScores(dices));
+        assertEquals(1050, Dices.calScoresOfDices(dices));
     }
 
     @Test
@@ -87,7 +81,7 @@ class DicesTest {
         dices.add(4);
         dices.add(1);
         dices.add(6); // 5,5,5,4,1,6 -- 500+10=600
-        assertEquals(600, Dices.CalDiceScores(dices));
+        assertEquals(600, Dices.calScoresOfDices(dices));
     }
 
     @Test
@@ -98,12 +92,22 @@ class DicesTest {
         Expected.add(5);
         InputStream Original = System.in; // backup System.in to restore it later
         System.setIn(new ByteArrayInputStream(InputDiceToKeep.getBytes()));
-        assertEquals(Expected, Dices.GetKeepDices());
+        assertEquals(Expected, Dices.getKeepDices());
         System.setIn(Original);
     }
 
     @Test
-    void testExpectedException() {
-        //don't know how to deal with
+    void testExpectedException(){
+//        String InputDiceToKeep = "R";
+//        InputStream Original = System.in; // backup System.in to restore it later
+//        System.setIn(new ByteArrayInputStream(InputDiceToKeep.getBytes()));
+//        try {
+//            Dices.getKeepDices();;
+//        }
+//        catch (NoSuchElementException e) {
+//            fail("Exception " + e);
+//            return;
+//        }
+//        System.setIn(Original);
     }
 }

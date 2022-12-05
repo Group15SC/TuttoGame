@@ -86,52 +86,13 @@ public class Game {
                 System.out.println("The card you got is: " + card.getCardType());
                 // get the bonus points of this bonus card
                 if(!(card instanceof StopCard)) {
-                    if(card instanceof BonusCard) {
-                        BonusCard bonusCard = (BonusCard) card;
+                    if(card instanceof BonusCard bonusCard) {
                         System.out.println("The bonus points of this card is " + bonusCard.getPoints());
                     }
                     int ScoreInThisTurn = 0; // the actual score gained in this turn
                     String option = UI.turnStartingOption();
                     option = askForContinueOption(player, option);
-                    if (option.equals("R")) {
-                        ArrayList<Integer> ResultDices = card.handleTurn();
-                        // Calculate the points gained in this card
-                        boolean Continue = true;
-                        int ScoreOfThisCard = 0;
-                        while (Continue) {
-                            ScoreOfThisCard = card.calScores(ResultDices);
-                            // store the score gained with this card
-                            if (card.getCardType() == CardType.STOP) {
-                                Continue = false;
-                            }
-                            if (card.getCardType() == CardType.PLUS_MINUS && card.ableToDrawAnotherCard()) {
-                                // the player is able to draw a new card if and only if accomplishing a Tutto
-                                ArrayList<Player> HighestPlayer = getHighestPlayer(listOfPlayers);
-                                for (Player player2 : HighestPlayer) {
-                                    if (player2 != player) {
-                                        player2.setScore(player2.getScore() - 1000);
-                                    }
-                                }
-                            }
-                            if (card.ableToDrawAnotherCard()) { // if the player wants to draw a new card after Tutto
-                                String ifContinue = UI.tuttoOption();
-                                switch (ifContinue) {
-                                    case "E" -> Continue = false; // end this turn
-                                    case "R" -> {
-                                        Card NewCard = drawACard(deck);
-                                        System.out.println("Player " + player.getName());
-                                        System.out.println("The card you got is: " + card.getCardType());
-                                        ResultDices = NewCard.handleTurn();
-                                    }
-                                }
-                            } else { // if not able to draw another card --> setScore and end this turn
-                                Continue = false; // end this turn
-                            }
-                        }
-                        ScoreInThisTurn += ScoreOfThisCard;
-                        player.setScore(ScoreInThisTurn);
-                        System.out.println("The score you obtained in this turn is: "+ScoreInThisTurn);
-                    }
+                    handleAPlayersTurn(deck, player, card, ScoreInThisTurn, option); // handle a player's turn
                 }
                 System.out.println("Your turn is over!");
                 System.out.println("============================");
@@ -146,7 +107,47 @@ public class Game {
         }
     }
 
-
+    private void handleAPlayersTurn(ArrayList<Card> deck, Player player, Card card, int ScoreInThisTurn, String option) {
+        if (option.equals("R")) {
+            ArrayList<Integer> ResultDices = card.handleTurn();
+            // Calculate the points gained in this card
+            boolean Continue = true;
+            int ScoreOfThisCard = 0;
+            while (Continue) {
+                ScoreOfThisCard = card.calScores(ResultDices);
+                // store the score gained with this card
+                if (card.getCardType() == CardType.STOP) {
+                    Continue = false;
+                }
+                if (card.getCardType() == CardType.PLUS_MINUS && card.ableToDrawAnotherCard()) {
+                    // the player is able to draw a new card if and only if accomplishing a Tutto
+                    ArrayList<Player> HighestPlayer = getHighestPlayer(listOfPlayers);
+                    for (Player player2 : HighestPlayer) {
+                        if (player2 != player) {
+                            player2.setScore(player2.getScore() - 1000);
+                        }
+                    }
+                }
+                if (card.ableToDrawAnotherCard()) { // if the player wants to draw a new card after Tutto
+                    String ifContinue = UI.tuttoOption();
+                    switch (ifContinue) {
+                        case "E" -> Continue = false; // end this turn
+                        case "R" -> {
+                            Card NewCard = drawACard(deck);
+                            System.out.println("Player " + player.getName());
+                            System.out.println("The card you got is: " + card.getCardType());
+                            ResultDices = NewCard.handleTurn();
+                        }
+                    }
+                } else { // if not able to draw another card --> setScore and end this turn
+                    Continue = false; // end this turn
+                }
+            }
+            ScoreInThisTurn += ScoreOfThisCard;
+            player.setScore(ScoreInThisTurn);
+            System.out.println("The score you obtained in this turn is: "+ ScoreInThisTurn);
+        }
+    }
 
 
     public static ArrayList<Card> generateCardSet(){

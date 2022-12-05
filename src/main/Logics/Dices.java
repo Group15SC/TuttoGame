@@ -25,30 +25,36 @@ public class Dices implements RollDice {
     public static int calScoresOfDices(ArrayList<Integer> Dices) {
         int Scores = 0;
         int occurrences = 0;
-        ArrayList<Integer> CurrentDices = Dices;
+//        ArrayList<Integer> currentDices = Dices;
 
-        for(int i=0; i<Dices.size(); i++) {
-            int dice = Dices.get(i);
+        ArrayList<Integer> cloneDices = new ArrayList<>();
+
+        for(int diceVal:Dices){
+            cloneDices.add(diceVal); // in case the remove operation will change the original pair
+        }
+
+        for(int i=0; i<cloneDices.size(); i++) {
+            int dice = cloneDices.get(i);
             occurrences = Collections.frequency(Dices, dice);
             if(occurrences == 3) {
                 if(dice != 1) {
                     // Triplet 2,3,4,5,6 gets 200,300,400,500,600 respectively
-                    Scores = Scores + CurrentDices.get(i) * 100;
+                    Scores = Scores + Dices.get(i) * 100;
                 }
                 else if(dice == 1) {
                     // Triplet 1 gets 1000
                     Scores = Scores + 1000;
                 }
-                CurrentDices.remove(Integer.valueOf(dice));
-                CurrentDices.remove(Integer.valueOf(dice));
-                CurrentDices.remove(Integer.valueOf(dice));
+                cloneDices.remove(Integer.valueOf(dice));
+                cloneDices.remove(Integer.valueOf(dice));
+                cloneDices.remove(Integer.valueOf(dice));
             }
         }
-        for (int i=0; i<CurrentDices.size(); i++) {
-            if(CurrentDices.get(i) == 1) {
+        for (int i=0; i<cloneDices.size(); i++) {
+            if(cloneDices.get(i) == 1) {
                 Scores = Scores + 100;
             }
-            else if(CurrentDices.get(i) == 5) {
+            else if(cloneDices.get(i) == 5) {
                 Scores = Scores + 50;
             }
         }
@@ -66,7 +72,7 @@ public class Dices implements RollDice {
                 String[] KeepDices = keep.split(",");
                 for (String s : KeepDices) IntKeepDices.add(Integer.valueOf(s));
                 break;
-            } catch (Exception e) {
+            } catch (NumberFormatException e) {
                 System.out.println("Invalid Input! Please re-enter:");
             }
         }

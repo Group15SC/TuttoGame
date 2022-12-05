@@ -35,7 +35,7 @@ public class BonusCard implements Card {
     public int calScores(ArrayList<Integer> keptDices) {
         int Score = Dices.calScoresOfDices(keptDices);
         if(keptDices.size() == 6){
-            Score += points; // accomplish a Tutto --> get dices score+the points of this card
+            Score += getPoints(); // accomplish a Tutto --> get dices score+the points of this card
         }
         return Score;
     }

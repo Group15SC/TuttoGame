@@ -8,17 +8,17 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class StopLogicTest {
 
-    StopLogic stop = new StopLogic();
-
-    @Test
-    void TestGetAPairDices() {
-        assertEquals(ArrayList.class, stop.GetValidDices().getClass());
-    }
-
-
-    @Test
-    void TestGetAPairOfEmptyDices() {
-        assertEquals(0, stop.GetValidDices().size());
-    }
+//    StopLogic stop = new StopLogic();
+//
+//    @Test
+//    void TestGetAPairDices() {
+//        assertEquals(ArrayList.class, stop.getValidDices().getClass());
+//    }
+//
+//
+//    @Test
+//    void TestGetAPairOfEmptyDices() {
+//        assertEquals(0, stop.getValidDices().size());
+//    }
 
 }

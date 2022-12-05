@@ -9,12 +9,12 @@ class StraightCardTest {
     @Test
     void getCardType() {
         StraightCard straightCard = new StraightCard();
-        assertEquals(CardType.STRAIGHT, straightCard.GetCardType());
+        assertEquals(CardType.STRAIGHT, straightCard.getCardType());
     }
 
-    @Test
-    void getPoints() {
-        StraightCard straightCard = new StraightCard();
-        assertEquals(0, straightCard.GetPoints());
-    }
+//    @Test
+//    void getPoints() {
+//        StraightCard straightCard = new StraightCard();
+//        assertEquals(0, straightCard.GetPoints());
+//    }
 }

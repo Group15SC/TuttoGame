@@ -9,12 +9,12 @@ class FireworksCardTest {
     @Test
     void getCardType() {
         FireworksCard fireworks = new FireworksCard();
-        assertEquals(CardType.FIREWORKS, fireworks.GetCardType());
+        assertEquals(CardType.FIREWORKS, fireworks.getCardType());
     }
 
-    @Test
-    void getPoints() {
-        FireworksCard fireworks = new FireworksCard();
-        assertEquals(0, fireworks.GetPoints());
-    }
+//    @Test
+//    void getPoints() {
+//        FireworksCard fireworks = new FireworksCard();
+//        assertEquals(0, fireworks.getPoints());
+//    }
 }
