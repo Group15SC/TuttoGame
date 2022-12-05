@@ -16,7 +16,6 @@ public class UI {
 
     public static String tuttoOption() {
         Scanner scanner = new Scanner(System.in);
-//        System.out.println("You accomplished a Tutto!");
         System.out.println("Would you like to End or Continue?");
         String tuttooption = scanner.next();
         return tuttooption;

@@ -17,13 +17,6 @@ public class GameInitialization {
     }
     public int askForNumberOfPlayers() {
 
-//        System.out.println("Please enter the number of players (2-4): ");
-//        int num = scanner.nextInt();
-//        while (num < 2 || num > 4) {
-//            System.out.println("Please note the number of players must be between 2 and 4!");
-//            System.out.println("Please re-enter the number of players: ");
-//            num = scanner.nextInt();
-//        }
         int num = 0;
         String strInput;
         boolean valid = false;
