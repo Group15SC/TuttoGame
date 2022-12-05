@@ -38,6 +38,5 @@ class CloverleafCardTest {
     @Test
     void testDefaultIsTutto() {
         assertFalse(cloverleaf.isTutto());
-
     }
 }

@@ -30,6 +30,7 @@ public class CloverleafLogic extends Logic {
         int numOfDices = 6;
         while (continueTurn) {
             aPairOfDices = new ArrayList<>(); //empty the dice set
+            notTutto = true;
             rollAPair(numOfDices, aPairOfDices);
             Dices.displayDices(aPairOfDices);
             if (isValid(aPairOfDices)) {
@@ -47,9 +48,10 @@ public class CloverleafLogic extends Logic {
                     }
                 }
                 while (notTutto){
+                    ArrayList<Integer> dicesToKeep = new ArrayList<>();
                     // Ask the player which dices he/she would like to keep
                     /* break out of the notTutto while loop,but not change the notTutto value*/
-                    ArrayList<Integer> dicesToKeep = Dices.getKeepDices();
+                    dicesToKeep = Dices.getKeepDices();
                     while (!isValidKeep(dicesToKeep, aPairOfDices)){
                         System.out.println("Invalid Input! Please re-enter:");
                         dicesToKeep = Dices.getKeepDices();

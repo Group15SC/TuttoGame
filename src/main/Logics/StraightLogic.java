@@ -48,8 +48,6 @@ public class StraightLogic extends Logic {
 
     protected boolean isTuttoForStraight(ArrayList<Integer> ValidDices, ArrayList<Integer> AlreadyKeptDices){
         return (ValidDices.size() + AlreadyKeptDices.size() == 6);
-//        return(IsValidKeepForStraight(rolledDices, rolledDices, AlreadyKeptDices) && ((AlreadyKeptDices.size() + rolledDices.size()) == 6)
-//        && keptDices.size() != 0);
     }
     protected static ArrayList<Integer> validInThisRollForStraight(ArrayList<Integer> rolled, ArrayList<Integer> kept){
         ArrayList<Integer> ValidDicesInThisRoll = new ArrayList<>();

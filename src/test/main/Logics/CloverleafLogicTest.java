@@ -2,6 +2,8 @@ package main.Logics;
 
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -46,6 +48,33 @@ class CloverleafLogicTest {
         cloverleaf.getValidDices();
         assertFalse(cloverleaf.isTutto());
     }
+
+    @Test
+    void getKeptDices3() {
+        CloverleafLogic newCloverleaf = new CloverleafLogic(new RollDice() {
+            int[] aCase= {1,1,1,2,2,2,1,1,2,2,2,3,1};
+            int i = 0;
+            @Override
+            public int rollDice() {
+                int dice = aCase[i];
+                i ++;
+                return dice;
+            }
+        });
+
+        String stopOption = "1,1,2,2,2";
+        InputStream Original = System.in; // backup System.in to restore it later
+        System.setIn(new ByteArrayInputStream(stopOption.getBytes()));
+        newCloverleaf.getValidDices();
+        ArrayList<Integer> actual = newCloverleaf.getKeptDices();
+
+        int[] expected = {1,1,1,2,2,2,1,1,2,2,2,1};
+        ArrayList<Integer> keptDices = new ArrayList<>();
+        for(int dice: expected){
+            keptDices.add(dice);
+        }
+    }
+
 
     @Test
     void isTutto() {

@@ -12,10 +12,6 @@ public class FireworksCard implements Card{
         return CardType.FIREWORKS;
     }
 
-//    @Override
-//    public int GetPoints() {
-//        return 0;
-//    }
 
     @Override
     public ArrayList<Integer> handleTurn() {

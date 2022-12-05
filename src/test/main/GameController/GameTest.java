@@ -8,6 +8,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -171,5 +172,25 @@ class GameTest {
         System.setOut(standardOut);
     }
 
+    @Test
+    void testDisplayScores() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        ArrayList<Player> players = new ArrayList<>();
+        Player player1 = new Player("A",100);
+        Player player2 = new Player("B", 200);
+        players.add(player1);
+        players.add(player2);
+        Game game = new Game();
+
+        String expected = "Player A got 100 in total\nPlayer B got 200 in total";
+        final PrintStream standardOut = System.out; //restoring it to its original state when our test terminates
+        final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStreamCaptor));
+
+        Method method = Game.class.getDeclaredMethod("displayScoreForEachPlayer", ArrayList.class);
+        method.setAccessible(true);
+        method.invoke(null, players);
+
+        assertEquals(expected, outputStreamCaptor.toString().trim());
+    }
 
 }

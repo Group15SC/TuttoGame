@@ -66,32 +66,3 @@ public abstract class Logic {
 
     public abstract void getValidDices();
 }
-
-
-
-
-// [for straight card] check whether a list of rolled dices have valid dices to keep
-//    protected static boolean IsValidForStraight(ArrayList<Integer> RolledDices, ArrayList<Integer> AlreadyKeptDices) {
-//        if(AlreadyKeptDices.size() == 0) {
-//            return true;
-//        }
-//        for(int Dice : RolledDices) {
-//            if( Dice >= 0 && Dice <=6 && !AlreadyKeptDices.contains(Dice)) {
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
-
-
-
-
-
-
-//    protected static String TurnSartingOption() {
-//        Scanner scanner = new Scanner(System.in);
-//        System.out.println("Would you like to Roll or Display current scores?");
-//        System.out.println("Enter 'D' if you want to Display current scores; Enter 'R' if you want to Roll.");
-//        String option = scanner.next();
-//        return option;
-//    }

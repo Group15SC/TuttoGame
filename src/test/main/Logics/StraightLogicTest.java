@@ -2,8 +2,11 @@ package main.Logics;
 
 import main.GameController.Game;
 import main.GameController.Player;
+import main.GameController.UI;
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -114,6 +117,48 @@ class StraightLogicTest {
         });
         newStraight.getValidDices();
         assertTrue(newStraight.isTutto());
+    }
+
+    @Test
+    void getKeptDices2() {
+        StraightLogic newStraight = new StraightLogic(new RollDice() {
+            int[] aCase= {1,2,3,4,5,5,6};
+            int i = 0;
+            @Override
+            public int rollDice() {
+                int dice = aCase[i];
+                i ++;
+                return dice;
+            }
+        });
+
+        String stopOption = "1,2,3,4,5";
+        InputStream Original = System.in; // backup System.in to restore it later
+        System.setIn(new ByteArrayInputStream(stopOption.getBytes()));
+        newStraight.getValidDices();
+        System.setIn(Original);
+        assertTrue(newStraight.isTutto());
+    }
+
+    @Test
+    void getKeptDices3() {
+        StraightLogic newStraight = new StraightLogic(new RollDice() {
+            int[] aCase= {1,2,3,4,5,5,5};
+            int i = 0;
+            @Override
+            public int rollDice() {
+                int dice = aCase[i];
+                i ++;
+                return dice;
+            }
+        });
+
+        String stopOption = "1,2,3,4,5";
+        InputStream Original = System.in; // backup System.in to restore it later
+        System.setIn(new ByteArrayInputStream(stopOption.getBytes()));
+        newStraight.getValidDices();
+        ArrayList<Integer> expected = newStraight.getKeptDices();
+        assertTrue(expected.isEmpty());
     }
 
     @Test

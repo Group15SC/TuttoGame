@@ -29,8 +29,7 @@ public class Game {
     private static ArrayList<Player> getHighestPlayer(ArrayList<Player> players) {
         ArrayList<Player> HighestPlayer= new ArrayList<>();
         int MaxScore = 0;
-//        ArrayList<Player> SortedPlayers = new ArrayList<>();
-//        players.sort(Comparator.comparing(Player::getScore));
+
         for (Player player: players) {
             if(player.getScore() >= MaxScore) {
                 MaxScore = player.getScore();
@@ -174,58 +173,3 @@ public class Game {
         return CardSet;
     }
 }
-
-
-
-
-//                            switch (ResultDices.size()){
-//                                case 0:
-//                                    // if the card is STOP, return an empty list and enter this case
-//                                    ScoreInThisTurn = 0;
-//                                    Continue = false;
-//                                    break;
-//                                case 6:
-//                                case 12:
-//                                    switch (card.getCardType()) {
-//                                        case BONUS:
-//                                        case MULTIPLY_TWO:
-//                                        case STRAIGHT:
-//                                        case CLOVERLEAF:
-//                                        case FIREWORKS:
-//                                            ScoreOfThisCard = card.calScores(ResultDices);
-//                                            break;
-//                                        case PLUS_MINUS:
-//                                            ScoreOfThisCard = card.calScores(ResultDices);
-//                                            ArrayList<Player> HighestPlayer = getHighestPlayer(listOfPlayers);
-//                                            for(Player player2: HighestPlayer) {
-//                                                if(player2 != player) {
-//                                                    player2.setScore(player2.getScore()-1000);
-//                                                }
-//                                            }
-//                                            break;
-//                                    }
-//                                    String ifContinue = UI.tuttoOption();
-//                                    switch (ifContinue) {
-//                                        case "E":
-//                                            Continue = false;
-//                                            break;
-//                                        case "R":
-//                                            Card NewCard = drawACard(deck);
-//                                            ResultDices = NewCard.handleTurn();
-//                                            break;
-//                                    }
-//                                    break;
-//                                default:
-//                                    ScoreOfThisCard = Dices.calScoresOfDices(ResultDices);
-//                                    Continue = false;
-//                                    break;
-//                            }
-//                            ScoreInThisTurn += ScoreOfThisCard;
-//                        }
-//                        player.setScore(ScoreInThisTurn);
-//                    }
-//
-//                System.out.println("Your turn is over!");
-//                System.out.println("============================");
-
-
